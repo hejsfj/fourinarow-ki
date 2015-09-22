@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?implements EventTarget?>
+<?extends java.lang.Object?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatsController">
+   <children>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="542.0" prefWidth="848.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="848.0">
+               <children>
+                  <VBox alignment="CENTER" disable="false" maxHeight="137.0" prefHeight="100.0" prefWidth="835.0" visible="true">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="69.0" prefWidth="835.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Die Änderungen wurden gespeichert / Die Daten wurden aktualisiert" textAlignment="LEFT" textOrigin="CENTER">
+                                 <font>
+                                    <Font size="14.0" fx:id="x3" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </bottom>
+         <left>
+            <VBox prefHeight="274.0" prefWidth="120.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="refreshButton" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="137.0" mnemonicParsing="false" text="Aktualisieren" textAlignment="CENTER">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="saveButton" layoutX="8.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="105.0" text="Speichern">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </left>
+         <right>
+            <VBox prefHeight="274.0" prefWidth="65.0" BorderPane.alignment="CENTER" />
+         </right>
+         <top>
+            <VBox prefHeight="110.0" prefWidth="848.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="22.0" prefWidth="835.0">
+                     <children>
+                        <Button fx:id="newButton" layoutX="21.0" layoutY="-2.0" mnemonicParsing="false" text="Neues Spiel" />
+                        <Button fx:id="statsButton" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
+                     </children>
+                  </Pane>
+                  <HBox alignment="TOP_LEFT" prefHeight="100.0" prefWidth="848.0" rotate="0.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="90.0" prefWidth="848.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gespeicherte Spiele">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                     </children>
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                  </HBox>
+               </children>
+            </VBox>
+         </top>
+         <center>
+            <TableView editable="true" prefHeight="274.0" prefWidth="662.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="189.0" text="Savegame" />
+                <TableColumn prefWidth="215.0" text="Date" />
+                  <TableColumn minWidth="0.0" prefWidth="245.0" text="Score" />
+              </columns>
+            </TableView>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
