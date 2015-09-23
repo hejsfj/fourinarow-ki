@@ -1,5 +1,7 @@
 package application;
 
+import java.awt.Label;
+import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +30,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class StartController implements Initializable {
+	
+	/*Steuerelemente*/
 
 	@FXML // fx:id="myButton"
 	private Button startButton; // Value injected by FXMLLoader
@@ -39,15 +43,67 @@ public class StartController implements Initializable {
 	private RadioButton rbPush;
 
 	@FXML
+<<<<<<< HEAD
+	private RadioButton fileButton;
+	
+	@FXML
+	private TextField tfZugZeit;
+	
+	@FXML
+	private TextField tfDateiPfad;
+	
+	@FXML
+	private TextField tfAppKey;
+	
+	@FXML
+	private TextField tfAppId;
+	
+	@FXML
+	private TextField tfAppSecret;
+	
+	@FXML
+	private Label lZugZeit;
+	
+	@FXML
+	private Label lDateiPfad;
+	
+	@FXML
+	private Label lAppKey;
+	
+	@FXML
+	private Label lAppId;
+	
+	@FXML
+	private Label lAppSecret;
+	
+	
+	
+=======
 	private RadioButton rbFile;
+>>>>>>> 115b818515537a66f63717139a4db08766338478
 
 	@Override // This method is called by the FXMLLoader when initialization is
 				// complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		assert startButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
 		assert statsButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
+<<<<<<< HEAD
+		assert pushButton != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
+		assert tfAppId != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert tfAppKey != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert tfAppSecret != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert tfDateiPfad != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert tfZugZeit != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert lAppId != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert lAppKey != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert lAppSecret != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert lDateiPfad != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert lZugZeit != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+
+=======
 		assert rbPush != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
 		assert rbFile != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+>>>>>>> 115b818515537a66f63717139a4db08766338478
 		
 		
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -109,6 +165,28 @@ public class StartController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
+<<<<<<< HEAD
+//				System.out.println("3 Einstellungen");
+//
+//				Stage stage;
+//
+//				// get reference to the button's stage
+//				stage = (Stage) pushButton.getScene().getWindow();
+//				// load up OTHER FXML document
+//
+//				AnchorPane page;
+//				try {
+//					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Stats.fxml"));
+//					// create a new scene with root and set the stage
+//					Scene scene = new Scene(page);
+//					stage.setScene(scene);
+//					stage.show();
+//
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+=======
 				System.out.println("3 Einstellungen");
 
 				Stage stage;
@@ -129,6 +207,7 @@ public class StartController implements Initializable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+>>>>>>> 115b818515537a66f63717139a4db08766338478
 			} 
 		}); //endSetOnActionPushButton
 		
@@ -146,6 +225,27 @@ public class StartController implements Initializable {
 	private void pushButtonAnsicht(ActionEvent ev){
 		RadioButton rb = (RadioButton) ev.getSource();
 		System.out.printf("%s%n", rb.getText());
+		
+		System.out.println("3 Einstellungen");
+
+		Stage stage;
+
+		// get reference to the button's stage
+		stage = (Stage) pushButton.getScene().getWindow();
+		// load up OTHER FXML document
+
+		AnchorPane page;
+		try {
+			page = (AnchorPane) FXMLLoader.load(getClass().getResource("Stats.fxml"));
+			// create a new scene with root and set the stage
+			Scene scene = new Scene(page);
+			stage.setScene(scene);
+			stage.show();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}//endFileButtonAnsicht
 
 }//endClass
