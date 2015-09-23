@@ -56,8 +56,7 @@ public class ServerfileReader {
 	private Document getDocFromXmlFile(File xmlFile) throws ParserConfigurationException, SAXException, IOException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+		
 		return documentBuilder.parse(xmlFile);
 		}
-	
-
 }
