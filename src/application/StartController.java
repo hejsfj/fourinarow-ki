@@ -10,24 +10,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.ButtonBase;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.Control;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
+
+
+
 
 public class StartController implements Initializable {
 	
@@ -76,7 +66,6 @@ public class StartController implements Initializable {
 	private Label lAppSecret;
 	
 
-
 	@Override // This method is called by the FXMLLoader when initialization is
 				// complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -85,9 +74,8 @@ public class StartController implements Initializable {
 		assert rbPush != null : "fx:id=\"rbPush\" was not injected: check your FXML file";
 		assert rbFile != null : "fx:id=\"rbFile\" was not injected: check your FXML file";
 
-		
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
-
+			
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("That was easy, wasn't it?");
@@ -110,9 +98,10 @@ public class StartController implements Initializable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			
 			}
-		}
-		);//endSetOnActionStartButton
+		
+			});//endSetOnActionStartButton
 
 		statsButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -191,11 +180,26 @@ public class StartController implements Initializable {
 		}); //endSetOnActionPushButton
 		
 		rbFile.setOnAction((ev) -> fileButtonAnsicht(ev));
-		rbPush.setOnAction((ev)-> pushButtonAnsicht(ev));
+		rbPush.setOnAction((ev) -> pushButtonAnsicht(ev));
+	
+	
 
-	} //endInitialize
+//		private Pane createButtonBasedEditor(String initialText) {		
+//		startButton.setDefaultButton(true);
+//        startButton.setDisable(true);
+// 
+//        tfZugZeit.textProperty.addTextListener(() -> {
+//            startButton.setDisable(false);
+//        });
+//	    startButton.setOnAction((event) -> 
+//	        tfZugZeit.setText(tfZugZeit.getText()));
+//	        startButton.setDisable(false);
+	   
 
-	private void fileButtonAnsicht(ActionEvent ev) {
+	
+		}//endInitialize
+
+	private void fileButtonAnsicht(ActionEvent ev){
 		// TODO Auto-generated method stub
         RadioButton rb = (RadioButton) ev.getSource();
         System.out.printf("%s%n", rb.getText());
@@ -207,5 +211,5 @@ public class StartController implements Initializable {
 		System.out.printf("%s%n", rb.getText());
 		
 	}//endFileButtonAnsicht
-
+        
 }//endClass
