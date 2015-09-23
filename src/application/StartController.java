@@ -101,7 +101,7 @@ public class StartController implements Initializable {
 					e.printStackTrace();
 				}
 			}
-		});
+		}); //endSetOnActionStatsButton
 
 		pushButton.setOnAction(new EventHandler<ActionEvent>() {
 
