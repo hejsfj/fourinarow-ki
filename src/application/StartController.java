@@ -1,6 +1,5 @@
 package application;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,116 +29,107 @@ import javafx.stage.Stage;
 
 public class StartController implements Initializable {
 
-    @FXML //  fx:id="myButton"
-    private Button startButton; // Value injected by FXMLLoader
-    
-    @FXML
-    private Button statsButton;
-    
-    @FXML
-    private RadioButton pushButton;
-    
-    @FXML
-    private RadioButton fileButton;
-    
+	@FXML // fx:id="myButton"
+	private Button startButton; // Value injected by FXMLLoader
 
-    
+	@FXML
+	private Button statsButton;
 
-public class RadioButton extends ToggleButton implements Toggle{
-    final ToggleGroup group = new ToggleGroup();   
-    pushButton.setToggleGroup(group);
-    pushButton.setSelected(true);    
-    fileButton.setToggleGroup(group);
-}
+	@FXML
+	private RadioButton pushButton;
 
-    @Override // This method is called by the FXMLLoader when initialization is complete
-    public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-        assert startButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
-        assert statsButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
-        
-        startButton.setOnAction(new EventHandler<ActionEvent>() {
+	@FXML
+	private RadioButton fileButton;
 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("That was easy, wasn't it?");
-                
-                   
-                Stage stage; 
-       
-                   //get reference to the button's stage         
-                   stage=(Stage)startButton.getScene().getWindow();
-                   //load up OTHER FXML document
-                   
-                	AnchorPane page;
-					try {
-						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
-						//create a new scene with root and set the stage
-		                 Scene scene = new Scene(page);
-		                 stage.setScene(scene);
-		                 stage.show();
-					
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}           
-            }
-        });
-        
-        statsButton.setOnAction(new EventHandler<ActionEvent>() {
+	@Override // This method is called by the FXMLLoader when initialization is
+				// complete
+	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
+		assert startButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
+		assert statsButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
+		assert pushButton != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
+		assert fileButton != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		startButton.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("That was easy, wasn't it?");
-                     
-                Stage stage; 
-                           
-                   //get reference to the button's stage         
-                   stage=(Stage)statsButton.getScene().getWindow();
-                   //load up OTHER FXML document
-                   
-                	AnchorPane page;
-					try {
-						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Stats.fxml"));
-						//create a new scene with root and set the stage
-		                 Scene scene = new Scene(page);
-		                 stage.setScene(scene);
-		                 stage.show();
-					
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}     
-            }
-        });
-        
-        pushButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("That was easy, wasn't it?");
 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("3 Einstellungen");
-                     
-                Stage stage; 
-                           
-                   //get reference to the button's stage         
-                   stage=(Stage)pushButton.getScene().getWindow();
-                   //load up OTHER FXML document
-                   
-                	AnchorPane page;
-					try {
-						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Stats.fxml"));
-						//create a new scene with root and set the stage
-		                 Scene scene = new Scene(page);
-		                 stage.setScene(scene);
-		                 stage.show();
-					
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}     
-            }
-        });
-        
-        
-    }   
+				Stage stage;
 
-}
+				// get reference to the button's stage
+				stage = (Stage) startButton.getScene().getWindow();
+				// load up OTHER FXML document
+
+				AnchorPane page;
+				try {
+					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
+					// create a new scene with root and set the stage
+					Scene scene = new Scene(page);
+					stage.setScene(scene);
+					stage.show();
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		);//endSetOnActionStartButton
+
+		statsButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("That was easy, wasn't it?");
+
+				Stage stage;
+
+				// get reference to the button's stage
+				stage = (Stage) statsButton.getScene().getWindow();
+				// load up OTHER FXML document
+
+				AnchorPane page;
+				try {
+					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Stats.fxml"));
+					// create a new scene with root and set the stage
+					Scene scene = new Scene(page);
+					stage.setScene(scene);
+					stage.show();
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+
+		pushButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("3 Einstellungen");
+
+				Stage stage;
+
+				// get reference to the button's stage
+				stage = (Stage) pushButton.getScene().getWindow();
+				// load up OTHER FXML document
+
+				AnchorPane page;
+				try {
+					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Stats.fxml"));
+					// create a new scene with root and set the stage
+					Scene scene = new Scene(page);
+					stage.setScene(scene);
+					stage.show();
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} 
+		}); //endSetOnActionPushButton
+
+	} //endInitialize
+
+}//endClass
