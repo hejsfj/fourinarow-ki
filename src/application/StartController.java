@@ -43,8 +43,7 @@ public class StartController implements Initializable {
 	private RadioButton rbPush;
 
 	@FXML
-<<<<<<< HEAD
-	private RadioButton fileButton;
+	private RadioButton rbFile;
 	
 	@FXML
 	private TextField tfZugZeit;
@@ -76,35 +75,26 @@ public class StartController implements Initializable {
 	@FXML
 	private Label lAppSecret;
 	
-	
-	
-=======
-	private RadioButton rbFile;
->>>>>>> 115b818515537a66f63717139a4db08766338478
+
 
 	@Override // This method is called by the FXMLLoader when initialization is
 				// complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		assert startButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
-		assert statsButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
-<<<<<<< HEAD
-		assert pushButton != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
-		assert tfAppId != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
-		assert tfAppKey != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
-		assert tfAppSecret != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
-		assert tfDateiPfad != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
-		assert tfZugZeit != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
-		assert lAppId != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
-		assert lAppKey != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
-		assert lAppSecret != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
-		assert lDateiPfad != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
-		assert lZugZeit != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert startButton != null : "fx:id=\"startButton\" was not injected: check your FXML file";
+		assert statsButton != null : "fx:id=\"statsButton\" was not injected: check your FXML file";
+		assert tfAppId != null : "fx:id=\"tfAppId\" was not injected: check your FXML file";
+		assert tfAppKey != null : "fx:id=\"tfAppKey\" was not injected: check your FXML file";
+		assert tfAppSecret != null : "fx:id=\"tfAppSecret\" was not injected: check your FXML file";
+		assert tfDateiPfad != null : "fx:id=\"tfDateiPfaf\" was not injected: check your FXML file";
+		assert tfZugZeit != null : "fx:id=\"tfZugZeit\" was not injected: check your FXML file";
+		assert lAppId != null : "fx:id=\"lAppId\" was not injected: check your FXML file";
+		assert lAppKey != null : "fx:id=\"lAppKex\" was not injected: check your FXML file";
+		assert lAppSecret != null : "fx:id=\"lAppSecret\" was not injected: check your FXML file";
+		assert lDateiPfad != null : "fx:id=\"lDateiPfad\" was not injected: check your FXML file";
+		assert lZugZeit != null : "fx:id=\"lZugZeit\" was not injected: check your FXML file";
+		assert rbPush != null : "fx:id=\"rbPush\" was not injected: check your FXML file";
+		assert rbFile != null : "fx:id=\"rbFile\" was not injected: check your FXML file";
 
-=======
-		assert rbPush != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
-		assert rbFile != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
->>>>>>> 115b818515537a66f63717139a4db08766338478
-		
 		
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -165,7 +155,7 @@ public class StartController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-<<<<<<< HEAD
+
 //				System.out.println("3 Einstellungen");
 //
 //				Stage stage;
@@ -186,7 +176,7 @@ public class StartController implements Initializable {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
-=======
+
 				System.out.println("3 Einstellungen");
 
 				Stage stage;
@@ -207,7 +197,6 @@ public class StartController implements Initializable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
->>>>>>> 115b818515537a66f63717139a4db08766338478
 			} 
 		}); //endSetOnActionPushButton
 		
@@ -231,7 +220,7 @@ public class StartController implements Initializable {
 		Stage stage;
 
 		// get reference to the button's stage
-		stage = (Stage) pushButton.getScene().getWindow();
+		stage = (Stage) rbPush.getScene().getWindow();
 		// load up OTHER FXML document
 
 		AnchorPane page;
