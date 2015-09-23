@@ -37,4 +37,8 @@ public class Serverfile {
 	public void setSieger(String sieger) {
 		this.sieger = sieger;
 	}
+	
+	public boolean isGameOver(){
+		return getFreigabe() == false && getSatzstatus().equals("beendet");
+	}
 }
