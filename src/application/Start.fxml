@@ -50,7 +50,7 @@
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                    <Button fx:id="startButton" cancelButton="false" defaultButton="false" mnemonicParsing="false" prefHeight="54.0" prefWidth="292.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS" />
+                    <Button fx:id="btStart" cancelButton="false" defaultButton="false" mnemonicParsing="false" prefHeight="54.0" prefWidth="292.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS" />
                            </children>
                         </Pane>
                      </children>
@@ -88,13 +88,13 @@
                       </children>
                     </HBox>
                               <Label fx:id="lZugZeit" text="Zugzeit" />
-                  <TextField fx:id="tfZugZeit" prefHeight="15.0" prefWidth="388.0" />
+              			      <TextField fx:id="tfZugZeit" prefHeight="15.0" prefWidth="388.0" />
                               <Label fx:id="lDateiPfad" text="Dateipfad" />
-                  <TextField fx:id="tfDateipfad" prefHeight="15.0" prefWidth="388.0" />
+                  			  <TextField fx:id="tfDateiPfad" prefHeight="15.0" prefWidth="388.0" />
                               <Label fx:id="lAppKey" text="AppKey" />
                               <TextField fx:id="tfAppKey" prefHeight="15.0" prefWidth="388.0" />
                               <Label fx:id="lAppId" text="App ID" />
-                              <TextField fx:id="appID" prefHeight="15.0" prefWidth="388.0" />
+                              <TextField fx:id="tfAppId" prefHeight="15.0" prefWidth="388.0" />
                               <Label fx:id="lAppSecret" text="App Secret" />
                               <TextField fx:id="tfAppSecret" prefHeight="15.0" prefWidth="388.0" />
                   </children>
@@ -136,7 +136,7 @@
             <Pane prefHeight="22.0" prefWidth="835.0">
               <children>
                 <Button disable="true" layoutX="21.0" layoutY="-2.0" mnemonicParsing="false" text="Neues Spiel" />
-                <Button fx:id="statsButton" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
+                <Button fx:id="btStats" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
               </children>
             </Pane>
             <HBox alignment="TOP_LEFT" prefHeight="56.0" prefWidth="828.0" rotate="0.0">

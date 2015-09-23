@@ -11,10 +11,30 @@ public class AgentfileWriter{
 
 	private String sharedFolderPath;
 	private char player;
+	
+	
+	
+	public String getSharedFolderPath() {
+		return sharedFolderPath;
+	}
+
+	public void setSharedFolderPath(String sharedFolderPath) {
+		this.sharedFolderPath = sharedFolderPath;
+	}
+
+	public char getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(char player) {
+		this.player = player;
+	}
+
 	public AgentfileWriter(String sharedFolderPath, char player){
 		this.sharedFolderPath = sharedFolderPath;		
 		this.player = player;
 	}
+	
 	public void writeAgentfile(Agentfile agentFile) throws IOException{					
 			String filePath = sharedFolderPath + "/spieler" + player + "2server.txt";
 			

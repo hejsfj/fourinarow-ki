@@ -1,7 +1,6 @@
 package application;
 
-import java.awt.Label;
-import java.awt.TextField;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,23 +10,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.scene.control.RadioButton;
 
+import fileInterface.*;
 
 
 
 public class StartController implements Initializable {
 	
-	/*Steuerelemente*/
+	/*Steuerelemente deklarieren*/
 
-	@FXML // fx:id="myButton"
-	private Button startButton; // Value injected by FXMLLoader
+	@FXML 
+	private Button btStart; // Value injected by FXMLLoader
 
 	@FXML
-	private Button statsButton;
+	private Button btStats;
 
 	@FXML
 	private RadioButton rbPush;
@@ -35,84 +35,98 @@ public class StartController implements Initializable {
 	@FXML
 	private RadioButton rbFile;
 	
+	@FXML
+	private RadioButton rbRot;
+
+	@FXML
+	private RadioButton rbGelb;
 	
+	@FXML
 	private TextField tfZugZeit;
 	
-	
+	@FXML
 	private TextField tfDateiPfad;
 	
-	
+	@FXML
 	private TextField tfAppKey;
 	
-	
+	@FXML
 	private TextField tfAppId;
 	
-	
+	@FXML
 	private TextField tfAppSecret;
 	
-	
+	@FXML
 	private Label lZugZeit;
 	
-	
+	@FXML
 	private Label lDateiPfad;
 	
-	
+	@FXML
 	private Label lAppKey;
 	
-	
+	@FXML
 	private Label lAppId;
 	
-	
+	@FXML
 	private Label lAppSecret;
+	
+	Character player;
 	
 
 	@Override // This method is called by the FXMLLoader when initialization is
 				// complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		assert startButton != null : "fx:id=\"startButton\" was not injected: check your FXML file";
-		assert statsButton != null : "fx:id=\"statsButton\" was not injected: check your FXML file";
+		assert btStart != null : "fx:id=\"startButton\" was not injected: check your FXML file";
+		assert btStats != null : "fx:id=\"statsButton\" was not injected: check your FXML file";
 		assert rbPush != null : "fx:id=\"rbPush\" was not injected: check your FXML file";
 		assert rbFile != null : "fx:id=\"rbFile\" was not injected: check your FXML file";
-
-		startButton.setOnAction(new EventHandler<ActionEvent>() {
+		
+		
+		/*Start Event*/
+		
+		btStart.setOnAction((ev) -> 	{
 			
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("That was easy, wasn't it?");
-
-				Stage stage;
-
-				// get reference to the button's stage
-				stage = (Stage) startButton.getScene().getWindow();
-				// load up OTHER FXML document
-
-				AnchorPane page;
-				try {
-					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
-					// create a new scene with root and set the stage
-					Scene scene = new Scene(page);
-					stage.setScene(scene);
-					stage.show();
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			System.out.println("Game startet");
 			
+			//TO DO File Interface Einsatz
+			AgentfileWriter agentFileWriter = new AgentfileWriter(tfDateiPfad.getText(), player);
+			System.out.println("FileInterface Spieler: "+ agentFileWriter.getPlayer());	
+			System.out.println("FileInterface Sharedfolder: "+ agentFileWriter.getSharedFolderPath());		
+			
+			Stage stage;
+
+
+			// get reference to the button's stage
+			stage = (Stage) btStart.getScene().getWindow();
+			// load up OTHER FXML document
+
+			AnchorPane page;
+			try {
+				page = (AnchorPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
+				// create a new scene with root and set the stage
+				Scene scene = new Scene(page);
+				stage.setScene(scene);
+				stage.show();
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		
 			});//endSetOnActionStartButton
 
-		statsButton.setOnAction(new EventHandler<ActionEvent>() {
+		/*Statistik Event*/
+		btStats.setOnAction((ev)-> 
+		{
 
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("That was easy, wasn't it?");
+
+				System.out.println("Stats startet");
 
 				Stage stage;
 
 				// get reference to the button's stage
-				stage = (Stage) statsButton.getScene().getWindow();
+				stage = (Stage) btStats.getScene().getWindow();
 				// load up OTHER FXML document
 
 				AnchorPane page;
@@ -127,89 +141,49 @@ public class StartController implements Initializable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
+			
 		}); //endSetOnActionStatsButton
 
-		rbPush.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-
-//				System.out.println("3 Einstellungen");
-//
-//				Stage stage;
-//
-//				// get reference to the button's stage
-//				stage = (Stage) pushButton.getScene().getWindow();
-//				// load up OTHER FXML document
-//
-//				AnchorPane page;
-//				try {
-//					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Stats.fxml"));
-//					// create a new scene with root and set the stage
-//					Scene scene = new Scene(page);
-//					stage.setScene(scene);
-//					stage.show();
-//
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-
-				System.out.println("3 Einstellungen");
-
-				Stage stage;
-
-				// get reference to the button's stage
-				stage = (Stage) rbPush.getScene().getWindow();
-				// load up OTHER FXML document
-
-				AnchorPane page;
-				try {
-					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Stats.fxml"));
-					// create a new scene with root and set the stage
-					Scene scene = new Scene(page);
-					stage.setScene(scene);
-					stage.show();
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} 
-		}); //endSetOnActionPushButton
 		
-		rbFile.setOnAction((ev) -> fileButtonAnsicht(ev));
-		rbPush.setOnAction((ev) -> pushButtonAnsicht(ev));
-	
-	
+		rbFile.setOnAction((ev) -> {
+			System.out.println(rbFile.getText()+" ausgewählt");
+			lAppId.setVisible(false);
+			lAppKey.setVisible(false);
+			lAppSecret.setVisible(false);
+			tfAppId.setVisible(false);
+			tfAppKey.setVisible(false);
+			tfAppSecret.setVisible(false);	
+			lDateiPfad.setVisible(true);
+			tfDateiPfad.setVisible(true);
+				
+			
+		});//endSetOnActionRbFile
+		
+		rbPush.setOnAction((ev) -> {
+			System.out.println(rbPush.getText()+" ausgewählt");
+			lDateiPfad.setVisible(false);
+			tfDateiPfad.setVisible(false);
+			lAppId.setVisible(true);
+			lAppKey.setVisible(true);
+			lAppSecret.setVisible(true);
+			tfAppId.setVisible(true);
+			tfAppKey.setVisible(true);
+			tfAppSecret.setVisible(true);	
 
-//		private Pane createButtonBasedEditor(String initialText) {		
-//		startButton.setDefaultButton(true);
-//        startButton.setDisable(true);
-// 
-//        tfZugZeit.textProperty.addTextListener(() -> {
-//            startButton.setDisable(false);
-//        });
-//	    startButton.setOnAction((event) -> 
-//	        tfZugZeit.setText(tfZugZeit.getText()));
-//	        startButton.setDisable(false);
-	   
+		
+		}); //endSetOnActionRbPush
+		
+		rbGelb.setOnAction((ev) -> {
+			player = 'o';
+			
+		});//endRbGelb
 
+		rbRot.setOnAction((ev) -> {
+			player = 'x';
+			
+		});//endRbGelb
 	
 		}//endInitialize
 
-	private void fileButtonAnsicht(ActionEvent ev){
-		// TODO Auto-generated method stub
-        RadioButton rb = (RadioButton) ev.getSource();
-        System.out.printf("%s%n", rb.getText());
-        
-	}//endFileButtonAusgabe
-	
-	private void pushButtonAnsicht(ActionEvent ev){
-		RadioButton rb = (RadioButton) ev.getSource();
-		System.out.printf("%s%n", rb.getText());
-		
-	}//endFileButtonAnsicht
         
 }//endClass
