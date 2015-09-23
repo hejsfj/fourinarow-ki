@@ -12,68 +12,55 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 
 public class GameController implements Initializable {
 	
+    @FXML //  fx:id="myButton"
+    private Button newButton; // Value injected by FXMLLoader
+    
     @FXML
+    private Button statsButton; // Value injected by FXMLLoader
+    
+	@FXML
     private Button startButton;
 
-    @FXML
-    private Font x31;
 
-    @FXML
-    private Color x1;
-
-    @FXML
-    private Button newButton;
-
-    @FXML
-    private Font x3;
-
-    @FXML
-    private Font x4;
-
-    @FXML
-    private Button statsButton;
-
-    @FXML
-    private Color x5;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		assert newButton != null : "fx:id=\"newButton\" was not injected: check your FXML file";
 		assert statsButton != null : "fx:id=\"statsButton\" was not injected: check your FXML file";
 		
 		
-		newButton.setOnAction(new EventHandler<ActionEvent>() {
+        newButton.setOnAction(new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Zum neuen Spiel");
-
-				Stage stage;
-
-				// get reference to the button's stage
-				stage = (Stage) newButton.getScene().getWindow();
-				// load up OTHER FXML document
-
-				AnchorPane page;
-				try {
-					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Start.fxml"));
-					// create a new scene with root and set the stage
-					Scene scene = new Scene(page);
-					stage.setScene(scene);
-					stage.show();
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});//endSetOnActionStartButton
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Load it!");
+          
+                Stage stage; 
+  
+                   //get reference to the button's stage         
+                   stage=(Stage)newButton.getScene().getWindow();
+                   //load up OTHER FXML document
+                   
+                	AnchorPane page;
+					try {
+						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Start.fxml"));
+						//create a new scene with root and set the stage
+		                 Scene scene = new Scene(page);
+		                 stage.setScene(scene);
+		                 stage.show();
+					
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}    
+            }
+            
+        });
 		
 		statsButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -103,7 +90,6 @@ public class GameController implements Initializable {
 		});//endSetOnActionStartButton
 		
 	}
-
-    
+   
 }
 

@@ -63,15 +63,7 @@ public class StatsController implements Initializable {
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
-				
-				
-                 
-               
-                
-			
-                 
-                 
+					}    
             }
             
         });

@@ -21,7 +21,7 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text layoutX="206.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 1 ist am Zug / Spieler 2 gewinnt" textAlignment="LEFT" textOrigin="CENTER">
+                              <Text layoutX="206.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 1 ist am Zug / Spieler 2 gewinnt" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="422.2177734375">
                                  <font>
                                     <Font size="14.0" fx:id="x31" />
                                  </font>
@@ -165,7 +165,7 @@
               <children>
                 <Button fx:id="newButton" layoutX="21.0" layoutY="-2.0" mnemonicParsing="false" text="Neues Spiel" />
                 <Button fx:id="statsButton" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
-                <Button id="statsButton" layoutX="213.0" layoutY="-2.0" mnemonicParsing="false" text="Spiel starten" />
+                <Button id="statsButton" fx:id="startButton" layoutX="213.0" layoutY="-2.0" mnemonicParsing="false" text="Spiel starten" />
               </children>
             </Pane>
             <HBox alignment="TOP_LEFT" prefHeight="137.0" prefWidth="759.0" rotate="0.0">
