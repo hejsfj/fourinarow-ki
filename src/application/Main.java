@@ -10,10 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
-//huhu
-
-
-
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
