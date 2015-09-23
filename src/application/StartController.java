@@ -48,6 +48,8 @@ public class StartController implements Initializable {
 		assert statsButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
 		assert pushButton != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
 		assert fileButton != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		
+		
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -129,7 +131,21 @@ public class StartController implements Initializable {
 				}
 			} 
 		}); //endSetOnActionPushButton
+		
+		fileButton.setOnAction((ev) -> fileButtonAnsicht(ev));
+		pushButton.setOnAction((ev)-> pushButtonAnsicht(ev));
 
 	} //endInitialize
+
+	private void fileButtonAnsicht(ActionEvent ev) {
+		// TODO Auto-generated method stub
+        RadioButton rb = (RadioButton) ev.getSource();
+        System.out.printf("%s%n", rb.getText());
+	}//endFileButtonAusgabe
+	
+	private void pushButtonAnsicht(ActionEvent ev){
+		RadioButton rb = (RadioButton) ev.getSource();
+		System.out.printf("%s%n", rb.getText());
+	}//endFileButtonAnsicht
 
 }//endClass
