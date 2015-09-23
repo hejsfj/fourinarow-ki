@@ -12,7 +12,7 @@
 <?implements EventTarget?>
 <?extends java.lang.Object?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatsController">
+<AnchorPane maxHeight="530" maxWidth="830" minHeight="530" minWidth="830" prefHeight="553.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatsController">
    <children>
       <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="542.0" prefWidth="848.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
@@ -67,7 +67,7 @@
                   <Pane prefHeight="22.0" prefWidth="835.0">
                      <children>
                         <Button fx:id="newButton" layoutX="21.0" layoutY="-2.0" mnemonicParsing="false" text="Neues Spiel" />
-                        <Button fx:id="statsButton" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
+                        <Button fx:id="statsButton" disable="true" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
                      </children>
                   </Pane>
                   <HBox alignment="TOP_LEFT" prefHeight="100.0" prefWidth="848.0" rotate="0.0">

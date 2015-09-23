@@ -4,6 +4,7 @@ package application;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -17,8 +18,10 @@ public class Main extends Application {
             AnchorPane page = (AnchorPane) FXMLLoader.load(Main.class.getResource("Start.fxml"));
             Scene scene = new Scene(page);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("FXML is Simple");
+            primaryStage.setTitle("4 Gewinnt immer!");
+            primaryStage.setResizable(false);
             primaryStage.show();
+          
         } 
 		
 		catch (Exception ex) {
