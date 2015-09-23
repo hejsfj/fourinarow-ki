@@ -10,14 +10,13 @@ import java.nio.charset.Charset;
 public class AgentfileWriter{
 
 	private String sharedFolderPath;
-	public AgentfileWriter(String sharedFolderPath){
+	private char player;
+	public AgentfileWriter(String sharedFolderPath, char player){
 		this.sharedFolderPath = sharedFolderPath;		
+		this.player = player;
 	}
 	public void writeAgentfile(Agentfile agentFile) throws IOException{					
-		// TO DO: Wie die Angabe des Spielers reinpacken?? für korrekte Bestimmung des Dateinamens
-			String filePath = sharedFolderPath + "/spielero2server.txt";
-			// oder:
-			// String filePath = sharedFolderPath + "/spielerx2server.txt";
+			String filePath = sharedFolderPath + "/spieler" + player + "2server.txt";
 			
 			final Charset charset=Charset.forName("US-ASCII");
 			
