@@ -40,9 +40,10 @@ public class StartController implements Initializable {
 	private Button statsButton;
 
 	@FXML
-	private RadioButton pushButton;
+	private RadioButton rbPush;
 
 	@FXML
+<<<<<<< HEAD
 	private RadioButton fileButton;
 	
 	@FXML
@@ -77,12 +78,16 @@ public class StartController implements Initializable {
 	
 	
 	
+=======
+	private RadioButton rbFile;
+>>>>>>> 115b818515537a66f63717139a4db08766338478
 
 	@Override // This method is called by the FXMLLoader when initialization is
 				// complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		assert startButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
 		assert statsButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
+<<<<<<< HEAD
 		assert pushButton != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
 		assert tfAppId != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
 		assert tfAppKey != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
@@ -95,6 +100,10 @@ public class StartController implements Initializable {
 		assert lDateiPfad != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
 		assert lZugZeit != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
 
+=======
+		assert rbPush != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
+		assert rbFile != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+>>>>>>> 115b818515537a66f63717139a4db08766338478
 		
 		
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -152,10 +161,11 @@ public class StartController implements Initializable {
 			}
 		}); //endSetOnActionStatsButton
 
-		pushButton.setOnAction(new EventHandler<ActionEvent>() {
+		rbPush.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
+<<<<<<< HEAD
 //				System.out.println("3 Einstellungen");
 //
 //				Stage stage;
@@ -176,11 +186,33 @@ public class StartController implements Initializable {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
+=======
+				System.out.println("3 Einstellungen");
+
+				Stage stage;
+
+				// get reference to the button's stage
+				stage = (Stage) rbPush.getScene().getWindow();
+				// load up OTHER FXML document
+
+				AnchorPane page;
+				try {
+					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Stats.fxml"));
+					// create a new scene with root and set the stage
+					Scene scene = new Scene(page);
+					stage.setScene(scene);
+					stage.show();
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+>>>>>>> 115b818515537a66f63717139a4db08766338478
 			} 
 		}); //endSetOnActionPushButton
 		
-		fileButton.setOnAction((ev) -> fileButtonAnsicht(ev));
-		pushButton.setOnAction((ev)-> pushButtonAnsicht(ev));
+		rbFile.setOnAction((ev) -> fileButtonAnsicht(ev));
+		rbPush.setOnAction((ev)-> pushButtonAnsicht(ev));
 
 	} //endInitialize
 
