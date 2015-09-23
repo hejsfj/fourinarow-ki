@@ -11,21 +11,24 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <BorderPane prefHeight="553.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
-        <HBox alignment="CENTER" prefHeight="113.0" prefWidth="835.0">
+        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="835.0">
           <children>
-            <VBox alignment="BOTTOM_CENTER" disable="false" maxHeight="137.0" prefHeight="100.0" prefWidth="835.0" visible="true">
-              <children>
-                <Separator orientation="VERTICAL" prefHeight="45.0" />
-                <ScrollPane prefHeight="68.0" prefWidth="835.0">
-                  <content>
-                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                  </content>
-                </ScrollPane>
-              </children>
+            <VBox alignment="BOTTOM_CENTER" disable="false" maxHeight="137.0" prefHeight="66.0" prefWidth="835.0" visible="true">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Text layoutX="206.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 1 ist am Zug / Spieler 2 gewinnt" textAlignment="LEFT" textOrigin="CENTER">
+                                 <font>
+                                    <Font size="14.0" fx:id="x31" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                     </children>
             </VBox>
           </children>
         </HBox>
@@ -146,7 +149,7 @@
                   <children>
                     <Circle fill="$x5" layoutX="110.0" layoutY="63.0" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                     <Text focusTraversable="false" font="$x3" layoutX="46.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege gegen Spieler 2: 1" textAlignment="CENTER" textOrigin="CENTER" />
-                    <Text font="$x4" layoutX="64.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 1" textOrigin="CENTER" />
+                    <Text font="$x4" layoutX="64.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 2" textOrigin="CENTER" />
                   </children>
                 </Pane>
                 <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
