@@ -36,18 +36,18 @@ public class StartController implements Initializable {
 	private Button statsButton;
 
 	@FXML
-	private RadioButton pushButton;
+	private RadioButton rbPush;
 
 	@FXML
-	private RadioButton fileButton;
+	private RadioButton rbFile;
 
 	@Override // This method is called by the FXMLLoader when initialization is
 				// complete
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		assert startButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
 		assert statsButton != null : "fx:id=\"myButton\" was not injected: check your FXML file";
-		assert pushButton != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
-		assert fileButton != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
+		assert rbPush != null : "fx:id=\"pushButton\" was not injected: check your FXML file";
+		assert rbFile != null : "fx:id=\"fileButton\" was not injected: check your FXML file";
 		
 		
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -105,7 +105,7 @@ public class StartController implements Initializable {
 			}
 		}); //endSetOnActionStatsButton
 
-		pushButton.setOnAction(new EventHandler<ActionEvent>() {
+		rbPush.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -114,7 +114,7 @@ public class StartController implements Initializable {
 				Stage stage;
 
 				// get reference to the button's stage
-				stage = (Stage) pushButton.getScene().getWindow();
+				stage = (Stage) rbPush.getScene().getWindow();
 				// load up OTHER FXML document
 
 				AnchorPane page;
@@ -132,8 +132,8 @@ public class StartController implements Initializable {
 			} 
 		}); //endSetOnActionPushButton
 		
-		fileButton.setOnAction((ev) -> fileButtonAnsicht(ev));
-		pushButton.setOnAction((ev)-> pushButtonAnsicht(ev));
+		rbFile.setOnAction((ev) -> fileButtonAnsicht(ev));
+		rbPush.setOnAction((ev)-> pushButtonAnsicht(ev));
 
 	} //endInitialize
 
