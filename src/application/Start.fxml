@@ -87,16 +87,16 @@
                                     </Pane>
                       </children>
                     </HBox>
-                              <Label text="Zugzeit" />
-                  <TextField fx:id="tfZugZeit" prefHeight="31.921875" prefWidth="380.0" />
-                              <Label text="Dateipfad" />
-                  <TextField fx:id="tfDateipfad" prefHeight="32.0" prefWidth="380.0" />
-                              <Label text="AppKey" />
-                              <TextField fx:id="tfAppKey" prefHeight="32.0" prefWidth="380.0" />
-                              <Label text="App ID" />
-                              <TextField fx:id="appID" prefHeight="32.0" prefWidth="380.0" />
-                              <Label text="App Secret" />
-                              <TextField fx:id="tfAppSecret" prefHeight="32.0" prefWidth="380.0" />
+                              <Label fx:id="lZugZeit" text="Zugzeit" />
+                  <TextField fx:id="tfZugZeit" prefHeight="15.0" prefWidth="388.0" />
+                              <Label fx:id="lDateiPfad" text="Dateipfad" />
+                  <TextField fx:id="tfDateipfad" prefHeight="15.0" prefWidth="388.0" />
+                              <Label fx:id="lAppKey" text="AppKey" />
+                              <TextField fx:id="tfAppKey" prefHeight="15.0" prefWidth="388.0" />
+                              <Label fx:id="lAppId" text="App ID" />
+                              <TextField fx:id="appID" prefHeight="15.0" prefWidth="388.0" />
+                              <Label fx:id="lAppSecret" text="App Secret" />
+                              <TextField fx:id="tfAppSecret" prefHeight="15.0" prefWidth="388.0" />
                   </children>
                 </VBox>
               </children>
