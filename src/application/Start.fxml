@@ -87,15 +87,15 @@
                                     </Pane>
                       </children>
                     </HBox>
-                    <Text fx:id="lZugZeit" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Zugzeit" textOrigin="CENTER" wrappingWidth="398.75" />
+                              <Label text="Zugzeit" />
                   <TextField fx:id="tfZugZeit" prefHeight="31.921875" prefWidth="380.0" />
-                    <Text fx:id="lDateipfad" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Dateipfad" textOrigin="CENTER" wrappingWidth="397.5" />
+                              <Label text="Dateipfad" />
                   <TextField fx:id="tfDateipfad" prefHeight="32.0" prefWidth="380.0" />
-                              <Text fx:id="lAppKey" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="App Key" textOrigin="CENTER" wrappingWidth="397.359375" />
+                              <Label text="AppKey" />
                               <TextField fx:id="tfAppKey" prefHeight="32.0" prefWidth="380.0" />
-                              <Text fx:id="lAppId" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="App ID" textOrigin="CENTER" wrappingWidth="396.48828125" />
+                              <Label text="App ID" />
                               <TextField fx:id="appID" prefHeight="32.0" prefWidth="380.0" />
-                              <Text fx:id="lAppSecret" font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="App Secret" textOrigin="CENTER" wrappingWidth="396.6875" />
+                              <Label text="App Secret" />
                               <TextField fx:id="tfAppSecret" prefHeight="32.0" prefWidth="380.0" />
                   </children>
                 </VBox>
