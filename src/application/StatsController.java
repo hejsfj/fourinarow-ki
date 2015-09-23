@@ -23,6 +23,8 @@ public class StatsController implements Initializable {
 
     @FXML //  fx:id="myButton"
     private Button refreshButton; // Value injected by FXMLLoader
+    
+    @FXML
     private Button saveButton; // Value injected by FXMLLoader
 
   
@@ -61,18 +63,11 @@ public class StatsController implements Initializable {
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
-				
-				
-                 
-               
-                
-			
-                 
-                 
+					}    
             }
             
         });
+        
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
