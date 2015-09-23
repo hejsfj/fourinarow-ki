@@ -4,6 +4,7 @@ public class Gamefield {
 	private char[][] gamefield;
 	private final int numRows = 6;
 	private final int numColumns = 7;
+	private boolean isEmpty = true;
 	
 	public static void main(final String[] args) {
 		Gamefield gamefield = new Gamefield();
@@ -15,7 +16,6 @@ public class Gamefield {
 	}
 	
 	public Gamefield(){
-		
 		gamefield = new char[numRows][numColumns];
 		initGame();
 	}
@@ -35,12 +35,19 @@ public class Gamefield {
 			if (gamefield[rowIndex][columnIndex] == ' ' )
 			{
 				gamefield[rowIndex][columnIndex] = player;
+				if (isEmpty) { isEmpty = false;}
 				break;
 			}
 		}
 	}
-	
-	public char[][] getGamefield(){
-		return gamefield;
+
+	public boolean isEmpty(){
+		return isEmpty;
+	}
+	public boolean isValidMove(int columnIndex){
+		return !isColumnFull(columnIndex);
+	}
+	private boolean isColumnFull(int columnIndex){
+		 return gamefield[0][columnIndex] != ' ';
 	}
 }
