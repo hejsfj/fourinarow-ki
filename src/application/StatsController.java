@@ -23,6 +23,8 @@ public class StatsController implements Initializable {
 
     @FXML //  fx:id="myButton"
     private Button refreshButton; // Value injected by FXMLLoader
+    
+    @FXML
     private Button saveButton; // Value injected by FXMLLoader
 
   
@@ -73,6 +75,7 @@ public class StatsController implements Initializable {
             }
             
         });
+        
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

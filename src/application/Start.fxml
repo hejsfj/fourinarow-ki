@@ -9,9 +9,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.StartController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StartController">
   <children>
-    <BorderPane layoutX="0.0" layoutY="0.0" prefHeight="553.0" prefWidth="835.0">
+    <BorderPane layoutX="-7.0">
       <bottom>
         <HBox alignment="CENTER" prefHeight="113.0" prefWidth="835.0">
           <children>
@@ -32,7 +32,7 @@
           <children>
             <HBox prefHeight="285.0" prefWidth="395.0">
               <children>
-                <VBox alignment="TOP_CENTER" prefHeight="285.0" prefWidth="395.0">
+                <VBox alignment="TOP_CENTER" prefHeight="333.0" prefWidth="395.0">
                   <children>
                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Schnittstelle" textAlignment="CENTER" textOrigin="CENTER">
                       <font>
@@ -41,13 +41,19 @@
                     </Text>
                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                       <children>
-                        <RadioButton mnemonicParsing="false" text="Pusher Schnittstelle">
-                          <font>
-                            <Font size="18.0" fx:id="x1" />
-                          </font>
-                        </RadioButton>
-                        <Separator prefWidth="50.0" />
-                        <RadioButton font="$x1" mnemonicParsing="false" text="File Schnittstelle" />
+                                    <Pane prefHeight="63.0" prefWidth="445.0">
+                                       <children>
+                              <RadioButton fx:id="pushButton" layoutX="208.0" layoutY="18.0" mnemonicParsing="false" text="Pusher Schnittstelle">
+                                <font>
+                                  <Font size="18.0" fx:id="x1" />
+                                </font>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="Schnittstelle" />
+                                             </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="fileButton" contentDisplay="CENTER" font="$x1" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="173.0" text="File Schnittstelle" toggleGroup="$Schnittstelle" />
+                                       </children>
+                                    </Pane>
                       </children>
                     </HBox>
                     <Text font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Zugzeit" textAlignment="CENTER" textOrigin="CENTER" />
@@ -57,7 +63,7 @@
                       </children>
                     </HBox>
                     <Text font="$x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Dateipfad" textAlignment="CENTER" textOrigin="CENTER" />
-                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <HBox alignment="CENTER" prefHeight="73.0" prefWidth="395.0">
                       <children>
                         <TextField prefHeight="32.0" prefWidth="380.0" />
                       </children>
@@ -77,7 +83,7 @@
                 <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
                 <Pane prefHeight="193.0" prefWidth="220.0" visible="true">
                   <children>
-                    <Circle fill="#ff6666" layoutX="110.0" layoutY="97.0" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                    <Circle fill="#faff26" layoutX="110.0" layoutY="97.0" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   </children>
                 </Pane>
                 <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
@@ -94,7 +100,7 @@
                 <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
                 <Pane prefHeight="193.0" prefWidth="220.0" visible="true">
                   <children>
-                    <Circle fill="#66c8ff" layoutX="110.0" layoutY="97.0" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                    <Circle fill="#f82424" layoutX="110.0" layoutY="97.0" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                   </children>
                 </Pane>
                 <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
@@ -109,7 +115,7 @@
             <Pane prefHeight="22.0" prefWidth="835.0">
               <children>
                 <Button disable="true" layoutX="21.0" layoutY="-2.0" mnemonicParsing="false" text="Neues Spiel" />
-                <Button layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
+                <Button fx:id="statsButton" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
               </children>
             </Pane>
             <HBox alignment="TOP_LEFT" prefHeight="137.0" prefWidth="759.0" rotate="0.0">
