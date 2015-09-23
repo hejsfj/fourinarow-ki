@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -31,6 +32,9 @@ public class StatsController implements Initializable {
     
     @FXML
     private Button newButton;
+    
+    @FXML
+    private Label infostat;
   
 
     @Override // This method is called by the FXMLLoader when initialization is complete
@@ -47,28 +51,28 @@ public class StatsController implements Initializable {
             public void handle(ActionEvent event) {
                 System.out.println("Load it!");
                 
-                
+                infostat.setText("Die Daten wurden aktualisiert!");
                            
-                Stage stage; 
-                
-                
-               
-                   //get reference to the button's stage         
-                   stage=(Stage)refreshButton.getScene().getWindow();
-                   //load up OTHER FXML document
-                   
-                	AnchorPane page;
-					try {
-						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Start.fxml"));
-						//create a new scene with root and set the stage
-		                 Scene scene = new Scene(page);
-		                 stage.setScene(scene);
-		                 stage.show();
-					
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}    
+//                Stage stage; 
+//                
+//                
+//               
+//                   //get reference to the button's stage         
+//                   stage=(Stage)refreshButton.getScene().getWindow();
+//                   //load up OTHER FXML document
+//                   
+//                	AnchorPane page;
+//					try {
+//						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Start.fxml"));
+//						//create a new scene with root and set the stage
+//		                 Scene scene = new Scene(page);
+//		                 stage.setScene(scene);
+//		                 stage.show();
+//					
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}    
             }
             
         });
@@ -79,28 +83,29 @@ public class StatsController implements Initializable {
             public void handle(ActionEvent event) {
                 System.out.println("Save that shit");
                 
+                infostat.setText("Die Änderungen wurden übernommen.");
                 
                            
-                Stage stage; 
-                
-                
-               
-                   //get reference to the button's stage         
-                   stage=(Stage)saveButton.getScene().getWindow();
-                   //load up OTHER FXML document
-                   
-                	AnchorPane page;
-					try {
-						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
-						//create a new scene with root and set the stage
-		                 Scene scene = new Scene(page);
-		                 stage.setScene(scene);
-		                 stage.show();
-					
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} 
+//                Stage stage; 
+//                
+//                
+//               
+//                   //get reference to the button's stage         
+//                   stage=(Stage)saveButton.getScene().getWindow();
+//                   //load up OTHER FXML document
+//                   
+//                	AnchorPane page;
+//					try {
+//						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
+//						//create a new scene with root and set the stage
+//		                 Scene scene = new Scene(page);
+//		                 stage.setScene(scene);
+//		                 stage.show();
+//					
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					} 
                  
             }
             

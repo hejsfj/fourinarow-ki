@@ -22,6 +22,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="69.0" prefWidth="835.0">
                            <children>
+                              <Label fx:id="infostat" prefHeight="17.0" prefWidth="335.0" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Die Änderungen wurden gespeichert / Die Daten wurden aktualisiert" textAlignment="LEFT" textOrigin="CENTER">
                                  <font>
                                     <Font size="14.0" fx:id="x3" />
