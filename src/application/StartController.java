@@ -83,6 +83,17 @@ public class StartController implements Initializable {
 		assert rbFile != null : "fx:id=\"rbFile\" was not injected: check your FXML file";
 		
 		
+/* Initial ist File Schnittstelle ausgewählt */ 
+	rbFile.setSelected(true);
+	lAppId.setVisible(false);
+	lAppKey.setVisible(false);
+	lAppSecret.setVisible(false);
+	tfAppId.setVisible(false);
+	tfAppKey.setVisible(false);
+	tfAppSecret.setVisible(false);	
+	lDateiPfad.setVisible(true);
+	tfDateiPfad.setVisible(true);
+		
 		/*Start Event*/
 		
 		btStart.setOnAction((ev) -> 	{
