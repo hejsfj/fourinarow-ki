@@ -80,7 +80,7 @@ public class StartController implements Initializable {
 	Erster Versuch mit lokalen Variablen der Controller Klasse
 	*/
 	Character player;
-	double zugZeit;
+	int zugZeit;
 	
 
 	@Override // This method is called by the FXMLLoader when initialization is
@@ -102,6 +102,14 @@ public class StartController implements Initializable {
 	tfAppSecret.setVisible(false);	
 	lDateiPfad.setVisible(true);
 	tfDateiPfad.setVisible(true);
+	
+	/* Hinweise für Benutzereingaben */
+	
+	tfZugZeit.setText("1000");
+	tfDateiPfad.setText("C:/sharedFolder");
+	tfAppId.setText("123456");
+	tfAppKey.setText("93c4a752a14cbeef7216");
+	tfAppSecret.setText("adcd6bab9a922980c892");
 		
 		/*Start Event*/
 		
@@ -110,9 +118,9 @@ public class StartController implements Initializable {
 			System.out.println("Game startet");
 			
 			//TO DO File Interface Einsatz
-			AgentfileWriter agentFileWriter = new AgentfileWriter(tfDateiPfad.getText(), player);
-			System.out.println("FileInterface Spieler: "+ agentFileWriter.getPlayer());	
-			System.out.println("FileInterface Sharedfolder: "+ agentFileWriter.getSharedFolderPath());		
+//			AgentfileWriter agentFileWriter = new AgentfileWriter(tfDateiPfad.getText(), player);
+//			System.out.println("FileInterface Spieler: "+ agentFileWriter.getPlayer());	
+//			System.out.println("FileInterface Sharedfolder: "+ agentFileWriter.getSharedFolderPath());		
 			
 			Stage stage;
 
@@ -203,21 +211,61 @@ public class StartController implements Initializable {
 			
 		});//endRbGelb
 		
+		tfZugZeit.focusedProperty().addListener((observer,alt,neu)->{
+			
+			tfZugZeit.clear();		
+
+		});//endTfZugZeitAufKlickListener
+		
+		tfDateiPfad.focusedProperty().addListener((observer,alt,neu)->{
+			
+			tfDateiPfad.clear();		
+
+		});//endTfDateiPfadAufKlickListener
+		
+		tfAppId.focusedProperty().addListener((observer,alt,neu)->{
+			
+			tfAppId.clear();		
+
+		});//endTfAppIdAufKlickListener
+		
+		tfAppKey.focusedProperty().addListener((observer,alt,neu)->{
+			
+			tfAppKey.clear();		
+
+		});//endTfAppKeyAufKlickListener
+		
+		tfAppSecret.focusedProperty().addListener((observer,alt,neu)->{
+			
+			tfAppSecret.clear();		
+
+		});//endTfSecretAufKlickListener
+		
 		tfZugZeit.textProperty().addListener((observer,alt,neu)->{
 			
 			lZugZeitInfo.setText("in ms");
 			
-			if(!(neu.matches("\\d*\\.?,?\\d+"))){
+			try{
+			if(!(neu.matches("\\d*"))){
         		System.out.println("Ungültige Eingabe der Milisekunden");
         		lZugZeitInfo.setText("Ungültige Eingabe");
-        	}
+        	}//endIf
 			else{
-				String eingegebeneZugzeit = neu.replace(",", ".");
-				zugZeit = Double.parseDouble(eingegebeneZugzeit);
-				System.out.println("Eingestellte Zugzeit: "+ zugZeit);	
-			}
+				if(!(neu.equals(""))){
+					zugZeit = Integer.parseInt(neu);
+					System.out.println("Eingestellte Zugzeit: "+ zugZeit);	
+				}//endIF
+				else{
+					lZugZeitInfo.setText("in ms");
+				}//endElse
+				
+			}//endElse
+			}catch(NumberFormatException nfe){
+				lZugZeitInfo.setText("Ungültige Eingabe");
+				tfZugZeit.setText(alt);
+			}//endCatch
 
-		});//endTfZugZeitListener
+		});//endTfZugZeitTextListener
 	
 		}//endInitialize
 
