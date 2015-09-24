@@ -123,7 +123,10 @@
             <VBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="220.0">
               <children>
                 <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
-                <Pane prefHeight="193.0" prefWidth="220.0" visible="true" />
+                <Pane prefHeight="186.0" prefWidth="220.0" visible="true">
+                           <children>
+                              <Label fx:id="lZugZeitInfo" layoutY="54.0" prefHeight="17.0" prefWidth="146.0" text="in ms" />
+                           </children></Pane>
                 <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
               </children>
             </VBox>
