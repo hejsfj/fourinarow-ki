@@ -71,7 +71,16 @@ public class StartController implements Initializable {
 	@FXML
 	private Label lAppSecret;
 	
+	@FXML
+	private Label lZugZeitInfo;
+	
+	/*
+	Variablen zur weiteren Verarbeitung 
+	TO DO: Wie Interagiert das UI mit den Funktionalen Klassen??
+	Erster Versuch mit lokalen Variablen der Controller Klasse
+	*/
 	Character player;
+	double zugZeit;
 	
 
 	@Override // This method is called by the FXMLLoader when initialization is
@@ -193,6 +202,22 @@ public class StartController implements Initializable {
 			player = 'x';
 			
 		});//endRbGelb
+		
+		tfZugZeit.textProperty().addListener((observer,alt,neu)->{
+			
+			lZugZeitInfo.setText("in ms");
+			
+			if(!(neu.matches("\\d*\\.?,?\\d+"))){
+        		System.out.println("Ungültige Eingabe der Milisekunden");
+        		lZugZeitInfo.setText("Ungültige Eingabe");
+        	}
+			else{
+				String eingegebeneZugzeit = neu.replace(",", ".");
+				zugZeit = Double.parseDouble(eingegebeneZugzeit);
+				System.out.println("Eingestellte Zugzeit: "+ zugZeit);	
+			}
+
+		});//endTfZugZeitListener
 	
 		}//endInitialize
 
