@@ -104,12 +104,11 @@ public class StartController implements Initializable {
 	tfDateiPfad.setVisible(true);
 	
 	/* Hinweise für Benutzereingaben */
-	
-	tfZugZeit.setText("1000");
-	tfDateiPfad.setText("C:/sharedFolder");
-	tfAppId.setText("123456");
-	tfAppKey.setText("93c4a752a14cbeef7216");
-	tfAppSecret.setText("adcd6bab9a922980c892");
+	tfZugZeit.setPromptText("1000");
+	tfDateiPfad.setPromptText("C:/sharedFolder");
+	tfAppId.setPromptText("123456");
+	tfAppKey.setPromptText("93c4a752a14cbeef7216");
+	tfAppSecret.setPromptText("adcd6bab9a922980c892");
 		
 		/*Start Event*/
 		
