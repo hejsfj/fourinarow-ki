@@ -43,6 +43,8 @@ public class StartController implements Initializable {
 	@FXML private TextField tfAppId;
 	@FXML private TextField tfAppSecret;
 	
+	@FXML private Label infostart;
+	
 	Character player;
 	int zugZeit;
 	
@@ -68,7 +70,7 @@ public class StartController implements Initializable {
 		btStart.setOnAction((ev) -> 	{
 			if (!areAllRequiredFieldsFilled())
 			{
-				// HIER DAS LABEL ZUR WARNUNG DES NUTZERS, DASS NICHT ALLE FELDER GEFÜLLT SIND SETZEN!
+				 infostart.setText("Nicht alle benötigten Felder wurden richtig ausgefüllt");
 				return;
 			}
 			

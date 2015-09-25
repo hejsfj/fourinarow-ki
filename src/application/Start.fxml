@@ -48,9 +48,10 @@
                               </VBox>
                            </children>
                         </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
+                        <Pane prefHeight="113.0" prefWidth="452.0">
                            <children>
-                    <Button fx:id="btStart" cancelButton="false" defaultButton="false" mnemonicParsing="false" prefHeight="54.0" prefWidth="292.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS" />
+                    <Button fx:id="btStart" cancelButton="false" defaultButton="false" layoutX="46.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="292.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS" />
+                              <Label fx:id="infostart" layoutX="46.0" layoutY="70.0" prefHeight="21.0" prefWidth="342.0" textFill="#eb0000" />
                            </children>
                         </Pane>
                      </children>
