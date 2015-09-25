@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -25,6 +26,9 @@ public class GameController implements Initializable {
     
 	@FXML
     private Button startButton;
+	
+	@FXML
+    private Label infostat;
 
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
@@ -91,25 +95,26 @@ public class GameController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Zum neuen Spiel");
+				
+				infostat.setText("Das Spiel beginnt");
+//				Stage stage;
 
-				Stage stage;
-
-				// get reference to the button's stage
-				stage = (Stage) startButton.getScene().getWindow();
-				// load up OTHER FXML document
-
-				AnchorPane page;
-				try {
-					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Start.fxml"));
-					// create a new scene with root and set the stage
-					Scene scene = new Scene(page);
-					stage.setScene(scene);
-					stage.show();
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				// get reference to the button's stage
+//				stage = (Stage) startButton.getScene().getWindow();
+//				// load up OTHER FXML document
+//
+//				AnchorPane page;
+//				try {
+//					page = (AnchorPane) FXMLLoader.load(getClass().getResource("Start.fxml"));
+//					// create a new scene with root and set the stage
+//					Scene scene = new Scene(page);
+//					stage.setScene(scene);
+//					stage.show();
+//
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			}
 		});//endSetOnActionStartButton
 		

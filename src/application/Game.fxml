@@ -21,11 +21,16 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Text layoutX="206.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 1 ist am Zug / Spieler 2 gewinnt" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="422.2177734375">
+                              <Label fx:id="infostat" layoutX="14.0" layoutY="16.0" prefHeight="17.0" prefWidth="335.0">
                                  <font>
-                                    <Font size="14.0" fx:id="x31" />
+                                    <Font size="15.0" />
                                  </font>
-                              </Text>
+                              </Label>
+                              <Label layoutX="556.0" layoutY="16.0" text="Spieler 1 ist am Zug / Spieler 2 gewinnt">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </Pane>
                      </children>
