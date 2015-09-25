@@ -67,8 +67,11 @@ public class StartController implements Initializable {
 		
 		btStart.setOnAction((ev) -> 	{
 			if (!areAllRequiredFieldsFilled())
-				//maybe show popup or something else to warn the user
+			{
+				// HIER DAS LABEL ZUR WARNUNG DES NUTZERS, DASS NICHT ALLE FELDER GEFÜLLT SIND SETZEN!
 				return;
+			}
+			
 			saveUserInputToPropertiesFile();
 			System.out.println("Game startet");
 			
@@ -161,7 +164,6 @@ public class StartController implements Initializable {
 			}//endCatch
 		});//endTfZugZeitTextListener
 	}//endInitialize
-
 
 	private boolean areAllRequiredFieldsFilled() {
 		if (!isPlayerSelected()){
