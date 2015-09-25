@@ -7,10 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.Properties;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,84 +17,46 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import fileInterface.*;
-
 public class StartController implements Initializable {
+	GameProperties gameProperties;
 	
-	final String propertiesFileName = "client.ini";
-	Properties properties;
-	/*Steuerelemente deklarieren*/
-	@FXML 
-	private Button btStart; // Value injected by FXMLLoader
+	@FXML private Button btStart;
+	@FXML private Button btStats;	
 
-	@FXML
-	private Button btStats;
-
-	@FXML
-	private RadioButton rbPush;
-
-	@FXML
-	private RadioButton rbFile;
+	@FXML private RadioButton rbPush;
+	@FXML private RadioButton rbFile;	
 	
-	@FXML
-	private RadioButton rbRot;
-
-	@FXML
-	private RadioButton rbGelb;
+	@FXML private RadioButton rbRot;
+	@FXML private RadioButton rbGelb;
 	
-	@FXML
-	private TextField tfZugZeit;
+	@FXML private Label lZugZeit;	
+	@FXML private Label lZugZeitInfo;
+	@FXML private TextField tfZugZeit;
 	
-	@FXML
-	private TextField tfDateiPfad;
+	@FXML private TextField tfDateiPfad;	
+	@FXML private Label lDateiPfad;	
 	
-	@FXML
-	private TextField tfAppKey;
+	@FXML private Label lAppKey;	
+	@FXML private Label lAppId;	
+	@FXML private Label lAppSecret;	
+	@FXML private TextField tfAppKey;
+	@FXML private TextField tfAppId;
+	@FXML private TextField tfAppSecret;
 	
-	@FXML
-	private TextField tfAppId;
-	
-	@FXML
-	private TextField tfAppSecret;
-	
-	@FXML
-	private Label lZugZeit;
-	
-	@FXML
-	private Label lDateiPfad;
-	
-	@FXML
-	private Label lAppKey;
-	
-	@FXML
-	private Label lAppId;
-	
-	@FXML
-	private Label lAppSecret;
-	
-	@FXML
-	private Label lZugZeitInfo;
-	
-	/*
-	Variablen zur weiteren Verarbeitung 
-	TO DO: Wie Interagiert das UI mit den Funktionalen Klassen??
-	Erster Versuch mit lokalen Variablen der Controller Klasse
-	*/
 	Character player;
 	int zugZeit;
 	
 
-	@Override // This method is called by the FXMLLoader when initialization is
-				// complete
+	@Override 
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		assert btStart != null : "fx:id=\"startButton\" was not injected: check your FXML file";
 		assert btStats != null : "fx:id=\"statsButton\" was not injected: check your FXML file";
 		assert rbPush != null : "fx:id=\"rbPush\" was not injected: check your FXML file";
 		assert rbFile != null : "fx:id=\"rbFile\" was not injected: check your FXML file";
 
-		// wenn properties-file vorhanden, dann benutzen
-		 if (new File(propertiesFileName).exists()) {
-			properties = new Properties();
+		gameProperties = new GameProperties();
+		
+		 if (new File(GameProperties.DATEINAME).exists()) {
 			readProperties();	
 			restoreInputFieldsFromProperties();
 		 } else {
@@ -105,17 +64,13 @@ public class StartController implements Initializable {
 		 }
 
 		setTextfieldHints();
-		/*Start Event*/
 		
 		btStart.setOnAction((ev) -> 	{
-			
+			if (!areAllRequiredFieldsFilled())
+				//maybe show popup or something else to warn the user
+				return;
 			saveUserInputToPropertiesFile();
 			System.out.println("Game startet");
-			
-			//TO DO File Interface Einsatz
-//			AgentfileWriter agentFileWriter = new AgentfileWriter(tfDateiPfad.getText(), player);
-//			System.out.println("FileInterface Spieler: "+ agentFileWriter.getPlayer());	
-//			System.out.println("FileInterface Sharedfolder: "+ agentFileWriter.getSharedFolderPath());		
 			
 			Stage stage;
 
@@ -138,7 +93,6 @@ public class StartController implements Initializable {
 		
 			});//endSetOnActionStartButton
 
-		/*Statistik Event*/
 		btStats.setOnAction((ev)-> 
 		{
 				System.out.println("Stats startet");
@@ -209,23 +163,63 @@ public class StartController implements Initializable {
 	}//endInitialize
 
 
+	private boolean areAllRequiredFieldsFilled() {
+		if (!isPlayerSelected()){
+			System.out.println("no player selected");
+			return false;
+		}
+		if (!isZugZeitRegistered()){
+			System.out.println("no zugzeit registered");
+			return false;
+		}
+		if (rbFile.isSelected())
+			return areFileInterfaceFieldsFilled();
+		else if (rbPush.isSelected())
+			return arePusherInterfaceFieldsFilled();
+		else {
+			System.out.println("not all fields filled");
+			return false;
+		}
+	}
+
+	private boolean isPlayerSelected(){
+		return rbRot.isSelected() || rbGelb.isSelected();
+	}
+	private boolean isZugZeitRegistered(){
+		return !tfZugZeit.getText().equals("");
+	}
+	private boolean areFileInterfaceFieldsFilled(){
+		System.out.println("not all file fields filled");
+		return !tfDateiPfad.getText().equals("");		
+	}
+	private boolean arePusherInterfaceFieldsFilled(){
+		System.out.println("not all pusher fields filled");
+		return	 !tfAppId.getText().equals("")		&&
+				 !tfAppKey.getText().equals("")		&&
+				 !tfAppSecret.getText().equals("");
+	}
+
 	private void restoreInputFieldsFromProperties() {
-		setDefaultInterface(properties.getProperty("interface"));
+		setDefaultInterface(gameProperties.getProperty(GameProperties.INTERFACE));
 		
-		tfZugZeit.setText(properties.getProperty("zugzeit"));
-		tfDateiPfad.setText(properties.getProperty("kontaktpfad"));
-		tfAppId.setText(properties.getProperty("appId"));
-		tfAppKey.setText(properties.getProperty("appKey"));
-		tfAppSecret.setText(properties.getProperty("appSecret"));		
+		if ((GameProperties.SPIELER).equals("o"))
+			rbGelb.setSelected(true);
+		else
+			rbRot.setSelected(true);
+		
+		tfZugZeit.setText(gameProperties.getProperty(GameProperties.ZUGZEIT));
+		tfDateiPfad.setText(gameProperties.getProperty(GameProperties.DATEIPFAD));
+		tfAppId.setText(gameProperties.getProperty(GameProperties.APP_ID));
+		tfAppKey.setText(gameProperties.getProperty(GameProperties.APP_KEY));
+		tfAppSecret.setText(gameProperties.getProperty(GameProperties.APP_SECRET));		
 	}
 
 	private void readProperties() {
 		InputStream input = null;
     	
     	try {
-    		input = new FileInputStream(propertiesFileName);
-    		//load a properties file from class path, inside static method
-    		properties.load(input);
+    		input = new FileInputStream(GameProperties.DATEINAME);
+    		gameProperties.load(input);
     	} catch (IOException ex) {
     		ex.printStackTrace();
         } finally{
@@ -240,21 +234,20 @@ public class StartController implements Initializable {
     }
 
 	private void saveUserInputToPropertiesFile() {
-		Properties newProperties = new Properties();
 		OutputStream output = null;
 
 		try {
-			output = new FileOutputStream(propertiesFileName);
+			output = new FileOutputStream(GameProperties.DATEINAME);
 
-			newProperties.setProperty("interface",  (rbFile.isSelected()) ? "File" : "Push");
-			newProperties.setProperty("zugzeit", tfZugZeit.getText());
-			newProperties.setProperty("kontaktpfad", tfDateiPfad.getText());
-			newProperties.setProperty("appId", tfAppId.getText());
-			newProperties.setProperty("appKey", tfAppKey.getText());
-			newProperties.setProperty("appSecret", tfAppSecret.getText());
-
-			newProperties.store(output, null);
-
+			gameProperties.setProperty(GameProperties.INTERFACE,  	(rbFile.isSelected()) ? "File" : "Push");
+			gameProperties.setProperty(GameProperties.ZUGZEIT, 		tfZugZeit.getText());
+			gameProperties.setProperty(GameProperties.DATEIPFAD,	tfDateiPfad.getText());
+			gameProperties.setProperty(GameProperties.APP_ID, 		tfAppId.getText());
+			gameProperties.setProperty(GameProperties.APP_KEY, 		tfAppKey.getText());
+			gameProperties.setProperty(GameProperties.APP_SECRET, 	tfAppSecret.getText());
+			gameProperties.setProperty(GameProperties.SPIELER,  	(rbRot.isSelected()) ? "x" : "o");
+			
+			gameProperties.store(output, null);
 		} catch (IOException io) {
 			io.printStackTrace();
 		} finally {
