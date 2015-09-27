@@ -1,6 +1,5 @@
 package application;
 	
-// Mein Kommentar
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +12,8 @@ import javafx.scene.layout.StackPane;
 
 public class Main extends Application {
 	@Override
+	
+	//UI initialisieren in start Methode
 	public void start(Stage primaryStage) {
 		try {
             AnchorPane page = (AnchorPane) FXMLLoader.load(Main.class.getResource("Start.fxml"));
