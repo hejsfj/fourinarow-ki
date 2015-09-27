@@ -1,3 +1,4 @@
+
 package application;
 
 
@@ -25,13 +26,13 @@ public class StatsController implements Initializable {
     
 
     @FXML //  fx:id="myButton"
-    private Button refreshButton; // Value injected by FXMLLoader
+    private Button loadButton; // Value injected by FXMLLoader
     
     @FXML
     private Button saveButton; // Value injected by FXMLLoader
     
     @FXML
-    private Button newButton;
+    private Button newButton; // Value injected by FXMLLoader
     
     @FXML
     private Label infostat;
@@ -39,13 +40,13 @@ public class StatsController implements Initializable {
 
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-        assert refreshButton != null : "fx:id=\"refreshButton\" was not injected: check your FXML file";
+        assert loadButton != null : "fx:id=\"refreshButton\" was not injected: check your FXML file";
         assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file";
         assert newButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file";
 
 
         
-        refreshButton.setOnAction(new EventHandler<ActionEvent>() {
+        loadButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {

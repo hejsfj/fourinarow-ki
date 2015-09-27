@@ -9,110 +9,99 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="530" maxWidth="830.0" minHeight="530" minWidth="830" prefHeight="553.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StartController">
+<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.StartController">
   <children>
-    <BorderPane layoutX="-7.0" prefHeight="560.0" prefWidth="828.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <BorderPane prefHeight="560.0" prefWidth="828.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
         <HBox alignment="CENTER" prefHeight="104.0" prefWidth="830.0">
           <children>
-                  <HBox prefHeight="66.0" prefWidth="820.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="infostart" layoutY="69.0" prefHeight="21.0" prefWidth="572.0" textFill="#eb0000" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="113.0" prefWidth="452.0">
-                           <children>
+            <HBox prefHeight="66.0" prefWidth="820.0">
+              <children>
+                <Pane prefHeight="200.0" prefWidth="200.0">
+                  <children>
+                    <Label fx:id="infostart" layoutY="69.0" prefHeight="21.0" prefWidth="572.0" textFill="#eb0000" />
+                  </children>
+                </Pane>
+                <Pane prefHeight="113.0" prefWidth="452.0">
+                  <children>
                     <Button fx:id="btStart" cancelButton="false" defaultButton="false" layoutX="80.0" layoutY="14.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="292.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font></Button>
-                           </children>
-                        </Pane>
-                     </children>
-                  </HBox>
+                      <font>
+                        <Font size="20.0" />
+                      </font>
+                    </Button>
+                  </children>
+                </Pane>
+              </children>
+            </HBox>
           </children>
         </HBox>
       </bottom>
       <center>
-        <VBox prefHeight="350.0" prefWidth="399.0">
+        <VBox disable="false" prefHeight="350.0" prefWidth="399.0">
           <children>
             <HBox prefHeight="354.0" prefWidth="399.0">
               <children>
                 <VBox alignment="TOP_CENTER" prefHeight="350.0" prefWidth="392.0">
                   <children>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Schnittstelle:" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="254.12109375">
-                      <font>
-                        <Font size="17.0" fx:id="x2" />
-                      </font>
-                    </Text>
                     <HBox alignment="CENTER" prefHeight="45.0" prefWidth="399.0">
                       <children>
-                                    <Pane prefHeight="63.0" prefWidth="445.0">
-                                       <children>
-                              <RadioButton fx:id="rbPush" layoutX="212.0" layoutY="1.0" mnemonicParsing="false" text="Pusher Schnittstelle">
-                                <font>
-                                  <Font size="15.0" fx:id="x1" />
-                                </font>
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="Schnittstelle" />
-                                             </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="rbFile" contentDisplay="CENTER" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="173.0" text="File Schnittstelle" toggleGroup="$Schnittstelle">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font></RadioButton>
-                                       </children>
-                                    </Pane>
+                        <Pane prefHeight="63.0" prefWidth="445.0">
+                          <children>
+                            <RadioButton fx:id="rbPush" layoutX="212.0" layoutY="1.0" mnemonicParsing="false" text="Pusher Schnittstelle">
+                              <font>
+                                <Font size="15.0" fx:id="x1" />
+                              </font>
+                              <toggleGroup>
+                                <ToggleGroup fx:id="Schnittstelle" />
+                              </toggleGroup>
+                            </RadioButton>
+                            <RadioButton fx:id="rbFile" contentDisplay="CENTER" font="$x1" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="173.0" text="File Schnittstelle" toggleGroup="$Schnittstelle" />
+                          </children>
+                        </Pane>
                       </children>
                     </HBox>
-                              <Label fx:id="lZugZeit" text="Zugzeit" />
-              			      <TextField fx:id="tfZugZeit" prefHeight="15.0" prefWidth="388.0" />
-                              <Label fx:id="lDateiPfad" text="Dateipfad" />
-                  			  <TextField fx:id="tfDateiPfad" prefHeight="15.0" prefWidth="388.0" />
-                              <Label fx:id="lAppKey" text="AppKey" />
-                              <TextField fx:id="tfAppKey" prefHeight="15.0" prefWidth="388.0" />
-                              <Label fx:id="lAppId" text="App ID" />
-                              <TextField fx:id="tfAppId" prefHeight="15.0" prefWidth="388.0" />
-                              <Label fx:id="lAppSecret" text="App Secret" />
-                              <TextField fx:id="tfAppSecret" prefHeight="15.0" prefWidth="388.0" />
-                              <Pane prefHeight="113.0" prefWidth="457.0">
-                                 <children>
-                                    <VBox prefHeight="114.0" prefWidth="397.0">
-                                       <children>
-                                          <HBox alignment="CENTER" prefHeight="108.0" prefWidth="397.0">
-                                             <children>
-                                                <Pane prefHeight="77.0" prefWidth="397.0">
-                                                   <children>
-                                                      <Circle fill="#f82424" layoutX="140.0" layoutY="80.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                                                      <RadioButton fx:id="rbRot" layoutX="171.0" layoutY="70.0" mnemonicParsing="false" text="Rot (x)">
-                                                         <font>
-                                                            <Font size="15.0" fx:id="x11" />
-                                                         </font>
-                                                         <toggleGroup>
-                                                            <ToggleGroup fx:id="Schnittstelle1" />
-                                                         </toggleGroup>
-                                                      </RadioButton>
-                                                      <Circle fill="#faff26" layoutX="140.0" layoutY="29.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                                                      <RadioButton fx:id="rbGelb" contentDisplay="CENTER" layoutX="171.0" layoutY="16.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="107.0" text="Gelb (o)" toggleGroup="$Schnittstelle1">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </RadioButton>
-                                                   </children>
-                                                </Pane>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </Pane>
+                    <Label fx:id="lZugZeit" text="Zugzeit" />
+                    <TextField fx:id="tfZugZeit" prefHeight="15.0" prefWidth="388.0" />
+                    <Label fx:id="lDateiPfad" text="Dateipfad" />
+                    <TextField fx:id="tfDateiPfad" prefHeight="15.0" prefWidth="388.0" />
+                    <Label fx:id="lAppKey" text="AppKey" />
+                    <TextField fx:id="tfAppKey" prefHeight="15.0" prefWidth="388.0" />
+                    <Label fx:id="lAppId" text="App ID" />
+                    <TextField fx:id="tfAppId" prefHeight="15.0" prefWidth="388.0" />
+                    <Label fx:id="lAppSecret" text="App Secret" />
+                    <TextField fx:id="tfAppSecret" prefHeight="15.0" prefWidth="388.0" />
+                    <Pane prefHeight="113.0" prefWidth="457.0">
+                      <children>
+                        <VBox prefHeight="114.0" prefWidth="397.0">
+                          <children>
+                            <HBox alignment="CENTER" prefHeight="108.0" prefWidth="397.0">
+                              <children>
+                                <Pane prefHeight="77.0" prefWidth="397.0">
+                                  <children>
+                                    <Circle fill="#ff3d00" layoutX="140.0" layoutY="80.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                    <RadioButton fx:id="rbRot" font="$x1" layoutX="171.0" layoutY="70.0" mnemonicParsing="false" text="Rot (x)">
+                                      <toggleGroup>
+                                        <ToggleGroup fx:id="Schnittstelle1" />
+                                      </toggleGroup>
+                                    </RadioButton>
+                                    <Circle fill="#fff500" layoutX="140.0" layoutY="29.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                    <RadioButton fx:id="rbGelb" contentDisplay="CENTER" font="$x1" layoutX="171.0" layoutY="16.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="107.0" text="Gelb (o)" toggleGroup="$Schnittstelle1" />
+                                  </children>
+                                </Pane>
+                              </children>
+                            </HBox>
+                          </children>
+                        </VBox>
+                      </children>
+                    </Pane>
                   </children>
                 </VBox>
               </children>
             </HBox>
           </children>
+          <BorderPane.margin>
+            <Insets top="20.0" />
+          </BorderPane.margin>
         </VBox>
       </center>
       <left>
@@ -135,9 +124,10 @@
               <children>
                 <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
                 <Pane prefHeight="186.0" prefWidth="220.0" visible="true">
-                           <children>
-                              <Label fx:id="lZugZeitInfo" layoutX="8.0" layoutY="26.0" prefHeight="17.0" prefWidth="146.0" text=" in ms" />
-                           </children></Pane>
+                  <children>
+                    <Label fx:id="lZugZeitInfo" layoutX="8.0" layoutY="26.0" prefHeight="17.0" prefWidth="146.0" text=" in ms" />
+                  </children>
+                </Pane>
                 <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
               </children>
             </VBox>
@@ -147,15 +137,15 @@
       <top>
         <VBox prefHeight="76.0" prefWidth="828.0" BorderPane.alignment="CENTER">
           <children>
-            <Pane prefHeight="22.0" prefWidth="835.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
               <children>
-                <Button disable="true" layoutX="21.0" layoutY="-2.0" mnemonicParsing="false" text="Neues Spiel" />
-                <Button fx:id="btStats" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
+                <Button disable="true" mnemonicParsing="false" text="Neues Spiel" />
+                <Button fx:id="btStats" mnemonicParsing="false" text="Spiel laden" />
               </children>
-            </Pane>
-            <HBox alignment="TOP_LEFT" prefHeight="56.0" prefWidth="828.0" rotate="0.0">
+            </HBox>
+            <HBox alignment="TOP_LEFT" prefHeight="76.0" prefWidth="830.0" rotate="0.0">
               <children>
-                <HBox alignment="CENTER" prefHeight="113.0" prefWidth="220.0" />
+                <HBox alignment="CENTER" prefHeight="76.0" prefWidth="219.0" />
                 <HBox alignment="CENTER" prefHeight="44.0" prefWidth="393.0">
                   <children>
                     <Text strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Neues Spiel" textAlignment="CENTER" textOrigin="CENTER" underline="false">

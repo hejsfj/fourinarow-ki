@@ -1,104 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
 <?implements EventTarget?>
 <?extends java.lang.Object?>
 
-<AnchorPane maxHeight="530" maxWidth="830" minHeight="530" minWidth="830" prefHeight="553.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatsController">
-   <children>
-      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="542.0" prefWidth="848.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <bottom>
-            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="848.0">
-               <children>
-                  <VBox alignment="CENTER" disable="false" maxHeight="137.0" prefHeight="100.0" prefWidth="835.0" visible="true">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="69.0" prefWidth="835.0">
-                           <children>
-                              <Label fx:id="infostat" prefHeight="17.0" prefWidth="335.0" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Die Änderungen wurden gespeichert / Die Daten wurden aktualisiert" textAlignment="LEFT" textOrigin="CENTER">
-                                 <font>
-                                    <Font size="14.0" fx:id="x3" />
-                                 </font>
-                              </Text>
-                           </children>
+<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.StatsController">
+  <children>
+    <BorderPane prefHeight="542.0" prefWidth="848.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <HBox alignment="CENTER" prefHeight="150.0" prefWidth="830.0">
+          <children>
+            <VBox alignment="CENTER" disable="false" maxHeight="137.0" prefHeight="100.0" prefWidth="835.0" visible="true">
+              <children>
+                <HBox alignment="CENTER" prefHeight="69.0" prefWidth="835.0">
+                  <children>
+                    <VBox alignment="CENTER" prefHeight="69.0" prefWidth="866.0">
+                      <children>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="229.0">
+                          <children>
+                            <Label text="Teamname abändern:">
+                              <HBox.margin>
+                                <Insets right="10.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField prefWidth="200.9326171875" promptText="alter Teamname" text="">
+                              <HBox.margin>
+                                <Insets fx:id="x1" />
+                              </HBox.margin>
+                            </TextField>
+                            <Label text="zu">
+                              <HBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                              </HBox.margin>
+                            </Label>
+                            <TextField prefWidth="200.9326171875" promptText="neuer Teamname" HBox.margin="$x1" />
+                            <Button id="newButton" fx:id="saveButton" defaultButton="false" graphicTextGap="4.0" mnemonicParsing="false" pickOnBounds="false" text="Übernehmen" wrapText="false">
+                              <HBox.margin>
+                                <Insets left="10.0" />
+                              </HBox.margin>
+                            </Button>
+                          </children>
                         </HBox>
-                     </children>
-                  </VBox>
-               </children>
+                      </children>
+                    </VBox>
+                  </children>
+                </HBox>
+                <HBox alignment="CENTER" disable="false" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                    <Label fx:id="infostat" disable="true" text="Label" />
+                  </children>
+                </HBox>
+              </children>
+            </VBox>
+          </children>
+        </HBox>
+      </bottom>
+      <center>
+        <TableView disable="false" editable="true" focusTraversable="true" prefHeight="275.0" prefWidth="645.0" tableMenuButtonVisible="false" BorderPane.alignment="CENTER">
+          <columns>
+            <TableColumn editable="false" prefWidth="189.0" text="Datum" />
+            <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="285.0" resizable="true" text="Teilnehmer" />
+            <TableColumn editable="false" maxWidth="5000.0" minWidth="0.0" prefWidth="192.0" resizable="false" sortable="false" text="Ergebnis" visible="true" />
+          </columns>
+        </TableView>
+      </center>
+      <left>
+        <VBox prefHeight="260.0" prefWidth="83.0" BorderPane.alignment="CENTER" />
+      </left>
+      <right>
+        <VBox prefHeight="260.0" prefWidth="83.0" BorderPane.alignment="CENTER" />
+      </right>
+      <top>
+        <VBox prefHeight="120.0" prefWidth="830.0" BorderPane.alignment="CENTER">
+          <children>
+            <HBox minHeight="17.0" prefHeight="17.0" prefWidth="830.0">
+              <children>
+                <Button fx:id="newButton" defaultButton="false" graphicTextGap="4.0" mnemonicParsing="false" pickOnBounds="false" text="Neues Spiel" wrapText="false" />
+                <Button fx:id="statsButton" disable="true" mnemonicParsing="false" text="Gesamtstatistik" />
+                <Button id="statsButton" fx:id="loadButton" cancelButton="false" defaultButton="false" disable="true" mnemonicParsing="false" text="Ausgewähltes Spiel laden" />
+              </children>
             </HBox>
-         </bottom>
-         <left>
-            <VBox prefHeight="274.0" prefWidth="120.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="refreshButton" alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="137.0" mnemonicParsing="false" text="Aktualisieren" textAlignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="saveButton" layoutX="8.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="105.0" text="Speichern">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </Pane>
-               </children>
-            </VBox>
-         </left>
-         <right>
-            <VBox prefHeight="274.0" prefWidth="65.0" BorderPane.alignment="CENTER" />
-         </right>
-         <top>
-            <VBox prefHeight="110.0" prefWidth="848.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane prefHeight="22.0" prefWidth="835.0">
-                     <children>
-                        <Button fx:id="newButton" layoutX="21.0" layoutY="-2.0" mnemonicParsing="false" text="Neues Spiel" />
-                        <Button fx:id="statsButton" disable="true" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
-                     </children>
-                  </Pane>
-                  <HBox alignment="TOP_LEFT" prefHeight="100.0" prefWidth="848.0" rotate="0.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="90.0" prefWidth="848.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gespeicherte Spiele">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </HBox>
-                     </children>
-                     <rotationAxis>
-                        <Point3D />
-                     </rotationAxis>
-                  </HBox>
-               </children>
-            </VBox>
-         </top>
-         <center>
-            <TableView editable="true" prefHeight="274.0" prefWidth="662.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn prefWidth="189.0" text="Savegame" />
-                <TableColumn prefWidth="215.0" text="Date" />
-                  <TableColumn minWidth="0.0" prefWidth="245.0" text="Score" />
-              </columns>
-            </TableView>
-         </center>
-      </BorderPane>
-   </children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+              <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spiel laden">
+                  <font>
+                    <Font size="30.0" />
+                  </font>
+                </Text>
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+      </top>
+    </BorderPane>
+  </children>
 </AnchorPane>

@@ -11,29 +11,29 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="530" maxWidth="830" minHeight="530" minWidth="830" prefHeight="553.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GameController">
+<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.GameController">
   <children>
     <BorderPane prefHeight="553.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
-        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="835.0">
+        <HBox alignment="CENTER" prefHeight="79.8046875" prefWidth="830.0">
           <children>
-            <VBox alignment="BOTTOM_CENTER" disable="false" maxHeight="137.0" prefHeight="66.0" prefWidth="835.0" visible="true">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="infostat" layoutX="14.0" layoutY="16.0" prefHeight="17.0" prefWidth="335.0">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="556.0" layoutY="16.0" text="Spieler 1 ist am Zug / Spieler 2 gewinnt">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                     </children>
+            <VBox alignment="BOTTOM_CENTER" disable="false" maxHeight="137.0" prefHeight="103.0" prefWidth="830.0" visible="true">
+              <children>
+                <Pane prefHeight="92.0" prefWidth="830.0">
+                  <children>
+                    <Label fx:id="infostat" layoutX="14.0" layoutY="16.0" prefHeight="17.0" prefWidth="335.0">
+                      <font>
+                        <Font size="15.0" />
+                      </font>
+                    </Label>
+                    <Label disable="true" layoutX="311.0" layoutY="32.0" text="Spieler 1 ist am Zug / Spieler 2 gewinnt">
+                      <font>
+                        <Font size="12.0" fx:id="x5" />
+                      </font>
+                    </Label>
+                  </children>
+                </Pane>
+              </children>
             </VBox>
           </children>
         </HBox>
@@ -43,51 +43,55 @@
           <children>
             <Circle radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
               <fill>
-                <Color blue="0.400" green="0.400" red="1.000" fx:id="x1" />
+                <Color blue="0.000" green="0.239" red="1.000" fx:id="x2" />
               </fill>
             </Circle>
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Circle radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+              <fill>
+                <Color blue="0.000" green="0.960" red="1.000" fx:id="x1" />
+              </fill>
+            </Circle>
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Circle radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Circle radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
               <fill>
-                <Color blue="1.000" green="0.784" red="0.400" fx:id="x5" />
+                <Color blue="0.000" green="0.240" red="1.000" fx:id="x3" />
               </fill>
             </Circle>
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Circle fill="$x5" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Circle fill="$x5" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Circle fill="$x5" radius="22.5" smooth="true" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Circle fill="$x3" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" smooth="true" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Circle fill="$x3" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
@@ -120,25 +124,15 @@
       <left>
         <VBox prefHeight="345.0" prefWidth="220.0" BorderPane.alignment="CENTER">
           <children>
-            <VBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="220.0">
+            <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
               <children>
-                <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
-                <Pane prefHeight="193.0" prefWidth="220.0" visible="true">
-                  <children>
-                    <Circle fill="#faff26" layoutX="110.0" layoutY="63.0" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                    <Text focusTraversable="false" layoutX="46.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege gegen Spieler 2: 1" textAlignment="CENTER" textOrigin="CENTER">
-                      <font>
-                        <Font size="12.0" fx:id="x3" />
-                      </font>
-                    </Text>
-                    <Text layoutX="64.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 1" textOrigin="CENTER">
-                      <font>
-                        <Font size="24.0" fx:id="x4" />
-                      </font>
-                    </Text>
-                  </children>
-                </Pane>
-                <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
+                <Circle fill="#faff26" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 1" textOrigin="CENTER">
+                  <font>
+                    <Font size="24.0" fx:id="x4" />
+                  </font>
+                </Text>
+                <Text focusTraversable="false" font="$x5" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege gegen Spieler 2: 1" textAlignment="CENTER" textOrigin="CENTER" />
               </children>
             </VBox>
           </children>
@@ -147,40 +141,34 @@
       <right>
         <VBox prefHeight="303.0" prefWidth="220.0" BorderPane.alignment="CENTER">
           <children>
-            <VBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="220.0">
+            <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
               <children>
-                <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
-                <Pane prefHeight="193.0" prefWidth="220.0" visible="true">
-                  <children>
-                    <Circle fill="#f82424" layoutX="110.0" layoutY="63.0" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                    <Text focusTraversable="false" font="$x3" layoutX="46.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege gegen Spieler 2: 1" textAlignment="CENTER" textOrigin="CENTER" />
-                    <Text font="$x4" layoutX="64.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 2" textOrigin="CENTER" />
-                  </children>
-                </Pane>
-                <Pane prefHeight="45.0" prefWidth="220.0" visible="true" />
+                <Circle fill="#f82424" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                <Text font="$x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 2" textOrigin="CENTER" />
+                <Text focusTraversable="false" font="$x5" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege gegen Spieler 2: 1" textAlignment="CENTER" textOrigin="CENTER" />
               </children>
             </VBox>
           </children>
         </VBox>
       </right>
       <top>
-        <VBox prefHeight="155.0" prefWidth="835.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="134.0" prefWidth="830.0" BorderPane.alignment="CENTER">
           <children>
-            <Pane prefHeight="22.0" prefWidth="835.0">
+            <HBox minHeight="19.951171875" prefHeight="19.951171875" prefWidth="830.0">
               <children>
-                <Button fx:id="newButton" layoutX="21.0" layoutY="-2.0" mnemonicParsing="false" text="Neues Spiel" />
-                <Button fx:id="statsButton" layoutX="108.0" layoutY="-2.0" mnemonicParsing="false" text="Gesamtstatistik" />
-                <Button id="statsButton" fx:id="startButton" layoutX="213.0" layoutY="-2.0" mnemonicParsing="false" text="Spiel starten" />
+                <Button fx:id="newButton" mnemonicParsing="false" text="Neues Spiel" />
+                <Button id="statsButton" fx:id="startButton" defaultButton="false" mnemonicParsing="false" text="Spiel starten" />
+                <Button fx:id="statsButton" mnemonicParsing="false" text="Spiel laden" />
               </children>
-            </Pane>
-            <HBox alignment="TOP_LEFT" prefHeight="137.0" prefWidth="759.0" rotate="0.0">
+            </HBox>
+            <HBox alignment="TOP_LEFT" prefHeight="104.0" prefWidth="830.0" rotate="0.0">
               <children>
                 <HBox alignment="CENTER" prefHeight="113.0" prefWidth="220.0" />
                 <HBox alignment="CENTER" prefHeight="113.00009999999747" prefWidth="395.0">
                   <children>
                     <Text strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="1 - 1:1 - 2" textAlignment="CENTER" textOrigin="CENTER" underline="false">
                       <font>
-                        <Font size="60.0" />
+                        <Font size="40.0" />
                       </font>
                     </Text>
                   </children>
