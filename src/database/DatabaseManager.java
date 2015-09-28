@@ -12,7 +12,7 @@ import java.sql.Statement;
  *         Schritt soll die Klasse stäker Objektorientiert angepasst werden
  *
  */
-public class Database {
+public class DatabaseManager {
 
 	Connection con;
 	Statement stmt;
@@ -20,7 +20,7 @@ public class Database {
 	String dbPath = "hsql\\dbTest3";
 
 	// Konstruktur
-	public Database() {
+	public DatabaseManager() {
 		try {
 			// Treiberklasse laden
 			Class.forName("org.hsqldb.jdbcDriver");
@@ -73,7 +73,7 @@ public class Database {
 	
 
 	public static void main(String[] args) {
-		Database db = new Database();
+		DatabaseManager db = new DatabaseManager();
 		db.initTabels();
 		
 		db.closeDB();
