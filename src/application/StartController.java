@@ -193,11 +193,9 @@ public class StartController implements Initializable {
 		return !tfZugZeit.getText().equals("");
 	}
 	private boolean areFileInterfaceFieldsFilled(){
-		System.out.println("not all file fields filled");
 		return !tfDateiPfad.getText().equals("");		
 	}
 	private boolean arePusherInterfaceFieldsFilled(){
-		System.out.println("not all pusher fields filled");
 		return	 !tfAppId.getText().equals("")		&&
 				 !tfAppKey.getText().equals("")		&&
 				 !tfAppSecret.getText().equals("");
