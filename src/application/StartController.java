@@ -143,47 +143,54 @@ public class StartController implements Initializable {
 		});//endRbGelb
 		
 		tfZugZeit.textProperty().addListener((observer,alt,neu)->{
-			lZugZeitInfo.setText("in ms");
-			
-			try{
-			if(!(neu.matches("\\d*"))){
-        		System.out.println("Ungültige Eingabe der Milisekunden");
-        		lZugZeitInfo.setText("Ungültige Eingabe");
-        	}//endIf
-			else{
-				if(!(neu.equals(""))){
+			lZugZeitInfo.setText("in ms");			
+			try {
+				if(!(neu.matches("\\d*"))){
+	        		System.out.println("Ungültige Eingabe der Milisekunden");
+	        		lZugZeitInfo.setText("Ungültige Eingabe");
+				}
+				else if(!(neu.equals(""))){
 					zugZeit = Integer.parseInt(neu);
 					System.out.println("Eingestellte Zugzeit: "+ zugZeit);	
-				}//endIF
-				else{
+				}
+				else {
 					lZugZeitInfo.setText("in ms");
-				}//endElse
-				
-			}//endElse
-			}catch(NumberFormatException nfe){
+				}
+			} catch(NumberFormatException nfe){
 				lZugZeitInfo.setText("Ungültige Eingabe");
 				tfZugZeit.setText(alt);
-			}//endCatch
-		});//endTfZugZeitTextListener
-	}//endInitialize
+			}
+		});
+	}
 
 	private boolean areAllRequiredFieldsFilled() {
 		if (!isPlayerSelected()){
 			System.out.println("no player selected");
 			return false;
 		}
-		if (!isZugZeitRegistered()){
-			System.out.println("no zugzeit registered");
+		if (!isZugZeitValid())
+		{
+			System.out.println("zugzeit not valid");
 			return false;
 		}
 		if (rbFile.isSelected())
 			return areFileInterfaceFieldsFilled();
-		else if (rbPush.isSelected())
+		if (rbPush.isSelected())
 			return arePusherInterfaceFieldsFilled();
-		else {
-			System.out.println("not all fields filled");
+		
+		System.out.println("not all fields filled");
+			return false;
+	}
+
+	private boolean isZugZeitValid() {
+		if (!isZugZeitRegistered()){
 			return false;
 		}
+		if (lZugZeitInfo.getText().equals("Ungültige Eingabe"))
+		{
+			return false;
+		}
+		return true;
 	}
 
 	private boolean isPlayerSelected(){
