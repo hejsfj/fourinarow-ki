@@ -13,24 +13,15 @@
   <children>
     <BorderPane prefHeight="560.0" prefWidth="828.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
-        <HBox alignment="CENTER" prefHeight="104.0" prefWidth="830.0">
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="830.0">
           <children>
             <HBox prefHeight="66.0" prefWidth="820.0">
               <children>
-                <Pane prefHeight="200.0" prefWidth="200.0">
+                <VBox alignment="CENTER" prefHeight="80.0" prefWidth="820.0">
                   <children>
-                    <Label fx:id="infostart" layoutY="69.0" prefHeight="21.0" prefWidth="572.0" textFill="#eb0000" />
+                    <Label fx:id="infostart" alignment="CENTER" disable="false" opacity="0.56" prefHeight="21.0" prefWidth="572.0" text="Info" textAlignment="CENTER" textFill="BLACK" />
                   </children>
-                </Pane>
-                <Pane prefHeight="113.0" prefWidth="452.0">
-                  <children>
-                    <Button fx:id="btStart" cancelButton="false" defaultButton="false" layoutX="80.0" layoutY="14.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="292.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS">
-                      <font>
-                        <Font size="20.0" />
-                      </font>
-                    </Button>
-                  </children>
-                </Pane>
+                </VBox>
               </children>
             </HBox>
           </children>
@@ -45,9 +36,9 @@
                   <children>
                     <HBox alignment="CENTER" prefHeight="45.0" prefWidth="399.0">
                       <children>
-                        <Pane prefHeight="63.0" prefWidth="445.0">
+                        <Pane prefHeight="31.0" prefWidth="390.0">
                           <children>
-                            <RadioButton fx:id="rbPush" layoutX="212.0" layoutY="1.0" mnemonicParsing="false" text="Pusher Schnittstelle">
+                            <RadioButton fx:id="rbPush" layoutX="237.0" layoutY="4.0" mnemonicParsing="false" text="Pusher Schnittstelle">
                               <font>
                                 <Font size="15.0" fx:id="x1" />
                               </font>
@@ -55,7 +46,7 @@
                                 <ToggleGroup fx:id="Schnittstelle" />
                               </toggleGroup>
                             </RadioButton>
-                            <RadioButton fx:id="rbFile" contentDisplay="CENTER" font="$x1" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="173.0" text="File Schnittstelle" toggleGroup="$Schnittstelle" />
+                            <RadioButton fx:id="rbFile" contentDisplay="CENTER" font="$x1" layoutX="0.0" layoutY="0.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="173.0" text="File Schnittstelle" toggleGroup="$Schnittstelle" />
                           </children>
                         </Pane>
                       </children>
@@ -140,6 +131,7 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
               <children>
                 <Button disable="true" mnemonicParsing="false" text="Neues Spiel" />
+                <Button id="btStats" fx:id="btStart" mnemonicParsing="false" text="Zum Spielfeld" />
                 <Button fx:id="btStats" mnemonicParsing="false" text="Spiel laden" />
               </children>
             </HBox>
