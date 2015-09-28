@@ -21,17 +21,12 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle("4 Gewinnt immer!");
             primaryStage.setResizable(false);
-            primaryStage.show();
-          
-        } 
-		
-		catch (Exception ex) {
+            primaryStage.show();          
+        } catch (Exception ex) {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
 			System.out.println("Oh no");
-        }
-		
-	
+        }	
 	}
 	
 	public static void main(String[] args) {
