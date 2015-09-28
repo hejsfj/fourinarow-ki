@@ -41,7 +41,10 @@
                            <children>
                               <Pane prefHeight="43.0" prefWidth="943.0">
                                  <children>
-                                    <Label fx:id="infostat" layoutX="14.0" layoutY="13.0" prefHeight="17.0" prefWidth="504.0" textFill="#f20000" />
+                                    <Label fx:id="infostat" layoutX="14.0" layoutY="13.0" prefHeight="17.0" prefWidth="504.0" textFill="#f20000">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></Label>
                                  </children>
                               </Pane>
                            </children>
