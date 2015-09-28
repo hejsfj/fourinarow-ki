@@ -2,8 +2,6 @@ package agentKI;
 
 import java.util.Random;
 
-import com.sun.javafx.css.CalculatedValue;
-
 import fileInterface.AgentfileWriter;
 import fileInterface.Serverfile;
 import fileInterface.ServerfileReader;
