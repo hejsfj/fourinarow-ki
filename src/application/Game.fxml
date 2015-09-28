@@ -39,7 +39,7 @@
         </HBox>
       </bottom>
       <center>
-        <GridPane alignment="CENTER" gridLinesVisible="true" mouseTransparent="false" prefHeight="258.0390625" prefWidth="395.0" style="-fx-border-color: #FFFFFF;" BorderPane.alignment="CENTER">
+        <GridPane fx:id="gamefieldGrid" alignment="CENTER" gridLinesVisible="true" mouseTransparent="false" prefHeight="258.0390625" prefWidth="395.0" style="-fx-border-color: #FFFFFF;" BorderPane.alignment="CENTER">
           <children>
             <Circle radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
               <fill>
