@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.GameController">
+<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GameController">
   <children>
     <BorderPane prefHeight="553.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
@@ -21,7 +21,7 @@
               <children>
                 <Pane prefHeight="92.0" prefWidth="830.0">
                   <children>
-                    <Label fx:id="infostat" layoutX="14.0" layoutY="16.0" prefHeight="17.0" prefWidth="335.0">
+                    <Label fx:id="infostat" layoutX="14.0" layoutY="49.0" prefHeight="21.0" prefWidth="494.0" textFill="#eb0000">
                       <font>
                         <Font size="15.0" />
                       </font>
@@ -91,7 +91,7 @@
             <Circle fill="$x2" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Circle fill="$x3" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Circle fill="#ff3d00" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Circle fill="$x1" radius="22.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
@@ -143,7 +143,7 @@
           <children>
             <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
               <children>
-                <Circle fill="#f82424" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                <Circle fill="#ff3d00" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                 <Text font="$x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 2" textOrigin="CENTER" />
                 <Text focusTraversable="false" font="$x5" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege gegen Spieler 2: 1" textAlignment="CENTER" textOrigin="CENTER" />
               </children>
@@ -166,11 +166,20 @@
                 <HBox alignment="CENTER" prefHeight="113.0" prefWidth="220.0" />
                 <HBox alignment="CENTER" prefHeight="113.00009999999747" prefWidth="395.0">
                   <children>
-                    <Text strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="1 - 1:1 - 2" textAlignment="CENTER" textOrigin="CENTER" underline="false">
-                      <font>
-                        <Font size="40.0" />
-                      </font>
-                    </Text>
+                              <Pane prefHeight="104.0" prefWidth="446.0">
+                                 <children>
+                          <Text layoutX="111.0" layoutY="52.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="1 - 1:1 - 2" textAlignment="CENTER" textOrigin="CENTER" underline="false">
+                            <font>
+                              <Font size="40.0" />
+                            </font>
+                          </Text>
+                                    <Text layoutX="115.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spielstand" textAlignment="CENTER" wrappingWidth="161.638671875">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </Pane>
                   </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="113.0" prefWidth="220.0" />

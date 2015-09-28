@@ -12,7 +12,7 @@
 <?implements EventTarget?>
 <?extends java.lang.Object?>
 
-<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.StatsController">
+<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatsController">
   <children>
     <BorderPane prefHeight="542.0" prefWidth="848.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
@@ -67,7 +67,7 @@
         <TableView disable="false" editable="true" focusTraversable="true" prefHeight="275.0" prefWidth="645.0" tableMenuButtonVisible="false" BorderPane.alignment="CENTER">
           <columns>
             <TableColumn editable="false" prefWidth="189.0" text="Datum" />
-            <TableColumn editable="false" maxWidth="5000.0" minWidth="10.0" prefWidth="285.0" resizable="true" text="Teilnehmer" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="285.0" resizable="true" text="Teilnehmer" />
             <TableColumn editable="false" maxWidth="5000.0" minWidth="0.0" prefWidth="192.0" resizable="false" sortable="false" text="Ergebnis" visible="true" />
           </columns>
         </TableView>
