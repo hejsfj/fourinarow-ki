@@ -82,7 +82,7 @@ public class StatsController implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Save that shit");
+                System.out.println("Daten werden geladen");
                 
                 infostat.setText("Die Daten werden geladen.");
                 
