@@ -84,7 +84,7 @@ public class StatsController implements Initializable {
             public void handle(ActionEvent event) {
                 System.out.println("Save that shit");
                 
-                infostat.setText("Die Änderungen wurden übernommen.");
+                infostat.setText("Die Daten werden geladen.");
                 
                            
 //                Stage stage; 
