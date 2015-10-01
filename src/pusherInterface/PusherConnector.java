@@ -13,22 +13,22 @@ import com.pusher.client.connection.ConnectionEventListener;
 import com.pusher.client.connection.ConnectionStateChange;
 import utils.HmacSHA256;
 
-public class PusherConnector implements ConnectionEventListener, PrivateChannelEventListener {
+public class PusherConnector implements ConnectionEventListener {
 
 	private final Pusher pusher;
-	private final String channelName;
-	private final String eventName;
+	private final String channelName = "private-channel";
+	private final String eventName = "MoveToAgent";
+	private final String appId;
+	private final String appKey;
+	private final String appSecret;
 	private final long startTime = System.currentTimeMillis();
-	private static PrivateChannel channel;
+	private PrivateChannel channel;
+	
 
-	public static void main(final String[] args) {
-		new PusherConnector();
-	}
-
-	public PusherConnector() {
-		final String apiKey = "93c4a752a14cbeef7216";
-		channelName = "private-channel";
-		eventName = "MoveToAgent";
+	public PusherConnector(String pusherAppId, String pusherAppKey, String pusherAppSecret) {
+		appId = pusherAppId;
+		appKey = pusherAppKey;
+		appSecret = pusherAppSecret;
 
 		PusherOptions options = new PusherOptions();
 
@@ -54,33 +54,18 @@ public class PusherConnector implements ConnectionEventListener, PrivateChannelE
 				String message = socketId + ":" + channelName;
 
 				// calc the hash, e. g. one part of the authentication signature
-				String appSecret = "adcd6bab9a922980c892";
-
 				String hash = HmacSHA256.getHmacSHA256HexDigest(appSecret, message);
 
 				// compose the entire authentication signature
 				// <signature> ::= "{"auth":"<appId>:<hash>"}"
-				String appKey = "93c4a752a14cbeef7216";
 				String signature = "{\"auth\":\"" + appKey + ":" + hash + "\"}";
 
 				return signature; // ... wer auch immer das dann auswertet.
 			}
 		});
 
-		pusher = new Pusher(apiKey, options);
+		pusher = new Pusher(appKey, options);
 		pusher.connect(this);
-
-		channel = pusher.subscribePrivate(channelName, this, eventName);
-
-		// Keep main thread asleep while we watch for events or application will
-		// terminate
-		while (true) {
-			try {
-				Thread.sleep(1000);
-			} catch (final InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 	/* ConnectionEventListener implementation */
@@ -101,40 +86,19 @@ public class PusherConnector implements ConnectionEventListener, PrivateChannelE
 
 	/* ChannelEventListener implementation */
 
-	@Override
-	public void onEvent(final String channelName, final String eventName, final String data) {
-
-		System.out.println(String.format("[%d] Received event [%s] on channel [%s] with data [%s]", timestamp(),
-				eventName, channelName, data));
-
-		final Gson gson = new Gson();
-		@SuppressWarnings("unchecked")
-		final Map<String, String> jsonObject = gson.fromJson(data, Map.class);
-		System.out.println(jsonObject);
-		
-		triggerClientEvent(1);
-	}
-
-	@Override
-	public void onSubscriptionSucceeded(final String channelName) {
-
-		System.out.println(String.format("[%d] Subscription to channel [%s] succeeded", timestamp(), channelName));
-	}
 
 	private long timestamp() {
 		return System.currentTimeMillis() - startTime;
 	}
 
-	@Override
-	public void onAuthenticationFailure(String arg0, Exception arg1) {
-		System.out.println(arg0);
-		System.out.println(arg1);
-		System.out.println("authentication failure!!");
-	}
-	
-	public void triggerClientEvent(int move){
+	public void triggerClientMove(PrivateChannel channel, int move){
 		channel.trigger("client-event", "{\"move\": \"" + move + "\"}");	
-		System.out.println("Client event losgeschickt!!");	
+		System.out.println("Client move: " + move + " losgeschickt!!");	
+	}
+
+	public PrivateChannel subscribeToPrivateChannel(String channelName, PrivateChannelEventListener listener, String eventName){
+		channel =  pusher.subscribePrivate(channelName, listener, eventName);		
+		return channel;
 	}
 
 }
