@@ -2,11 +2,7 @@ package agentKI;
 
 import java.util.Random;
 
-import fileInterface.AgentfileWriter;
-import fileInterface.Serverfile;
-import fileInterface.ServerfileReader;
 import gamefield.Gamefield;
-import pusherInterface.PusherConnector;
 
 public class AgentKI {
 	
