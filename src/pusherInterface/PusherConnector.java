@@ -1,8 +1,5 @@
 package pusherInterface;
 
-import java.util.Map;
-
-import com.google.gson.Gson;
 import com.pusher.client.AuthorizationFailureException;
 import com.pusher.client.Authorizer;
 import com.pusher.client.Pusher;
@@ -16,17 +13,12 @@ import utils.HmacSHA256;
 public class PusherConnector implements ConnectionEventListener {
 
 	private final Pusher pusher;
-	private final String channelName = "private-channel";
-	private final String eventName = "MoveToAgent";
-	private final String appId;
 	private final String appKey;
 	private final String appSecret;
 	private final long startTime = System.currentTimeMillis();
 	private PrivateChannel channel;
 	
-
 	public PusherConnector(String pusherAppId, String pusherAppKey, String pusherAppSecret) {
-		appId = pusherAppId;
 		appKey = pusherAppKey;
 		appSecret = pusherAppSecret;
 

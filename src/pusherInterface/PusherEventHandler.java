@@ -15,7 +15,7 @@ public class PusherEventHandler implements PrivateChannelEventListener {
 		
 		hasEvent = true;
 		String[] parts = data.split("\":\"");
-		String messageKey = parts[0]; // 004
+		// String messageKey = parts[0]; // 004
 		String messageValues = parts[1]; // 034556
 		
 		String[] values = messageValues.split(" # ");			
