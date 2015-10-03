@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.SettingsController">
+  <children>
+    <BorderPane prefHeight="560.0" prefWidth="828.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="-1.0">
+          <children>
+            <VBox prefHeight="100.0" prefWidth="997.0">
+              <children>
+                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="-1.0">
+                  <children>
+                    <Button fx:id="btStart" cancelButton="false" defaultButton="false" mnemonicParsing="false" prefHeight="-1.0" prefWidth="-1.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS">
+                      <font>
+                        <Font size="12.0" fx:id="x2" />
+                      </font>
+                    </Button>
+                  </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="60.0" prefWidth="-1.0">
+                  <children>
+                    <Label fx:id="infostart" alignment="CENTER" disable="true" prefHeight="-1.0" prefWidth="-1.0" textAlignment="CENTER" textFill="BLACK">
+                      <font>
+                        <Font size="10.0" />
+                      </font>
+                    </Label>
+                  </children>
+                </HBox>
+              </children>
+            </VBox>
+          </children>
+        </HBox>
+      </bottom>
+      <center>
+        <VBox disable="false" prefHeight="350.0" prefWidth="399.0">
+          <children>
+            <HBox prefHeight="354.0" prefWidth="399.0">
+              <children>
+                <VBox alignment="TOP_CENTER" prefHeight="350.0" prefWidth="392.0">
+                  <children>
+                    <HBox alignment="CENTER" prefHeight="-1.0" prefWidth="-1.0">
+                      <children>
+                        <VBox prefHeight="-1.0" prefWidth="-1.0">
+                          <children>
+                            <RadioButton fx:id="rbRot" alignment="CENTER_LEFT" contentDisplay="CENTER" disable="false" focusTraversable="true" mnemonicParsing="false" prefWidth="-1.0" selected="false" text="Spieler X" textOverrun="ELLIPSIS" wrapText="false">
+                              <font>
+                                <Font size="15.0" fx:id="x1" />
+                              </font>
+                              <toggleGroup>
+                                <ToggleGroup fx:id="Schnittstelle1" />
+                              </toggleGroup>
+                            </RadioButton>
+                            <RadioButton fx:id="rbGelb" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" prefHeight="-1.0" prefWidth="-1.0" text="Spieler O" toggleGroup="$Schnittstelle1" />
+                          </children>
+                        </VBox>
+                        <Pane prefHeight="50.0" prefWidth="144.0" />
+                        <VBox prefHeight="-1.0" prefWidth="-1.0">
+                          <children>
+                            <RadioButton fx:id="rbPush" font="$x1" mnemonicParsing="false" text="Pusher Schnittstelle">
+                              <toggleGroup>
+                                <ToggleGroup fx:id="Schnittstelle" />
+                              </toggleGroup>
+                            </RadioButton>
+                            <RadioButton fx:id="rbFile" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" prefHeight="27.0" prefWidth="132.0" text="File Schnittstelle" toggleGroup="$Schnittstelle" />
+                          </children>
+                        </VBox>
+                      </children>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" disable="false" fillHeight="true" prefHeight="-1.0" prefWidth="-1.0">
+                      <children>
+                        <Label fx:id="lZugZeit" disable="false" focusTraversable="false" font="$x1" prefWidth="92.6796875" text="Zugzeit" wrapText="false" />
+                        <TextField fx:id="tfZugZeit" prefHeight="20.0" prefWidth="250.0" />
+                        <Label id="lZugZeitInfo" font="$x1" prefHeight="-1.0" prefWidth="-1.0" text=" in ms" />
+                      </children>
+                      <VBox.margin>
+                        <Insets top="10.0" fx:id="x3" />
+                      </VBox.margin>
+                    </HBox>
+                    <HBox prefHeight="-1.0" prefWidth="-1.0">
+                      <children>
+                        <Label fx:id="lDateiPfad" font="$x1" prefWidth="92.6796875" text="Dateipfad" />
+                        <TextField fx:id="tfDateiPfad" prefHeight="-1.0" prefWidth="250.0" />
+                        <Button id="btStart" fx:id="findFile" cancelButton="false" contentDisplay="CENTER" defaultButton="false" font="$x2" minHeight="-1.0" mnemonicParsing="false" onAction="#choose" prefHeight="-1.0" prefWidth="47.0" text="..." textAlignment="CENTER" textFill="BLACK" textOverrun="ELLIPSIS" />
+                      </children>
+                      <VBox.margin>
+                        <Insets top="10.0" fx:id="x3" />
+                      </VBox.margin>
+                    </HBox>
+                    <HBox prefHeight="-1.0" prefWidth="-1.0" VBox.margin="$x3">
+                      <children>
+                        <Label fx:id="lAppKey" font="$x1" prefWidth="92.6796875" text="AppKey" />
+                        <TextField fx:id="tfAppKey" prefHeight="-1.0" prefWidth="297.0" />
+                      </children>
+                    </HBox>
+                    <HBox prefHeight="-1.0" prefWidth="-1.0" VBox.margin="$x3">
+                      <children>
+                        <Label fx:id="lAppId" font="$x1" prefWidth="92.6796875" text="App ID" />
+                        <TextField fx:id="tfAppId" prefHeight="20.0" prefWidth="297.0" />
+                      </children>
+                    </HBox>
+                    <HBox prefHeight="-1.0" prefWidth="-1.0" VBox.margin="$x3">
+                      <children>
+                        <Label fx:id="lAppSecret" font="$x1" prefWidth="92.6796875" text="App Secret" />
+                        <TextField fx:id="tfAppSecret" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="297.0" />
+                      </children>
+                    </HBox>
+                  </children>
+                </VBox>
+              </children>
+            </HBox>
+          </children>
+          <BorderPane.margin>
+            <Insets top="20.0" />
+          </BorderPane.margin>
+        </VBox>
+      </center>
+      <left>
+        <VBox prefHeight="350.0" prefWidth="220.0" BorderPane.alignment="CENTER" />
+      </left>
+      <right>
+        <VBox alignment="BOTTOM_CENTER" prefHeight="350.0" prefWidth="220.0" BorderPane.alignment="CENTER" />
+      </right>
+      <top>
+        <VBox prefHeight="130.0" prefWidth="828.0" BorderPane.alignment="CENTER">
+          <children>
+            <MenuBar id="MenuBar">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem disable="true" mnemonicParsing="false" onAction="#newGame" text="New Game" fx:id="NewGame" />
+                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Load Game" fx:id="LoadGame" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+              <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Game" textAlignment="CENTER">
+                  <font>
+                    <Font size="48.0" />
+                  </font>
+                </Text>
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+      </top>
+    </BorderPane>
+  </children>
+</AnchorPane>

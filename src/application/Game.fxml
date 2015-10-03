@@ -15,24 +15,24 @@
   <children>
     <BorderPane prefHeight="553.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
-        <HBox alignment="CENTER" prefHeight="79.8046875" prefWidth="830.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="-1.0">
           <children>
-            <VBox alignment="BOTTOM_CENTER" disable="false" maxHeight="137.0" prefHeight="103.0" prefWidth="830.0" visible="true">
+            <VBox prefHeight="-1.0" prefWidth="937.0">
               <children>
-                <Pane prefHeight="92.0" prefWidth="830.0">
+                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="-1.0">
                   <children>
-                    <Label fx:id="infostat" layoutX="14.0" layoutY="49.0" prefHeight="21.0" prefWidth="494.0" textFill="#eb0000">
+                    <Button id="statsButton" fx:id="startButton" defaultButton="false" mnemonicParsing="false" prefHeight="-1.0" prefWidth="-1.0" text="Spiel starten" />
+                  </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="60.0" prefWidth="-1.0">
+                  <children>
+                    <Label fx:id="infostat" contentDisplay="CENTER" disable="true" prefHeight="-1.0" prefWidth="-1.0" textAlignment="CENTER" textFill="BLACK">
                       <font>
-                        <Font size="15.0" />
-                      </font>
-                    </Label>
-                    <Label disable="true" layoutX="311.0" layoutY="32.0" text="Spieler 1 ist am Zug / Spieler 2 gewinnt">
-                      <font>
-                        <Font size="12.0" fx:id="x5" />
+                        <Font size="10.0" />
                       </font>
                     </Label>
                   </children>
-                </Pane>
+                </HBox>
               </children>
             </VBox>
           </children>
@@ -82,27 +82,26 @@
         </VBox>
       </left>
       <right>
-      <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
-              <children>
-                <Circle fill="#ff3d00" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 2" textOrigin="CENTER">
-                  <font>
-                    <Font size="24.0" fx:id="x4" />
-                  </font>
-                </Text>
-              </children>
-            </VBox>
+        <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
+          <children>
+            <Circle fill="#ff3d00" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Text font="$x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler 2" textOrigin="CENTER" />
+          </children>
+        </VBox>
       </right>
       <top>
-        <VBox prefHeight="134.0" prefWidth="830.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="130.0" prefWidth="830.0" BorderPane.alignment="CENTER">
           <children>
-            <HBox minHeight="19.951171875" prefHeight="19.951171875" prefWidth="830.0">
-              <children>
-                <Button fx:id="newButton" mnemonicParsing="false" text="Neues Spiel" />
-                <Button id="statsButton" fx:id="startButton" defaultButton="false" mnemonicParsing="false" text="Spiel starten" />
-                <Button fx:id="statsButton" mnemonicParsing="false" text="Spiel laden" />
-              </children>
-            </HBox>
+            <MenuBar id="MenuBar">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem disable="false" mnemonicParsing="false" onAction="#newGame" text="New Game" />
+                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
             <HBox alignment="TOP_LEFT" prefHeight="104.0" prefWidth="830.0" rotate="0.0">
               <children>
                 <HBox alignment="CENTER" prefHeight="113.0" prefWidth="220.0" />
@@ -110,18 +109,22 @@
                   <children>
                     <Pane prefHeight="104.0" prefWidth="446.0">
                       <children>
-                        <Text layoutX="89.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0 -   0:0   - 0" textAlignment="CENTER" textOrigin="CENTER" underline="false">
+                        <Text layoutX="118.0" layoutY="42.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="-    :    -" textAlignment="CENTER" textOrigin="CENTER" underline="false">
                           <font>
-                            <Font size="40.0" />
+                            <Font size="48.0" fx:id="x1" />
                           </font>
                         </Text>
-                        <Text layoutX="115.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satzstand" textAlignment="CENTER" wrappingWidth="161.638671875">
+                        <Text layoutX="115.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satzstand" textAlignment="CENTER" wrappingWidth="161.638671875">
                           <font>
                             <Font size="16.0" fx:id="x7" />
                           </font>
                         </Text>
-                        <Text font="$x7" layoutX="17.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler 1" textAlignment="CENTER" wrappingWidth="161.638671875" />
-                        <Text font="$x7" layoutX="210.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler 2" textAlignment="CENTER" wrappingWidth="161.638671875" />
+                        <Text font="$x7" layoutX="-2.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler 1" textAlignment="CENTER" wrappingWidth="161.638671875" />
+                        <Text font="$x7" layoutX="231.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler 2" textAlignment="CENTER" wrappingWidth="161.638671875" />
+                        <Text font="$x1" layoutX="299.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
+                        <Text font="$x1" layoutX="67.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
+                        <Text font="$x1" layoutX="201.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
+                        <Text font="$x1" layoutX="165.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
                       </children>
                     </Pane>
                   </children>

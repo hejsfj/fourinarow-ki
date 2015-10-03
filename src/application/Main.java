@@ -9,10 +9,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	@Override
 	
-	//UI initialisieren in start Methode
 	public void start(Stage primaryStage) {
 		try {
-            AnchorPane page = (AnchorPane) FXMLLoader.load(Main.class.getResource("Start.fxml"));
+            AnchorPane page = (AnchorPane) FXMLLoader.load(Main.class.getResource("Settings.fxml"));
             Scene scene = new Scene(page);
             primaryStage.setScene(scene);
             primaryStage.setTitle("4 Gewinnt immer!");
