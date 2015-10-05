@@ -31,7 +31,6 @@ public class Gamefield {
 			if (gamefield[rowIndex][columnIndex] == ' ' )
 			{
 				gamefield[rowIndex][columnIndex] = player;
-
 				addNewCoinToGridPane(gridPane, columnIndex, rowIndex, player);
 				if (isEmpty) { isEmpty = false;}
 				break;
@@ -56,7 +55,6 @@ public class Gamefield {
 	
 	private Circle getPlayerCircle(char player){
 		return new Circle(22.5, getColorForPlayer(player));
-		
 	}
 	
 	private Color getColorForPlayer(char player){
@@ -66,7 +64,6 @@ public class Gamefield {
 			return getSpielerXColor();
 		else 
 			return new Color(1.0, 1.0, 1.0, 1.0);
-			
 	}
 	
 	private Color getSpielerXColor(){

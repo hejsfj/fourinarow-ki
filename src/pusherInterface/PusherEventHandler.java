@@ -5,15 +5,12 @@ import com.pusher.client.channel.PrivateChannelEventListener;
 public class PusherEventHandler implements PrivateChannelEventListener {
 	private final long startTime = System.currentTimeMillis();
 	private PusherEvent recentPusherEvent;
-	public boolean hasEvent = false;
 
 	@Override
 	public void onEvent(final String channelName, final String eventName, final String data) {
 
 		System.out.println(String.format("[%d] Received event [%s] on channel [%s] with data [%s]", timestamp(),
 				eventName, channelName, data));
-		
-		hasEvent = true;
 		String[] parts = data.split("\":\"");
 		// String messageKey = parts[0]; // 004
 		String messageValues = parts[1]; // 034556
@@ -46,11 +43,19 @@ public class PusherEventHandler implements PrivateChannelEventListener {
 		System.out.println("authentication failure!!");
 	}
 	
-	public PusherEvent getPusherEvent(){
+	public PusherEvent getPusherEvent()	{
+		while (recentPusherEvent == null){
+			try {
+			Thread.sleep(300);
+			System.out.println("wartet auf PusherEvent");
+			} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		}
 		return recentPusherEvent;
 	}
-	public void clearPusherEvent(){
+	public void deletePusherEvent(){
 		recentPusherEvent = null;
-		System.out.println("pusherEvent cleared");
 	}
 }

@@ -99,87 +99,85 @@ public class GameController implements Initializable {
 					startFileInterfaceGame();
 				}
 				if (usedInterface.equals("Push")){
-					startPusherInterfaceGame();
-				}
-			}
-
-			private void startPusherInterfaceGame() {
-				System.out.println("PusherInterface not implemented yet");
-				Gamefield gamefield = new Gamefield();
-				AgentKI agent = new AgentKI();
-				char player = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
-				String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
-				String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
-				
-				PusherConnector pusher = new PusherConnector("", appKey, appSecret);
-				PusherEventHandler eventHandler = new PusherEventHandler();
-				PrivateChannel channel = pusher.subscribeToPrivateChannel("private-channel", eventHandler, "MoveToAgent");
-				PusherEvent pusherEvent;
-
-				int eventCounter = 0;
-				while (true) {
-					if (eventHandler.hasEvent) {
-						
-						pusherEvent = eventHandler.getPusherEvent();
-						eventHandler.hasEvent = false;
-						
-						eventCounter++;
-						
-						System.out.println("EventCounter: " + eventCounter);
-						
-						
-						System.out.println("Gegnerzug: " + pusherEvent.getGegnerzug());
-						
-						if (pusherEvent.getGegnerzug() != -1 && pusherEvent.getGegnerzug() != -2){
-							gamefield.insertCoin(gamefieldGrid, pusherEvent.getGegnerzug(), (player == 'o') ? 'x' : 'o');
-						}
-						if (!pusherEvent.isGameOver()){
-							
-							int move = agent.calculateMove(gamefield);
-							System.out.println("calculated move: " + move);
-							gamefield.insertCoin(gamefieldGrid, move, player);
-							pusher.triggerClientMove(channel, move);
-							
-						} else {
-							System.out.println("Spiel vorbei. Der Gewinner ist: " + pusherEvent.getSieger());
-							break;
-						}
-					}
-				}				
-			}
-
-			private void startFileInterfaceGame() {				
-
-				AgentKI agent = new AgentKI();
-
-				Gamefield gamefield = new Gamefield();
-				String sharedFolderPath = gameProperties.getProperty(GameProperties.DATEIPFAD);
-				
-				char player = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
-				AgentfileWriter agentfileWriter = new AgentfileWriter(sharedFolderPath, player);
-				ServerfileReader serverfileReader = new ServerfileReader(sharedFolderPath, player);	
-
-				while (true) {
-					try {
-						Serverfile serverfile = serverfileReader.readServerfile();
-						
-						if (serverfile.getGegnerzug() != -1){
-							gamefield.insertCoin(gamefieldGrid, serverfile.getGegnerzug(), (player == 'o') ? 'x' : 'o');
-						}
-						if (!serverfile.isGameOver()){
-							int move = agent.calculateMove(gamefield);
-							gamefield.insertCoin(gamefieldGrid, move, player);
-							agentfileWriter.writeAgentfile(new Agentfile(move));
-						} else {
-							System.out.println("Spiel vorbei. Der Gewinner ist: " + serverfile.getSieger());
-							break;
-						}
-					} catch (final Exception e) {
-						e.printStackTrace();
-					}
+				s	startPusherInterfaceGame();
 				}
 			}
 		});
+	}
+
+	private void startPusherInterfaceGame() {
+		System.out.println("PusherInterface not implemented yet");
+		Gamefield gamefield = new Gamefield();
+		AgentKI agent = new AgentKI();
+		char player = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
+		String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
+		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
+		
+		PusherConnector pusher = new PusherConnector("", appKey, appSecret);
+		PusherEventHandler pusherEventHandler = new PusherEventHandler();
+		PrivateChannel channel = pusher.subscribeToPrivateChannel("private-channel", pusherEventHandler, "MoveToAgent");
+		PusherEvent pusherEvent;
+	
+		while (true) {
+			try {
+				pusherEvent = pusherEventHandler.getPusherEvent();
+				pusherEventHandler.deletePusherEvent();
+				
+				System.out.println("PusherEvent");
+				System.out.println("Satzstatus: " + pusherEvent.getSatzstatus());
+				System.out.println("Freigabe: " + pusherEvent.getFreigabe());
+				System.out.println("Sieger: " + pusherEvent.getSieger());
+				System.out.println("Gegnerzug: " + pusherEvent.getGegnerzug());
+				System.out.println("");
+
+				if (pusherEvent.getGegnerzug() != -1 && pusherEvent.getGegnerzug() != -2){
+					gamefield.insertCoin(gamefieldGrid, pusherEvent.getGegnerzug(), (player == 'o') ? 'x' : 'o');
+				}
+				if (!pusherEvent.isGameOver()){
+					int move = agent.calculateMove(gamefield);
+					System.out.println("calculated move: " + move);
+					gamefield.insertCoin(gamefieldGrid, move, player);
+					pusher.triggerClientMove(channel, move);
+				} else {
+					System.out.println("Spiel vorbei. Der Gewinner ist: " + pusherEvent.getSieger());
+					break;
+				}
+			} catch (Exception e){
+				e.printStackTrace();						
+			}
+		}				
+	}
+
+	private void startFileInterfaceGame() {				
+
+		AgentKI agent = new AgentKI();
+
+		Gamefield gamefield = new Gamefield();
+		String sharedFolderPath = gameProperties.getProperty(GameProperties.DATEIPFAD);
+		
+		char player = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
+		AgentfileWriter agentfileWriter = new AgentfileWriter(sharedFolderPath, player);
+		ServerfileReader serverfileReader = new ServerfileReader(sharedFolderPath, player);	
+
+		while (true) {
+			try {
+				Serverfile serverfile = serverfileReader.readServerfile();
+				Thread.sleep(200);
+				if (serverfile.getGegnerzug() != -1){
+					gamefield.insertCoin(gamefieldGrid, serverfile.getGegnerzug(), (player == 'o') ? 'x' : 'o');
+				}
+				if (!serverfile.isGameOver()){
+					int move = agent.calculateMove(gamefield);
+					gamefield.insertCoin(gamefieldGrid, move, player);
+					agentfileWriter.writeAgentfile(new Agentfile(move));
+				} else {
+					System.out.println("Spiel vorbei. Der Gewinner ist: " + serverfile.getSieger());
+					break;
+				}
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	private void readProperties() {
