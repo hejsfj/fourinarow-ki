@@ -99,7 +99,7 @@ public class GameController implements Initializable {
 					startFileInterfaceGame();
 				}
 				if (usedInterface.equals("Push")){
-				s	startPusherInterfaceGame();
+					startPusherInterfaceGame();
 				}
 			}
 		});
