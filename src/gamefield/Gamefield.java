@@ -24,6 +24,42 @@ public class Gamefield {
 	     }
 	}
 	
+	public boolean hasWinner(){
+		boolean gewonnen = false;
+        // Horizontal
+        for(int i=0;!gewonnen && i<6;i++) {
+            int count = gamefield[i][0] == ' ' ? 0 : 1;
+            for(int j=1;!gewonnen && j<7;j++) {
+                if(gamefield[i][j]!=' ' && gamefield[i][j]==gamefield[i][j-1]) {
+                    count++;
+                } else {
+                    count=gamefield[i][j]==' ' ? 0 : 1;
+                }
+                if(count==4) {
+                    gewonnen=true;
+                }
+            }
+        }
+
+        // Vertikal
+        for(int j=0;!gewonnen && j<numColumns;j++) {
+            int count=gamefield[0][j]==' ' ? 0 : 1;
+            for(int i=1;!gewonnen && i<numRows;i++) {
+                if(gamefield[i][j]!=' ' && gamefield[i][j]==gamefield[i-1][j]) {
+                    count++;
+                } else {
+                    count=gamefield[i][j]==' ' ? 0 : 1;
+                }
+                if(count==4) {
+                    gewonnen=true;
+                }
+            }
+        }
+
+        return gewonnen;
+	}
+	
+	
 	public void insertCoin(GridPane gridPane, int columnIndex, char player) {
 		
 		for (int rowIndex = numRows - 1; rowIndex >= 0; rowIndex--)
@@ -37,6 +73,7 @@ public class Gamefield {
 			}
 		}
 	}
+	
 
 	public boolean isEmpty(){
 		return isEmpty;

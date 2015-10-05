@@ -136,8 +136,15 @@ public class GameController implements Initializable {
 				if (!pusherEvent.isGameOver()){
 					int move = agent.calculateMove(gamefield);
 					System.out.println("calculated move: " + move);
+					
 					gamefield.insertCoin(gamefieldGrid, move, player);
+					
 					pusher.triggerClientMove(channel, move);
+					System.out.println("Spiel vorbei. Wir haben gewonnen");
+					if (gamefield.hasWinner()){
+						break;
+					}
+					
 				} else {
 					System.out.println("Spiel vorbei. Der Gewinner ist: " + pusherEvent.getSieger());
 					break;
