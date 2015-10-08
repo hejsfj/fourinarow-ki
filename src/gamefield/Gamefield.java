@@ -24,6 +24,15 @@ public class Gamefield {
 	     }
 	}
 	
+	
+
+	
+	
+//	public void setResult(String result, int sequenceNumber) {
+//		Platform.runLater(new Runnable() {
+//			public void run() {
+//			}
+	
 	public void insertCoin(GridPane gridPane, int columnIndex, char player) {
 		
 		for (int rowIndex = numRows - 1; rowIndex >= 0; rowIndex--)
