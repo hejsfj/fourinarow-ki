@@ -23,6 +23,7 @@ public class ServerfileReader {
 	}
 	
 	public Serverfile readServerfile(){			
+		System.out.println("new readServerfile");
 		File xmlFile = new File(sharedFolderPath + "/server2spieler" + player + ".xml");
 		
 		while (!xmlFile.exists()){
@@ -34,6 +35,7 @@ public class ServerfileReader {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("XML empfangen. Verarbeite XML");
 		try {
 			serverFile = new Serverfile();
 			setServerfileValuesFromXML(xmlFile);			

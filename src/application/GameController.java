@@ -1,6 +1,5 @@
 package application;
 
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,8 +11,7 @@ import com.pusher.client.channel.PrivateChannel;
 import agentKI.AgentKI;
 import fileInterface.Agentfile;
 import fileInterface.AgentfileWriter;
-import fileInterface.Serverfile;
-import fileInterface.ServerfileReader;
+import fileInterface.ServerfileReaderService;
 import gamefield.Gamefield;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,7 +28,6 @@ import pusherInterface.PusherConnector;
 import pusherInterface.PusherEvent;
 import pusherInterface.PusherEventHandler;
 
-
 public class GameController implements Initializable {
 	
     @FXML private Button newButton; // Value injected by FXMLLoader    
@@ -40,11 +37,13 @@ public class GameController implements Initializable {
 	@FXML private Label infostat;
 	@FXML private GridPane gamefieldGrid;
 	
-	GameProperties gameProperties;
-
+	private GameProperties gameProperties;
+	private Gamefield gamefield;
+	private AgentKI agent;
+	private char player;
+	private String usedInterface;
 	
-	@FXML void loadGame(ActionEvent event) {
-    	
+	@FXML void loadGame(ActionEvent event) {    	
     	System.out.println("New Game");
 		Stage stage;
 		stage = (Stage) startButton.getScene().getWindow();
@@ -62,7 +61,6 @@ public class GameController implements Initializable {
     }
 
     @FXML void newGame(ActionEvent event) {
-
     	System.out.println("New Game");
 		Stage stage;
 		stage = (Stage) startButton.getScene().getWindow();
@@ -80,20 +78,20 @@ public class GameController implements Initializable {
     }
     
 	@Override
-	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		
+	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {		
 		assert startButton != null : "fx:id=\"statsButton\" was not injected: check your FXML file";
 				
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Zum neuen Spiel");			
 				infostat.setText("Das Spiel beginnt");				
 				
-				gameProperties = new GameProperties();
+				initRequiredComponents();
+				
 				readProperties();
-				String usedInterface = gameProperties.getProperty(GameProperties.INTERFACE);
+				usedInterface = gameProperties.getProperty(GameProperties.INTERFACE);				
+				player	      = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
 				
 				if (usedInterface.equals("File")){
 					startFileInterfaceGame();
@@ -102,14 +100,18 @@ public class GameController implements Initializable {
 					startPusherInterfaceGame();
 				}
 			}
+
+			private void initRequiredComponents() {
+				gameProperties = new GameProperties();
+				gamefield = new Gamefield();
+				agent = new AgentKI();
+			}
 		});
 	}
 
 	private void startPusherInterfaceGame() {
 		System.out.println("PusherInterface not implemented yet");
-		Gamefield gamefield = new Gamefield();
-		AgentKI agent = new AgentKI();
-		char player = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
+		
 		String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
 		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
 		
@@ -154,37 +156,36 @@ public class GameController implements Initializable {
 			}
 		}				
 	}
-
-	private void startFileInterfaceGame() {				
-
-		AgentKI agent = new AgentKI();
-
-		Gamefield gamefield = new Gamefield();
-		String sharedFolderPath = gameProperties.getProperty(GameProperties.DATEIPFAD);
-		
-		char player = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
+	
+	private void startFileInterfaceGame() {			
+		String sharedFolderPath = gameProperties.getProperty(GameProperties.DATEIPFAD);			
 		AgentfileWriter agentfileWriter = new AgentfileWriter(sharedFolderPath, player);
-		ServerfileReader serverfileReader = new ServerfileReader(sharedFolderPath, player);	
-
-		while (true) {
-			try {
-				Serverfile serverfile = serverfileReader.readServerfile();
-				Thread.sleep(200);
-				if (serverfile.getGegnerzug() != -1){
-					gamefield.insertCoin(gamefieldGrid, serverfile.getGegnerzug(), (player == 'o') ? 'x' : 'o');
-				}
-				if (!serverfile.isGameOver()){
-					int move = agent.calculateMove(gamefield);
-					gamefield.insertCoin(gamefieldGrid, move, player);
+		
+		startButton.setDisable(true);		
+		infostat.setText("Spiel läuft.");
+		
+		ServerfileReaderService serverFileReaderService = new ServerfileReaderService(sharedFolderPath, player);		
+		serverFileReaderService.setOnSucceeded(e -> {
+	    	 if (serverFileReaderService.getValue().getGegnerzug() != -1){
+					gamefield.insertCoin(gamefieldGrid, serverFileReaderService.getValue().getGegnerzug(), (player == 'o') ? 'x' : 'o');
+	    	  }
+	    	  if (!serverFileReaderService.getValue().isGameOver()){
+	    		  int move = agent.calculateMove(gamefield);
+	    		  gamefield.insertCoin(gamefieldGrid, move, player);
+	    		  try {
 					agentfileWriter.writeAgentfile(new Agentfile(move));
-				} else {
-					System.out.println("Spiel vorbei. Der Gewinner ist: " + serverfile.getSieger());
-					break;
-				}
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-		}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}		    		  
+	    		  serverFileReaderService.restart();
+	    	  } 
+	    	  else {
+	    		  System.out.println("Spiel vorbei. Der Gewinner ist: " + serverFileReaderService.getValue().getSieger());
+	    		  infostat.setText(serverFileReaderService.getValue().getSieger() + " hat gewonnen!");
+	    	  }
+	    }); 	  
+		
+		serverFileReaderService.start();		
 	}
 	
 	private void readProperties() {
@@ -195,17 +196,15 @@ public class GameController implements Initializable {
     		gameProperties.load(input);
     	} catch (IOException ex) {
     		ex.printStackTrace();
-        } finally{
-        	if(input!=null){
+        } finally {
+        	if(input != null){
         		try {
 				input.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+				}
         	}
         }
-    }
-	
-	
+    }	
 }
 
