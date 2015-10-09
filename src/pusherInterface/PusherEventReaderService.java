@@ -5,26 +5,20 @@ import com.pusher.client.channel.PrivateChannelEventListener;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
-public class PusherEventReaderService extends Service<PusherEvent> implements PrivateChannelEventListener{
-
-	public PusherEventReaderService(){
-	}
+public class PusherEventReaderService extends Service<PusherEvent> implements PrivateChannelEventListener {
+	private final long startTime = System.currentTimeMillis();
+	private PusherEvent recentPusherEvent;
+	
 	@Override
 	protected Task<PusherEvent> createTask() {
 		 return new Task<PusherEvent>() {
                 protected PusherEvent call() {
-                	System.out.println("in task");
                      PusherEvent event = getPusherEvent();
-                     System.out.println("event da");
                      deletePusherEvent();
-                     System.out.println("event gelöscht");
                      return event;
             };
 		 };
-	}
-	
-	private final long startTime = System.currentTimeMillis();
-	private PusherEvent recentPusherEvent;
+	}	
 
 	@Override
 	public void onEvent(final String channelName, final String eventName, final String data) {
@@ -37,10 +31,8 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 		
 		String[] values = messageValues.split(" # ");			
 		String correctedSieger = values[3].replace("\"}", "");
-		System.out.println("corrected sieger: " + correctedSieger);
 		
 		recentPusherEvent = new PusherEvent();
-		System.out.println("processing new event");
 		recentPusherEvent.setFreigabe(Boolean.parseBoolean(values[0]));
 		recentPusherEvent.setSatzstatus(values[1]);
 		recentPusherEvent.setGegnerzug(Integer.parseInt(values[2]));
@@ -53,9 +45,6 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 		System.out.println(String.format("[%d] Subscription to channel [%s] succeeded", timestamp(), channelName));
 	}
 
-	private long timestamp() {
-		return System.currentTimeMillis() - startTime;
-	}
 	@Override
 	public void onAuthenticationFailure(String arg0, Exception arg1) {
 		System.out.println(arg0);
@@ -69,7 +58,6 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 			Thread.sleep(300);
 			System.out.println("wartet auf PusherEvent");
 			} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
 		}
@@ -78,5 +66,8 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 	public void deletePusherEvent(){
 		recentPusherEvent = null;
 	}
-	
+
+	private long timestamp() {
+		return System.currentTimeMillis() - startTime;
+	}
 }

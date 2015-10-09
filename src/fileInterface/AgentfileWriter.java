@@ -6,13 +6,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
-// TO DO: Umstellen auf AgentFilewriter und Agentfile (OO)
-public class AgentfileWriter{
 
+public class AgentfileWriter {
 	private String sharedFolderPath;
 	private char player;
-	
-	
+
+	public AgentfileWriter(String sharedFolderPath, char player){
+		this.sharedFolderPath = sharedFolderPath;		
+		this.player = player;
+	}	
 	
 	public String getSharedFolderPath() {
 		return sharedFolderPath;
@@ -29,13 +31,8 @@ public class AgentfileWriter{
 	public void setPlayer(char player) {
 		this.player = player;
 	}
-
-	public AgentfileWriter(String sharedFolderPath, char player){
-		this.sharedFolderPath = sharedFolderPath;		
-		this.player = player;
-	}
 	
-	public void writeAgentfile(Agentfile agentFile) throws IOException{					
+	public void writeAgentfile(Agentfile agentFile) throws IOException {					
 			String filePath = sharedFolderPath + "/spieler" + player + "2server.txt";
 			
 			final Charset charset=Charset.forName("US-ASCII");

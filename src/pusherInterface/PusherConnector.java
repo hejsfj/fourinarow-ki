@@ -11,7 +11,6 @@ import com.pusher.client.connection.ConnectionStateChange;
 import utils.HmacSHA256;
 
 public class PusherConnector implements ConnectionEventListener {
-
 	private final Pusher pusher;
 	private final String appKey;
 	private final String appSecret;
@@ -42,17 +41,13 @@ public class PusherConnector implements ConnectionEventListener {
 				System.out.println("The clients channelName: " + channelName);
 				System.out.println("The clients socketId: " + socketId);
 
-				// String to sign ::= <webSocketId>:<channelName>
 				String message = socketId + ":" + channelName;
-
-				// calc the hash, e. g. one part of the authentication signature
 				String hash = HmacSHA256.getHmacSHA256HexDigest(appSecret, message);
 
-				// compose the entire authentication signature
 				// <signature> ::= "{"auth":"<appId>:<hash>"}"
 				String signature = "{\"auth\":\"" + appKey + ":" + hash + "\"}";
 
-				return signature; // ... wer auch immer das dann auswertet.
+				return signature;
 			}
 		});
 
@@ -60,8 +55,17 @@ public class PusherConnector implements ConnectionEventListener {
 		pusher.connect(this);
 	}
 
-	/* ConnectionEventListener implementation */
+	public void triggerClientMove(PrivateChannel channel, int move){
+		channel.trigger("client-event", "{\"move\": \"" + move + "\"}");	
+		System.out.println("Client move: " + move + " losgeschickt!!");	
+	}
 
+	public PrivateChannel subscribeToPrivateChannel(String channelName, PrivateChannelEventListener listener, String eventName){
+		channel =  pusher.subscribePrivate(channelName, listener, eventName);		
+		return channel;
+	}
+	
+	/* ConnectionEventListener implementation */
 	@Override
 	public void onConnectionStateChange(final ConnectionStateChange change) {
 
@@ -76,21 +80,7 @@ public class PusherConnector implements ConnectionEventListener {
 				timestamp(), message, code, e));
 	}
 
-	/* ChannelEventListener implementation */
-
-
 	private long timestamp() {
 		return System.currentTimeMillis() - startTime;
 	}
-
-	public void triggerClientMove(PrivateChannel channel, int move){
-		channel.trigger("client-event", "{\"move\": \"" + move + "\"}");	
-		System.out.println("Client move: " + move + " losgeschickt!!");	
-	}
-
-	public PrivateChannel subscribeToPrivateChannel(String channelName, PrivateChannelEventListener listener, String eventName){
-		channel =  pusher.subscribePrivate(channelName, listener, eventName);		
-		return channel;
-	}
-
 }

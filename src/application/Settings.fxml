@@ -54,11 +54,11 @@
                             <Font size="15.0" fx:id="x1" />
                           </font>
                           <toggleGroup>
-                            <ToggleGroup fx:id="Schnittstelle" />
+                            <ToggleGroup fx:id="toggleGroup_Interface" />
                           </toggleGroup>
                         </RadioButton>
                         <Pane prefHeight="87.0" prefWidth="93.0" />
-                        <RadioButton fx:id="rbFile" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" prefHeight="27.0" prefWidth="131.0" text="File Schnittstelle" toggleGroup="$Schnittstelle" />
+                        <RadioButton fx:id="rbFile" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" prefHeight="27.0" prefWidth="131.0" text="File Schnittstelle" toggleGroup="$toggleGroup_Interface" />
                       </children>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" disable="false" fillHeight="true" prefHeight="-1.0" prefWidth="-1.0">
@@ -110,7 +110,7 @@
                             <Circle fill="#fff500" radius="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                             <RadioButton fx:id="rbGelb" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" prefHeight="-1.0" prefWidth="-1.0" text="Spieler O">
                               <toggleGroup>
-                                <ToggleGroup fx:id="Schnittstelle1" />
+                                <ToggleGroup fx:id="toggleGroup_Player" />
                               </toggleGroup>
                             </RadioButton>
                           </children>
@@ -119,7 +119,7 @@
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                           <children>
                             <Circle fill="#ff3d00" radius="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                            <RadioButton fx:id="rbRot" alignment="CENTER_LEFT" contentDisplay="CENTER" disable="false" focusTraversable="true" font="$x1" mnemonicParsing="false" prefWidth="-1.0" selected="false" text="Spieler X" textOverrun="ELLIPSIS" toggleGroup="$Schnittstelle1" wrapText="false" />
+                            <RadioButton fx:id="rbRot" alignment="CENTER_LEFT" contentDisplay="CENTER" disable="false" focusTraversable="true" font="$x1" mnemonicParsing="false" prefWidth="-1.0" selected="false" text="Spieler X" textOverrun="ELLIPSIS" toggleGroup="$toggleGroup_Player" wrapText="false" />
                           </children>
                         </VBox>
                       </children>

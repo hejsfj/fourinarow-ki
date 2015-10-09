@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 public class ServerfileReader {
 	private String sharedFolderPath;
 	private char player;
-	Serverfile serverFile;	
+	private Serverfile serverFile;	
 	
 	public ServerfileReader(String sharedFolderPath, char player){
 		this.sharedFolderPath = sharedFolderPath;
@@ -23,7 +23,6 @@ public class ServerfileReader {
 	}
 	
 	public Serverfile readServerfile(){			
-		System.out.println("new readServerfile");
 		File xmlFile = new File(sharedFolderPath + "/server2spieler" + player + ".xml");
 		
 		while (!xmlFile.exists()){
@@ -31,7 +30,6 @@ public class ServerfileReader {
 				Thread.sleep(300);
 				System.out.println("wartet auf XML von Server");
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -58,8 +56,7 @@ public class ServerfileReader {
 		serverFile.setFreigabe(freigegeben);				
 		serverFile.setSatzstatus(element.getElementsByTagName("satzstatus").item(0).getTextContent());				
 		serverFile.setGegnerzug(Integer.parseInt(element.getElementsByTagName("gegnerzug").item(0).getTextContent()));				
-		serverFile.setSieger(element.getElementsByTagName("sieger").item(0).getTextContent());
-		
+		serverFile.setSieger(element.getElementsByTagName("sieger").item(0).getTextContent());		
 	}
 
 	private Node getNodeFromXmlDoc(Document xmlDoc, String node) {
@@ -74,5 +71,5 @@ public class ServerfileReader {
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		
 		return documentBuilder.parse(xmlFile);
-		}
+	}
 }

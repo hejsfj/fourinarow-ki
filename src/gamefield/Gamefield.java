@@ -57,13 +57,10 @@ public class Gamefield {
         }
 
         return gewonnen;
-	}
+	}	
 	
-	
-	public void insertCoin(GridPane gridPane, int columnIndex, char player) {
-		
-		for (int rowIndex = numRows - 1; rowIndex >= 0; rowIndex--)
-		{
+	public void insertCoin(GridPane gridPane, int columnIndex, char player) {		
+		for (int rowIndex = numRows - 1; rowIndex >= 0; rowIndex--) {
 			if (gamefield[rowIndex][columnIndex] == ' ' )
 			{
 				gamefield[rowIndex][columnIndex] = player;
@@ -73,7 +70,6 @@ public class Gamefield {
 			}
 		}
 	}
-	
 
 	public boolean isEmpty(){
 		return isEmpty;
@@ -115,8 +111,7 @@ public class Gamefield {
 	
 	private int[] getRGBValuesFromColorHexCode(String colorHexCode){
 		final int[] ret = new int[3];
-	    for (int i = 0; i < 3; i++)
-	    {
+	    for (int i = 0; i < 3; i++) {
 	        ret[i] = Integer.parseInt(colorHexCode.substring(i * 2, i * 2 + 2), 16);
 	    }
 	    return ret;		
