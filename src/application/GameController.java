@@ -48,15 +48,14 @@ public class GameController implements Initializable {
 		stage = (Stage) startButton.getScene().getWindow();
 		AnchorPane page;
 		
-			try {
-				page = (AnchorPane) FXMLLoader.load(getClass().getResource("Load.fxml"));
-				Scene scene = new Scene(page);
-				stage.setScene(scene);
-				stage.show();
-			} catch (IOException e) {
-			// TODO Auto-generated catch block
+		try {
+			page = (AnchorPane) FXMLLoader.load(getClass().getResource("Load.fxml"));
+			Scene scene = new Scene(page);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
 			e.printStackTrace();
-			}
+		}
     }
 
     @FXML void newGame(ActionEvent event) {
@@ -65,15 +64,14 @@ public class GameController implements Initializable {
 		stage = (Stage) startButton.getScene().getWindow();
 		AnchorPane page;
 		
-			try {
-				page = (AnchorPane) FXMLLoader.load(getClass().getResource("Settings.fxml"));
-				Scene scene = new Scene(page);
-				stage.setScene(scene);
-				stage.show();
-			} catch (IOException e) {
-			// TODO Auto-generated catch block
+		try {
+			page = (AnchorPane) FXMLLoader.load(getClass().getResource("Settings.fxml"));
+			Scene scene = new Scene(page);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
 			e.printStackTrace();
-			}
+		}
     }
     
 	@Override

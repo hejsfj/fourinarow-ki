@@ -13,7 +13,6 @@ import java.sql.Statement;
  *
  */
 public class DatabaseManager {
-
 	Connection con;
 	Statement stmt;
 	ResultSet rs;
@@ -32,7 +31,6 @@ public class DatabaseManager {
 		try {
 			this.con = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + "; shutdown=true", "root", "");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -42,7 +40,6 @@ public class DatabaseManager {
 		String sql;
 	
 		try {
-			
 			stmt = this.con.createStatement();
 			System.out.println(con + " " + con.getWarnings());
 
@@ -60,7 +57,6 @@ public class DatabaseManager {
 			sql = "INSERT INTO SPIELER VALUES (null, 'Sebastian', 2, 1);";
 			stmt.executeQuery(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -71,13 +67,10 @@ public class DatabaseManager {
 	    try { if (con != null) con.close(); } catch (Exception e) {};
 	}
 	
-
 	public static void main(String[] args) {
 		DatabaseManager db = new DatabaseManager();
-		db.initTabels();
 		
+		db.initTabels();		
 		db.closeDB();
 	}
-		
-		
 }
