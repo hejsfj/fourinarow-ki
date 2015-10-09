@@ -25,8 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import pusherInterface.PusherConnector;
-import pusherInterface.PusherEvent;
-import pusherInterface.PusherEventHandler;
+import pusherInterface.PusherEventReaderService;
 
 public class GameController implements Initializable {
 	
@@ -83,10 +82,9 @@ public class GameController implements Initializable {
 				
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Zum neuen Spiel");			
-				infostat.setText("Das Spiel beginnt");				
-				
+			public void handle(ActionEvent event) {	
+				startButton.setDisable(true);		
+				infostat.setText("Spiel läuft.");
 				initRequiredComponents();
 				
 				readProperties();
@@ -116,53 +114,38 @@ public class GameController implements Initializable {
 		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
 		
 		PusherConnector pusher = new PusherConnector("", appKey, appSecret);
-		PusherEventHandler pusherEventHandler = new PusherEventHandler();
-		PrivateChannel channel = pusher.subscribeToPrivateChannel("private-channel", pusherEventHandler, "MoveToAgent");
-		PusherEvent pusherEvent;
-	
-		while (true) {
-			try {
-				pusherEvent = pusherEventHandler.getPusherEvent();
-				pusherEventHandler.deletePusherEvent();
-				
-				System.out.println("PusherEvent");
-				System.out.println("Satzstatus: " + pusherEvent.getSatzstatus());
-				System.out.println("Freigabe: " + pusherEvent.getFreigabe());
-				System.out.println("Sieger: " + pusherEvent.getSieger());
-				System.out.println("Gegnerzug: " + pusherEvent.getGegnerzug());
-				System.out.println("");
 
-				if (pusherEvent.getGegnerzug() != -1 && pusherEvent.getGegnerzug() != -2){
-					gamefield.insertCoin(gamefieldGrid, pusherEvent.getGegnerzug(), (player == 'o') ? 'x' : 'o');
-				}
-				if (!pusherEvent.isGameOver()){
-					int move = agent.calculateMove(gamefield);
-					System.out.println("calculated move: " + move);
-					
-					gamefield.insertCoin(gamefieldGrid, move, player);
-					
-					pusher.triggerClientMove(channel, move);
-					System.out.println("Spiel vorbei. Wir haben gewonnen");
-					if (gamefield.hasWinner()){
-						break;
-					}
-					
-				} else {
-					System.out.println("Spiel vorbei. Der Gewinner ist: " + pusherEvent.getSieger());
-					break;
-				}
-			} catch (Exception e){
-				e.printStackTrace();						
-			}
-		}				
+		// pusherEventReaderService hört nach neuen Events, aber in hintergrund-thread durch task!
+		final PusherEventReaderService pusherEventReaderService = new PusherEventReaderService();
+		
+		PrivateChannel channel = pusher.subscribeToPrivateChannel("private-channel", pusherEventReaderService, "MoveToAgent");
+	
+		
+		pusherEventReaderService.setOnSucceeded(e -> {
+			System.out.println("here");
+	    	 if (pusherEventReaderService.getValue().getGegnerzug() != -1){
+					gamefield.insertCoin(gamefieldGrid, pusherEventReaderService.getValue().getGegnerzug(), (player == 'o') ? 'x' : 'o');
+	    	  }
+	    	  if (!pusherEventReaderService.getValue().isGameOver()){
+	    		  System.out.println("abc");
+	    		  int move = agent.calculateMove(gamefield);
+	    		  gamefield.insertCoin(gamefieldGrid, move, player);
+	    		  pusher.triggerClientMove(channel, move);
+	    		  // task wird hier erneut gestartet, da spiel noch nicht vorbei ist!!
+	    		  pusherEventReaderService.restart();
+	    	  } 
+	    	  else {
+	    		  System.out.println("Spiel vorbei. Der Gewinner ist: " + pusherEventReaderService.getValue().getSieger());
+	    		  infostat.setText(pusherEventReaderService.getValue().getSieger() + " hat gewonnen!");
+	    	  }
+	    }); 
+		pusherEventReaderService.start();
 	}
 	
 	private void startFileInterfaceGame() {			
 		String sharedFolderPath = gameProperties.getProperty(GameProperties.DATEIPFAD);			
 		AgentfileWriter agentfileWriter = new AgentfileWriter(sharedFolderPath, player);
 		
-		startButton.setDisable(true);		
-		infostat.setText("Spiel läuft.");
 		
 		ServerfileReaderService serverFileReaderService = new ServerfileReaderService(sharedFolderPath, player);		
 		serverFileReaderService.setOnSucceeded(e -> {

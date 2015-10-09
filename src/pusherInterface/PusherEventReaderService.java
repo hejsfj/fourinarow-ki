@@ -2,7 +2,27 @@ package pusherInterface;
 
 import com.pusher.client.channel.PrivateChannelEventListener;
 
-public class PusherEventHandler implements PrivateChannelEventListener {
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+
+public class PusherEventReaderService extends Service<PusherEvent> implements PrivateChannelEventListener{
+
+	public PusherEventReaderService(){
+	}
+	@Override
+	protected Task<PusherEvent> createTask() {
+		 return new Task<PusherEvent>() {
+                protected PusherEvent call() {
+                	System.out.println("in task");
+                     PusherEvent event = getPusherEvent();
+                     System.out.println("event da");
+                     deletePusherEvent();
+                     System.out.println("event gelöscht");
+                     return event;
+            };
+		 };
+	}
+	
 	private final long startTime = System.currentTimeMillis();
 	private PusherEvent recentPusherEvent;
 
@@ -58,4 +78,5 @@ public class PusherEventHandler implements PrivateChannelEventListener {
 	public void deletePusherEvent(){
 		recentPusherEvent = null;
 	}
+	
 }
