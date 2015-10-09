@@ -17,7 +17,6 @@ public class Main extends Application {
             primaryStage.setResizable(false);
             primaryStage.show();          
         } catch (Exception ex) {
-			// TODO Auto-generated catch block
 			ex.printStackTrace();
 			System.out.println("Oh no");
         }	

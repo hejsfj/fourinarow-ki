@@ -75,8 +75,14 @@ public class SettingsController implements Initializable {
     }
     
     @FXML void choose(ActionEvent event) {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
     	Stage stage = new Stage();
+    	
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        
+        File initialDirectory = new File(tfDateiPfad.getText().toString());        
+        if (initialDirectory.exists()){
+        	directoryChooser.setInitialDirectory(initialDirectory);
+        }
     	File selectedDirectory = directoryChooser.showDialog(stage);
     	if(selectedDirectory != null){
     		selectedDirectory.getAbsolutePath();
@@ -259,7 +265,6 @@ public class SettingsController implements Initializable {
 
 		try {
 			output = new FileOutputStream(GameProperties.DATEINAME);
-
 			gameProperties.setProperty(GameProperties.INTERFACE,  	usedInterface);
 			gameProperties.setProperty(GameProperties.ZUGZEIT, 		tfZugZeit.getText());
 			gameProperties.setProperty(GameProperties.DATEIPFAD,	tfDateiPfad.getText());
@@ -284,10 +289,12 @@ public class SettingsController implements Initializable {
 
 	private void setDefaultInterface(String defaultInterface) {
 		if (defaultInterface.equals("File")){
+			usedInterface = "File";
 			rbFile.setSelected(true);
 			setVisibilityOfPusherInterfaceFields(false);
 		}
 		else if (defaultInterface.equals("Push")){
+			usedInterface = "Push";
 			rbPush.setSelected(true);
 			setVisibilityOfFileInterfaceFields(false);
 		}
