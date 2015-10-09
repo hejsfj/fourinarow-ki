@@ -229,10 +229,14 @@ public class SettingsController implements Initializable {
 	private void restoreInputFieldsFromProperties() {
 		setDefaultInterface(gameProperties.getProperty(GameProperties.INTERFACE));
 		
-		if ((GameProperties.SPIELER).equals("o"))
+		System.out.println(GameProperties.SPIELER);
+		player = gameProperties.getProperty(GameProperties.SPIELER).toCharArray()[0];
+		if (player == 'o') {
 			rbGelb.setSelected(true);
-		else
+		}
+		else if (player == 'x') {
 			rbRot.setSelected(true);
+		}
 		
 		tfZugZeit.setText(gameProperties.getProperty(GameProperties.ZUGZEIT));
 		tfDateiPfad.setText(gameProperties.getProperty(GameProperties.DATEIPFAD));
