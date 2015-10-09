@@ -126,7 +126,7 @@ public class SettingsController implements Initializable {
 		setTextfieldHints();
 		
 		btStart.setOnAction((ev) -> 	{
-			if (!areAllRequiredFieldsFilled()){
+			if (!areAllRequiredFieldsFilledCorrectly()){
 				infostart.setText("Nicht alle benötigten Felder wurden richtig ausgefüllt");
 				return;
 			}
@@ -183,7 +183,7 @@ public class SettingsController implements Initializable {
 		});
 	}
 
-	private boolean areAllRequiredFieldsFilled() {
+	private boolean areAllRequiredFieldsFilledCorrectly() {
 		if (!isPlayerSelected()){
 			System.out.println("no player selected");
 			return false;
@@ -193,9 +193,9 @@ public class SettingsController implements Initializable {
 			return false;
 		}
 		if (rbFile.isSelected())
-			return areFileInterfaceFieldsFilled();
+			return areFileInterfaceFieldsFilledCorrectly();
 		if (rbPush.isSelected())
-			return arePusherInterfaceFieldsFilled();
+			return arePusherInterfaceFieldsFilledCorrectly();
 		
 		System.out.println("not all fields filled");
 		return false;
@@ -217,10 +217,12 @@ public class SettingsController implements Initializable {
 	private boolean isZugZeitRegistered(){
 		return !tfZugZeit.getText().equals("");
 	}
-	private boolean areFileInterfaceFieldsFilled(){
-		return !tfDateiPfad.getText().equals("");		
+	private boolean areFileInterfaceFieldsFilledCorrectly(){
+		
+		return !tfDateiPfad.getText().equals("") &&
+				new File(tfDateiPfad.getText()).exists();
 	}
-	private boolean arePusherInterfaceFieldsFilled(){
+	private boolean arePusherInterfaceFieldsFilledCorrectly(){
 		return	 !tfAppId.getText().equals("")		&&
 				 !tfAppKey.getText().equals("")		&&
 				 !tfAppSecret.getText().equals("");
