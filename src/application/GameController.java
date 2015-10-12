@@ -4,11 +4,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.pusher.client.channel.PrivateChannel;
 
 import agentKI.AgentKI;
+import database.DatabaseManager;
 import fileInterface.Agentfile;
 import fileInterface.AgentfileWriter;
 import fileInterface.ServerfileReaderService;
@@ -42,6 +44,7 @@ public class GameController implements Initializable {
 	@FXML private Label infostat;
 	@FXML private GridPane gamefieldGrid;
 	
+	private DatabaseManager databaseManager;
 	private GameProperties gameProperties;
 	private Gamefield gamefield;
 	private AgentKI agent;
@@ -107,11 +110,22 @@ public class GameController implements Initializable {
 				gameProperties = new GameProperties();
 				gamefield = new Gamefield();
 				agent = new AgentKI();
+				databaseManager = new DatabaseManager();
 			}
 		});
 	}
 
 	private void startPusherInterfaceGame() {
+		/*
+		try {
+			System.out.println("vorm satz hinzufügen");
+			databaseManager.addSatz(0, 0, 0, 0, "");
+			System.out.println("Satz hinzugefügt");
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}*/
 		
 		String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
 		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);

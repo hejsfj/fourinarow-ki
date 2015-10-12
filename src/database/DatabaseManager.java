@@ -15,9 +15,11 @@ public class DatabaseManager {
 	
 	public DatabaseManager(){
 		databaseConnect();
-		
+		System.out.println("database connected");
 		try {
+			System.out.println("trying to initialize database");
 			initializeDatabase();
+			System.out.println("database initialized");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -45,11 +47,9 @@ public class DatabaseManager {
 	}
 	
 	public void initializeDatabase() throws SQLException{
-		
 		execute(DatabaseStructure.CREATE_TABLE_SPIEL);
 		execute(DatabaseStructure.CREATE_TABLE_SATZ);
 		execute(DatabaseStructure.CREATE_TABLE_ZUG);
-		
 	}
 	
 	public synchronized void execute(String expression) throws SQLException {
@@ -83,16 +83,50 @@ public class DatabaseManager {
     }
 
 
-	public void addSpiel(int spiel_id, String spielerO, String spielerY, String sieger, String datum) throws SQLException{
-			this.execute("INSERT INTO spiel(spielero,spielery,sieger,datum) VALUES('"+spielerY+"','"+spielerO+"','"+sieger+"','"+datum+"')");	 	
+	public void addSpiel(String spielerO, String spielerX, String sieger, String datum) throws SQLException {
+			this.execute("INSERT INTO spiel ("
+							+ "spielero, "
+							+ "spielery, "
+							+ "sieger, "
+							+ "datum)"
+						+ "VALUES('"
+							+ spielerO 	+ "','"
+							+ spielerX 	+ "','"
+							+ sieger 	+ "','"
+							+ datum 
+						+"')");	 	
 	}
 
 	public void addSatz(int spiel_id, int satz_nr, int punktespielero,int punktespielerx, String startspieler) throws SQLException{
-		this.execute("INSERT INTO satz(spiel_id, satz_nr, punktespielero, punktespielerx, startspieler)VALUES('"+spiel_id+"','"+satz_nr+"','"+punktespielero+"','"+punktespielerx+"','"+startspieler+"')");
+		this.execute("INSERT INTO satz ("
+						+ "spiel_id, "
+						+ "satz_nr, "
+						+ "punktespielero, "
+						+ "punktespielerx, "
+						+ "startspieler)"
+					+ "VALUES('"
+						+ String.valueOf(spiel_id) 			+ "','"
+						+ String.valueOf(satz_nr) 			+ "','"
+						+ String.valueOf(punktespielero) 	+ "','"
+						+ String.valueOf(punktespielerx) 	+ "','"
+						+ startspieler 
+					+ "')");
 	}
 	
 	public void addZug(int spiel_id, int satz_nr,int zug_nr, int spalte, String spieler) throws SQLException{
-		this.execute("INSERT INTO zug(spiel_id,satz_nr,zug_nr,spalte,spieler) VALUES('"+spiel_id+"','"+satz_nr+"','"+zug_nr+"','"+spalte+"','"+spieler+"')");
+		this.execute("INSERT INTO zug("
+						+ "spiel_id, "
+						+ "satz_nr, "
+						+ "zug_nr, "
+						+ "spalte, "
+						+ "spieler) "
+					+ "VALUES('"
+						+ String.valueOf(spiel_id) 	+"','"
+						+ String.valueOf(satz_nr) 	+"','"
+						+ String.valueOf(zug_nr) 	+"','"
+						+ String.valueOf(spalte) 	+"','"
+						+ spieler
+					+"')");
 	}
 	
 	public ResultSet getSpiele(){
