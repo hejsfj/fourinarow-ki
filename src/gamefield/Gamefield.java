@@ -32,41 +32,6 @@ public class Gamefield {
         
 	}	
 
-	private boolean hasDiagonalWinner(){
-		
-		//rechts unten nach links oben
-		for (int rowIndex = 0; rowIndex <= 2; rowIndex++) {
-			for (int columnIndex = 0; columnIndex <= 3; columnIndex++) {
-				char player = gamefield[rowIndex][columnIndex];
-				if (player != ' '){
-					if (player == gamefield[rowIndex + 1][columnIndex + 1] &&
-						player == gamefield[rowIndex + 2][columnIndex + 2] &&
-						player == gamefield[rowIndex + 3][columnIndex + 3]){
-	                		System.out.println("diagonal winner");
-							return true;				
-							}
-				}								
-			}
-		}		
-		// links unten nach rechts oben
-		for(int rowIndex = 0; rowIndex <= 2; rowIndex++) {
-			for(int columnIndex  = 3; columnIndex <= 6; columnIndex++) {
-				char player = gamefield[rowIndex][columnIndex];
-				if (player != ' '){
-					if (player == gamefield[rowIndex + 1][columnIndex - 1] &&
-						player == gamefield[rowIndex + 2][columnIndex - 2] &&
-						player == gamefield[rowIndex + 3][columnIndex - 3]){
-                			System.out.println("diagonal winner");
-							return true;			
-						}	
-				}
-			}
-		}		
-		
-	    return false;
-}
-	
-	
 	public void insertCoin(GridPane gridPane, int columnIndex, char player) {		
 		for (int rowIndex = numRows - 1; rowIndex >= 0; rowIndex--) {
 			if (gamefield[rowIndex][columnIndex] == ' ' )
@@ -99,15 +64,15 @@ public class Gamefield {
 	}
 	
 	private boolean hasHorizontalWinner(){
-        for(int rowIndex=0; rowIndex < 6; rowIndex++) {
+        for(int rowIndex = 0; rowIndex < 6; rowIndex++) {
             int count = gamefield[rowIndex][0] == ' ' ? 0 : 1;
             for(int columnIndex = 1; columnIndex < 7; columnIndex++) {
-                if(gamefield[rowIndex][columnIndex]!=' ' && gamefield[rowIndex][columnIndex] == gamefield[rowIndex][columnIndex-1]) {
+                if(gamefield[rowIndex][columnIndex] != ' ' && gamefield[rowIndex][columnIndex] == gamefield[rowIndex][columnIndex-1]) {
                     count++;
                 } else {
-                    count=gamefield[rowIndex][columnIndex]==' ' ? 0 : 1;
+                    count = gamefield[rowIndex][columnIndex] == ' ' ? 0 : 1;
                 }
-                if(count==4) {
+                if(count == 4) {
                 	System.out.println("horizontal winner");
                     return true;
                 }
@@ -118,20 +83,54 @@ public class Gamefield {
 	
 	private boolean hasVerticalWinner(){
         for(int columnIndex = 0;  columnIndex < numColumns; columnIndex++) {
-            int count=gamefield[0][columnIndex]==' ' ? 0 : 1;
-            for(int rowIndex=1; rowIndex<numRows;rowIndex++) {
-                if(gamefield[rowIndex][columnIndex]!=' ' && gamefield[rowIndex][columnIndex]==gamefield[rowIndex-1][columnIndex]) {
+            int count = gamefield[0][columnIndex]==' ' ? 0 : 1;
+            for(int rowIndex=1; rowIndex < numRows; rowIndex++) {
+                if(gamefield[rowIndex][columnIndex] != ' ' && gamefield[rowIndex][columnIndex] == gamefield[rowIndex-1][columnIndex]) {
                     count++;
                 } else {
-                    count=gamefield[rowIndex][columnIndex]==' ' ? 0 : 1;
+                    count = gamefield[rowIndex][columnIndex]==' ' ? 0 : 1;
                 }
-                if(count==4) {
+                if(count == 4) {
                 	System.out.println("vertical winner");
                     return true;
                 }
             }
         }
 		return false;
+	}
+
+	private boolean hasDiagonalWinner(){
+		
+		//rechts unten nach links oben
+		for (int rowIndex = 0; rowIndex <= 2; rowIndex++) {
+			for (int columnIndex = 0; columnIndex <= 3; columnIndex++) {
+				char player = gamefield[rowIndex][columnIndex];
+				if (player != ' '){
+					if (player == gamefield[rowIndex + 1][columnIndex + 1] &&
+						player == gamefield[rowIndex + 2][columnIndex + 2] &&
+						player == gamefield[rowIndex + 3][columnIndex + 3]){
+	                		System.out.println("diagonal winner");
+							return true;				
+							}
+				}								
+			}
+		}		
+		// links unten nach rechts oben
+		for(int rowIndex = 0; rowIndex <= 2; rowIndex++) {
+			for(int columnIndex  = 3; columnIndex <= 6; columnIndex++) {
+				char player = gamefield[rowIndex][columnIndex];
+				if (player != ' '){
+					if (player == gamefield[rowIndex + 1][columnIndex - 1] &&
+						player == gamefield[rowIndex + 2][columnIndex - 2] &&
+						player == gamefield[rowIndex + 3][columnIndex - 3]){
+                			System.out.println("diagonal winner");
+							return true;			
+						}	
+				}
+			}
+		}		
+		
+	    return false;
 	}
 	
 	private void addNewCoinToGridPane(GridPane pane, int columnIndex, int rowIndex, char player){
