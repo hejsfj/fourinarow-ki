@@ -5,72 +5,113 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
-/**
- * 
- * @author Tim Erster Versuch für lauffähige Datenbank operationen Als zweiter
- *         Schritt soll die Klasse stäker Objektorientiert angepasst werden
- *
- */
+import database.DatabaseStructure;
+
 public class DatabaseManager {
-	Connection con;
-	Statement stmt;
-	ResultSet rs;
-	String dbPath = "hsql\\dbTest3";
-
-	// Konstruktur
-	public DatabaseManager() {
-		try {
-			// Treiberklasse laden
-			Class.forName("org.hsqldb.jdbcDriver");
-		} catch (ClassNotFoundException e) {
-			System.err.println("Treiberklasse nicht gefunden!");
-			return;
-		}
-
-		try {
-			this.con = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + "; shutdown=true", "root", "");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// erstmaliges erstellen der Tabellen im Filesystem des Anwenders
-	public void initTabels() {
-		String sql;
 	
-		try {
-			stmt = this.con.createStatement();
-			System.out.println(con + " " + con.getWarnings());
+	Connection connection = null;
+	DatabaseStructure DatabaseStructure;
 
-			sql = "CREATE TABLE IF NOT EXISTS Spieler (ID INTEGER IDENTITY,Name VARCHAR(255), Siege INTEGER, Niederlagen INTEGER)";
-			stmt.executeQuery(sql);
-			sql = "CREATE TABLE IF NOT EXISTS Spiel (ID INTEGER IDENTITY,Punkte INTEGER, PunkteGegner INTEGER , Gegner INTEGER REFERENCES Spieler(ID),Sieger INTEGER REFERENCES Spieler(ID), Datum date)";
-			stmt.executeQuery(sql);
-			sql = "CREATE TABLE IF NOT EXISTS Satz (ID INTEGER IDENTITY,SatzNr INTEGER, SpielID INTEGER REFERENCES Spiel(ID), Sieger INTEGER REFERENCES Spieler(ID),StartSpieler INTEGER REFERENCES Spieler(ID))";
-			stmt.executeQuery(sql);
-			sql = "CREATE TABLE IF NOT EXISTS Spiezug (ID INTEGER IDENTITY,ZugNr INTEGER, SatzID INTEGER REFERENCES Satz(ID), SpielerID INTEGER REFERENCES Spieler(ID),Spalte INTEGER)";
-			stmt.executeQuery(sql);
-//			stmt.close();
-			System.out.println("Tabellen angelegt");
-			
-			sql = "INSERT INTO SPIELER VALUES (null, 'Sebastian', 2, 1);";
-			stmt.executeQuery(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 	
-	public void closeDB(){
-		try { if (rs != null) rs.close(); } catch (Exception e) {};
-	    try { if (stmt != null) stmt.close(); } catch (Exception e) {};
-	    try { if (con != null) con.close(); } catch (Exception e) {};
-	}
-	
-	public static void main(String[] args) {
-		DatabaseManager db = new DatabaseManager();
+	public DatabaseManager(){
+		DatabaseStructure = new DatabaseStructure();
+		databaseConnect();
 		
-		db.initTabels();		
-		db.closeDB();
+		try {
+			initializeDatabase();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		//insert
+		//load
+	}
+	
+	public void databaseConnect(){
+		try { 
+	     
+	      Class.forName( "org.hsqldb.jdbcDriver" ); 
+	    } catch ( ClassNotFoundException e ) { 
+	      System.err.println( "Treiberklasse nicht gefunden" ); 
+	      return; 
+	    } 
+	  	  
+	    try{ 
+	      connection = DriverManager.getConnection(DatabaseStructure.path, DatabaseStructure.user, DatabaseStructure.password); 
+	      
+	    } catch ( SQLException e ) { 
+	      e.printStackTrace(); 
+	    } 
+
+	}
+	
+	public void initializeDatabase() throws SQLException{
+		
+		execute(DatabaseStructure.createTableSpiel);
+		execute(DatabaseStructure.createTableSatz);
+		execute(DatabaseStructure.createTableZug);
+		
+	}
+	
+	public synchronized void execute(String expression) throws SQLException {
+
+         Statement statement = null;
+         statement = connection.createStatement();
+
+         int i = statement.executeUpdate(expression);
+
+         if (i == -1) {
+             System.out.println("database experssion error : " + expression);
+         }
+
+         statement.close();
+    }  
+	
+    protected synchronized ResultSet query(String expression) {
+
+        Statement statement = null;
+        ResultSet resultset = null;
+        try {
+            statement = connection.createStatement();         
+            resultset = statement.executeQuery(expression);    
+            statement.close();  
+            
+        } catch (Exception e) {
+			System.out.println("Something went wrong executing query");
+        }
+        
+        return resultset;
+    }
+
+
+	public void addspiel(int spiel_id, String spielerO, String spielerY, String sieger, String datum) throws SQLException{
+			this.execute("INSERT INTO spiel(spielero,spielery,sieger,datum) VALUES('"+spielerY+"','"+spielerO+"','"+sieger+"','"+datum+"')");	 	
+	}
+
+	public void addsatz(int spiel_id, int satz_nr, int punktespielero,int punktespielerx, String startspieler) throws SQLException{
+		this.execute("INSERT INTO satz(spiel_id, satz_nr, punktespielero, punktespielerx, startspieler)VALUES('"+spiel_id+"','"+satz_nr+"','"+punktespielero+"','"+punktespielerx+"','"+startspieler+"')");
+	}
+	
+	public void addzug(int spiel_id, int satz_nr,int zug_nr, int spalte, String spieler) throws SQLException{
+		this.execute("INSERT INTO zug(spiel_id,satz_nr,zug_nr,spalte,spieler) VALUES('"+spiel_id+"','"+satz_nr+"','"+zug_nr+"','"+spalte+"','"+spieler+"')");
+	}
+	
+	public ResultSet getspiele(){
+		return this.query("SELECT * FROM spiele");		
+	}
+
+	public ResultSet getsaetze(String SpielID){
+		return this.query("SELECT * FROM satz WHERE spiel_id = "+SpielID);		
+	}
+	
+	public ResultSet getzuege(String SpielID, String SatzNR){
+		return this.query("SELECT * FROM zug WHERE spiel_id = "+SpielID+"AND satz_nr = "+SatzNR);
+	}
+	
+	public void updateSpiel(String sieger, String id){
+		this.query("UPDATE spiel SET sieger = "+sieger+", WHERE ID = "+id);
 	}
 }
