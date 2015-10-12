@@ -19,7 +19,7 @@
               <children>
                 <HBox alignment="CENTER" prefHeight="40.0" prefWidth="-1.0">
                   <children>
-                    <Button fx:id="btStart" cancelButton="false" defaultButton="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="-1.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS">
+                    <Button fx:id="btStart" cancelButton="false" defaultButton="false" ellipsisString="..." mnemonicParsing="false" prefHeight="30.0" prefWidth="-1.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS">
                       <font>
                         <Font size="18.0" />
                       </font>
