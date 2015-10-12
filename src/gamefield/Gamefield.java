@@ -82,6 +82,15 @@ public class Gamefield {
 	public boolean isEmpty(){
 		return isEmpty;
 	}
+	
+	public boolean isFull(){
+		for (int columnIndex = 0; columnIndex < numColumns; columnIndex++){
+			if (isColumnFull(columnIndex)){
+				return true;
+			}
+		}
+		return false;
+	}
 	public boolean isValidMove(int columnIndex){
 		return !isColumnFull(columnIndex);
 	}

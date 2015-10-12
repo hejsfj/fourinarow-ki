@@ -135,11 +135,14 @@ public class GameController implements Initializable {
 	    		  
 	    		  pusher.triggerClientMove(channel, move);
 
-	    		  //wenn wir gewinnen, dann steht jetzt hier true
-	    		  System.out.println("Hat jemand gewonnen? " + gamefield.hasWinner());
-	    		  
-	    		  // task wird hier erneut gestartet, da spiel noch nicht vorbei ist!!
-	    		  pusherEventReaderService.restart();
+	    		  if (gamefield.hasWinner()) {
+	    			  infostat.setText("Wir haben gewonnen!");	    			  
+	    		  } else if (gamefield.isFull()){
+	    			  infostat.setText("Kein Sieger!");
+	    		  } else {
+	    			  // task wird hier erneut gestartet, da spiel noch nicht vorbei ist!!
+	    			  pusherEventReaderService.restart();
+	    		  }
 	    	  } 
 	    	  else {
 	    		  System.out.println("Spiel vorbei. Der Gewinner ist: " + pusherEventReaderService.getValue().getSieger());
