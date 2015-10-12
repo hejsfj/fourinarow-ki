@@ -21,9 +21,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pusherInterface.PusherConnector;
 import pusherInterface.PusherEventReaderService;
@@ -34,10 +34,10 @@ public class GameController implements Initializable {
     @FXML private Button statsButton; // Value injected by FXMLLoader    
 	@FXML private Button startButton;
 
-    @FXML private TextField tfPlayer1_Game_Wins;
-    @FXML private TextField tfPlayer2_Game_Wins;
-    @FXML private TextField tfPlayer1_Set_Wins;
-    @FXML private TextField tfPlayer2_Set_Wins;
+    @FXML private Text tfPlayer1_Game_Wins;
+    @FXML private Text tfPlayer2_Game_Wins;
+    @FXML private Text tfPlayer1_Set_Wins;
+    @FXML private Text tfPlayer2_Set_Wins;
 	
 	@FXML private Label infostat;
 	@FXML private GridPane gamefieldGrid;
