@@ -112,7 +112,6 @@ public class GameController implements Initializable {
 	}
 
 	private void startPusherInterfaceGame() {
-		System.out.println("PusherInterface not implemented yet");
 		
 		String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
 		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
@@ -131,10 +130,14 @@ public class GameController implements Initializable {
 					gamefield.insertCoin(gamefieldGrid, pusherEventReaderService.getValue().getGegnerzug(), (player == 'o') ? 'x' : 'o');
 	    	  }
 	    	  if (!pusherEventReaderService.getValue().isGameOver()){
-	    		  System.out.println("abc");
 	    		  int move = agent.calculateMove(gamefield);
-	    		  gamefield.insertCoin(gamefieldGrid, move, player);
+	    		  gamefield.insertCoin(gamefieldGrid, move, player);	    		  
+	    		  
 	    		  pusher.triggerClientMove(channel, move);
+
+	    		  //wenn wir gewinnen, dann steht jetzt hier true
+	    		  System.out.println("Hat jemand gewonnen? " + gamefield.hasWinner());
+	    		  
 	    		  // task wird hier erneut gestartet, da spiel noch nicht vorbei ist!!
 	    		  pusherEventReaderService.restart();
 	    	  } 
