@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true">  
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="pusherInterface.PusherEventReaderService" project="fourinarow-ki" 
     file="/fourinarow-ki/src/pusherInterface/PusherEventReaderService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="225" width="248" x="41" y="37"/>    
+    <position height="232" width="292" x="41" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="pusherInterface.PusherConnector" project="fourinarow-ki" 
     file="/fourinarow-ki/src/pusherInterface/PusherConnector.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="261" width="439" x="329" y="37"/>    
+    <position height="268" width="518" x="373" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="pusherInterface.PusherEvent" project="fourinarow-ki" 
     file="/fourinarow-ki/src/pusherInterface/PusherEvent.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="315" width="153" x="41" y="338"/>    
+    <position height="322" width="175" x="41" y="345"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,8 +30,12 @@
   </class>  
   <association id="4">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="5" name="recentPusherEvent"/>      
-      <multiplicity id="6" minimum="0" maximum="1"/>    
+      <attribute id="5" name="recentPusherEvent">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="6" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
