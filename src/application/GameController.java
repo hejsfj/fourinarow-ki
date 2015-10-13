@@ -4,11 +4,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.pusher.client.channel.PrivateChannel;
 
 import agentKI.AgentKI;
+import database.DatabaseManager;
 import fileInterface.Agentfile;
 import fileInterface.AgentfileWriter;
 import fileInterface.ServerfileReaderService;
@@ -21,9 +23,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pusherInterface.PusherConnector;
 import pusherInterface.PusherEventReaderService;
@@ -34,14 +36,15 @@ public class GameController implements Initializable {
     @FXML private Button statsButton; // Value injected by FXMLLoader    
 	@FXML private Button startButton;
 
-    @FXML private TextField tfPlayer1_Game_Wins;
-    @FXML private TextField tfPlayer2_Game_Wins;
-    @FXML private TextField tfPlayer1_Set_Wins;
-    @FXML private TextField tfPlayer2_Set_Wins;
+    @FXML private Text tfPlayer1_Game_Wins;
+    @FXML private Text tfPlayer2_Game_Wins;
+    @FXML private Text tfPlayer1_Set_Wins;
+    @FXML private Text tfPlayer2_Set_Wins;
 	
 	@FXML private Label infostat;
 	@FXML private GridPane gamefieldGrid;
 	
+	private DatabaseManager databaseManager;
 	private GameProperties gameProperties;
 	private Gamefield gamefield;
 	private AgentKI agent;
@@ -107,12 +110,22 @@ public class GameController implements Initializable {
 				gameProperties = new GameProperties();
 				gamefield = new Gamefield();
 				agent = new AgentKI();
+				databaseManager = new DatabaseManager();
 			}
 		});
 	}
 
 	private void startPusherInterfaceGame() {
-		System.out.println("PusherInterface not implemented yet");
+		/*
+		try {
+			System.out.println("vorm satz hinzufügen");
+			databaseManager.addSatz(0, 0, 0, 0, "");
+			System.out.println("Satz hinzugefügt");
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}*/
 		
 		String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
 		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
@@ -131,12 +144,19 @@ public class GameController implements Initializable {
 					gamefield.insertCoin(gamefieldGrid, pusherEventReaderService.getValue().getGegnerzug(), (player == 'o') ? 'x' : 'o');
 	    	  }
 	    	  if (!pusherEventReaderService.getValue().isGameOver()){
-	    		  System.out.println("abc");
 	    		  int move = agent.calculateMove(gamefield);
-	    		  gamefield.insertCoin(gamefieldGrid, move, player);
+	    		  gamefield.insertCoin(gamefieldGrid, move, player);	    		  
+	    		  
 	    		  pusher.triggerClientMove(channel, move);
-	    		  // task wird hier erneut gestartet, da spiel noch nicht vorbei ist!!
-	    		  pusherEventReaderService.restart();
+
+	    		  if (gamefield.hasWinner()) {
+	    			  infostat.setText("Wir haben gewonnen!");	    			  
+	    		  } else if (gamefield.isFull()){
+	    			  infostat.setText("Kein Sieger!");
+	    		  } else {
+	    			  // task wird hier erneut gestartet, da spiel noch nicht vorbei ist!!
+	    			  pusherEventReaderService.restart();
+	    		  }
 	    	  } 
 	    	  else {
 	    		  System.out.println("Spiel vorbei. Der Gewinner ist: " + pusherEventReaderService.getValue().getSieger());

@@ -19,7 +19,7 @@
               <children>
                 <HBox alignment="CENTER" prefHeight="40.0" prefWidth="-1.0">
                   <children>
-                    <Button fx:id="btStart" cancelButton="false" defaultButton="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="-1.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS">
+                    <Button fx:id="btStart" cancelButton="false" defaultButton="false" ellipsisString="..." mnemonicParsing="false" prefHeight="30.0" prefWidth="-1.0" text="Zum Spielfeld" textFill="BLACK" textOverrun="ELLIPSIS">
                       <font>
                         <Font size="18.0" />
                       </font>
@@ -87,7 +87,7 @@
                     </HBox>
                     <HBox prefHeight="-1.0" prefWidth="-1.0" VBox.margin="$x3">
                       <children>
-                        <Label fx:id="lAppKey" font="$x1" prefWidth="92.6796875" text="AppKey" />
+                        <Label fx:id="lAppKey" font="$x1" prefWidth="92.6796875" text="App Key" />
                         <TextField fx:id="tfAppKey" prefHeight="-1.0" prefWidth="297.0" />
                       </children>
                     </HBox>
