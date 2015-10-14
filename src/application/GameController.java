@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.pusher.client.channel.PrivateChannel;
@@ -48,8 +49,12 @@ public class GameController implements Initializable {
 	private GameProperties gameProperties;
 	private Gamefield gamefield;
 	private AgentKI agent;
-	private char player;
+	private char myPlayer;
+	private char opponentPlayer;
 	private String usedInterface;
+	private int currentGameId;
+	private int currentSetNr;
+	private int zugNrCounter;
 	
 	@FXML void loadGame(ActionEvent event) {    	
     	System.out.println("New Game");
@@ -96,7 +101,28 @@ public class GameController implements Initializable {
 				
 				readProperties();
 				usedInterface = gameProperties.getProperty(GameProperties.INTERFACE);				
-				player	      = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
+				myPlayer	  = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
+				if (myPlayer == 'o')
+					opponentPlayer = 'x';
+				else 
+					opponentPlayer = 'o';
+				
+				
+				
+				if (isNewGame()) {
+					currentGameId = databaseManager.addSpiel("spielerO", "spielerX", null, new Date().toString());
+					currentSetNr = 1;
+					try {
+						// addSatz(int spiel_id, int satz_nr, int punktespielero,int punktespielerx, String sieger, String startspieler)
+						// wissen noch nicht wer anfängt
+						databaseManager.addSatz(currentGameId, currentSetNr, 0, 0, "keinGewinner", "spielero");
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					// currentGameId kommt aus dem Ladescreen
+				}
 				
 				if (usedInterface.equals("File")){
 					startFileInterfaceGame();
@@ -115,17 +141,13 @@ public class GameController implements Initializable {
 		});
 	}
 
+	private boolean isNewGame(){
+		if (tfPlayer1_Set_Wins.getText().equals("0") && tfPlayer2_Set_Wins.getText().equals("0"))
+			return true;
+		return false;
+	}
+	
 	private void startPusherInterfaceGame() {
-		/*
-		try {
-			System.out.println("vorm satz hinzufügen");
-			databaseManager.addSatz(0, 0, 0, 0, "");
-			System.out.println("Satz hinzugefügt");
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			
-		}*/
 		
 		String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
 		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
@@ -141,11 +163,11 @@ public class GameController implements Initializable {
 		pusherEventReaderService.setOnSucceeded(e -> {
 			System.out.println("here");
 	    	 if (pusherEventReaderService.getValue().getGegnerzug() != -1){
-					gamefield.insertCoin(gamefieldGrid, pusherEventReaderService.getValue().getGegnerzug(), (player == 'o') ? 'x' : 'o');
+					gamefield.insertCoin(gamefieldGrid, pusherEventReaderService.getValue().getGegnerzug(), (myPlayer == 'o') ? 'x' : 'o');
 	    	  }
 	    	  if (!pusherEventReaderService.getValue().isGameOver()){
 	    		  int move = agent.calculateMove(gamefield);
-	    		  gamefield.insertCoin(gamefieldGrid, move, player);	    		  
+	    		  gamefield.insertCoin(gamefieldGrid, move, myPlayer);	    		  
 	    		  
 	    		  pusher.triggerClientMove(channel, move);
 
@@ -168,17 +190,41 @@ public class GameController implements Initializable {
 	
 	private void startFileInterfaceGame() {			
 		String sharedFolderPath = gameProperties.getProperty(GameProperties.DATEIPFAD);			
-		AgentfileWriter agentfileWriter = new AgentfileWriter(sharedFolderPath, player);
-		
-		
-		ServerfileReaderService serverFileReaderService = new ServerfileReaderService(sharedFolderPath, player);		
+		AgentfileWriter agentfileWriter = new AgentfileWriter(sharedFolderPath, myPlayer);
+		zugNrCounter = 1;
+		ServerfileReaderService serverFileReaderService = new ServerfileReaderService(sharedFolderPath, myPlayer);		
 		serverFileReaderService.setOnSucceeded(e -> {
+			
+				// Gegnerzug
 	    	 if (serverFileReaderService.getValue().getGegnerzug() != -1){
-					gamefield.insertCoin(gamefieldGrid, serverFileReaderService.getValue().getGegnerzug(), (player == 'o') ? 'x' : 'o');
+	    		 	int gegnerZug = serverFileReaderService.getValue().getGegnerzug();
+					gamefield.insertCoin(gamefieldGrid, gegnerZug, opponentPlayer);
+					try {
+						// addZug(int spiel_id, int satz_nr,int zug_nr, int spalte, String spieler)
+						databaseManager.addZug(currentGameId, currentSetNr, zugNrCounter, gegnerZug, "spieler" + String.valueOf(opponentPlayer));
+
+						zugNrCounter++;
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 	    	  }
+	    	 
+	    	 // unser Zug
 	    	  if (!serverFileReaderService.getValue().isGameOver()){
 	    		  int move = agent.calculateMove(gamefield);
-	    		  gamefield.insertCoin(gamefieldGrid, move, player);
+	    		  gamefield.insertCoin(gamefieldGrid, move, myPlayer);
+	    		  try {
+						databaseManager.addZug(currentGameId, currentSetNr, zugNrCounter, move, "spieler" + String.valueOf(myPlayer));
+
+						zugNrCounter++;
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	    		  
+	    		  
+	    		  
 	    		  try {
 					agentfileWriter.writeAgentfile(new Agentfile(move));
 				} catch (Exception e1) {
@@ -189,6 +235,12 @@ public class GameController implements Initializable {
 	    	  else {
 	    		  System.out.println("Spiel vorbei. Der Gewinner ist: " + serverFileReaderService.getValue().getSieger());
 	    		  infostat.setText(serverFileReaderService.getValue().getSieger() + " hat gewonnen!");
+	    		  try {
+					databaseManager.updateSatz(currentGameId, currentSetNr, serverFileReaderService.getValue().getSieger());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	    	  }
 	    }); 	  
 		

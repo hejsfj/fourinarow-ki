@@ -172,6 +172,7 @@ public class DatabaseManager {
 						+ String.valueOf(spalte) 	+"','"
 						+ spieler
 					+"')");
+		System.out.println("zug in db geschrieben");
 	}
 	
 	public ResultSet getSpiele(){
@@ -186,11 +187,11 @@ public class DatabaseManager {
 		return this.query("SELECT * FROM zug WHERE spiel_id = "+SpielID+"AND satz_nr = "+SatzNR);
 	}
 	
-	public void updateSatz(String spielId,  String satzNr, String sieger){
-		this.query("UPDATE saetze "
-					+ "SET sieger = " + sieger + ", "
-					+ "WHERE spiel_id = " + spielId + " "
-							+ "AND "
-						+ "satz_nr = " + satzNr);
+	public void updateSatz(int spielId,  int satzNr, String sieger) throws SQLException{
+		this.execute("UPDATE saetze"
+					+ " SET sieger = " + "'" + sieger + "'"
+					+ " WHERE spiel_id = " + String.valueOf(spielId)
+							+ " AND "
+						+ "satz_nr = " + String.valueOf(satzNr));
 	}
 }
