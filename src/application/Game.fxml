@@ -123,8 +123,8 @@
                             <Font size="16.0" fx:id="x7" />
                           </font>
                         </Text>
-                        <Text font="$x7" layoutX="-2.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler 1" textAlignment="CENTER" wrappingWidth="161.638671875" />
-                        <Text font="$x7" layoutX="231.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler 2" textAlignment="CENTER" wrappingWidth="161.638671875" />
+                        <Text font="$x7" layoutX="-2.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler O" textAlignment="CENTER" wrappingWidth="161.638671875" />
+                        <Text font="$x7" layoutX="231.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler X" textAlignment="CENTER" wrappingWidth="161.638671875" />
                         <Text fx:id="tfPlayer2_Game_Wins" font="$x1" layoutX="299.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
                         <Text fx:id="tfPlayer1_Game_Wins" font="$x1" layoutX="67.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
                         <Text fx:id="tfPlayer2_Set_Wins" font="$x1" layoutX="201.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
