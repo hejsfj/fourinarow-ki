@@ -96,7 +96,7 @@
       <top>
         <VBox prefHeight="130.0" prefWidth="830.0" BorderPane.alignment="CENTER">
           <children>
-            <MenuBar id="MenuBar">
+            <MenuBar fx:id="menuBar" id="MenuBar">
               <menus>
                 <Menu mnemonicParsing="false" text="Datei">
                   <items>
