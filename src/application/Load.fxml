@@ -44,15 +44,7 @@
         </HBox>
       </bottom>
       <center>
-        <TableView disable="false" editable="true" focusTraversable="true" prefHeight="275.0" prefWidth="645.0" tableMenuButtonVisible="false" BorderPane.alignment="CENTER">
-          <columns>
-            <TableColumn prefWidth="138.0" text="Spiel ID" />
-            <TableColumn prefWidth="97.0" text="Satz Nr." />
-            <TableColumn editable="false" prefWidth="190.0" text="Datum" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="120.0" resizable="true" text="Startspieler" />
-            <TableColumn editable="false" maxWidth="5000.0" minWidth="0.0" prefWidth="118.0" resizable="false" sortable="false" text="Sieger" visible="true" />
-          </columns>
-        </TableView>
+        <TableView fx:id="myTable" disable="false" editable="true" focusTraversable="true" prefHeight="275.0" prefWidth="645.0" tableMenuButtonVisible="false" BorderPane.alignment="CENTER" />
       </center>
       <left>
         <VBox prefHeight="260.0" prefWidth="83.0" BorderPane.alignment="CENTER" />
