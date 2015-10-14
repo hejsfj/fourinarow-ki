@@ -2,7 +2,6 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,17 +9,16 @@ import java.sql.Statement;
 import database.DatabaseStructure;
 
 public class DatabaseManager {
-	
-	Connection connection = null;
-
+	private Connection connection = null;
 	
 	public DatabaseManager(){
-		databaseConnect();
+		connectToDatabase();
 		System.out.println("database connected");
 		try {
 			System.out.println("trying to initialize database");
 			initializeDatabase();
 			System.out.println("database initialized");
+			
 			//int id = addSpiel("spielerO", "spielerX", null, "25.07.1990");
 			//int id1 = addSpiel("spielerO", "spielerX", null, "25.07.1991");
 			//addSatz(1, 1, 2, 0, "spielerO", "spielerO");
@@ -29,15 +27,10 @@ public class DatabaseManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-	
-		//insert
-		//load
 	}
 	
-	public void databaseConnect(){
+	public void connectToDatabase(){
 		try { 
-	     
 	      Class.forName( "org.hsqldb.jdbcDriver" ); 
 	    } catch ( ClassNotFoundException e ) { 
 	      System.err.println( "Treiberklasse nicht gefunden" ); 
@@ -45,12 +38,10 @@ public class DatabaseManager {
 	    } 
 	  	  
 	    try{ 
-	      connection = DriverManager.getConnection(DatabaseStructure.PATH, DatabaseStructure.USER, DatabaseStructure.PASSWORD); 
-	      
+	      connection = DriverManager.getConnection(DatabaseStructure.PATH, DatabaseStructure.USER, DatabaseStructure.PASSWORD);
 	    } catch ( SQLException e ) { 
 	      e.printStackTrace(); 
 	    } 
-
 	}
 	
 	public void initializeDatabase() throws SQLException{
@@ -58,140 +49,126 @@ public class DatabaseManager {
 		execute(DatabaseStructure.CREATE_TABLE_SAETZE);
 		execute(DatabaseStructure.CREATE_TABLE_ZUEGE);
 	}
-	
-	public synchronized void execute(String expression) throws SQLException {
 
+    public int addGame(String playerO, String playerX, String winner, String date) throws SQLException {
+		  Statement statement = connection.createStatement(); 
+		  
+		  String sqlQuery =   "INSERT INTO spiele ("
+							+ 	"spielero, "
+							+ 	"spielerx, "
+							+ 	"sieger, "
+							+ 	"datum)"
+							+ "VALUES('"
+							+ 	playerO 	+ "','"
+							+ 	playerX 	+ "','"
+							+ 	winner 	+ "','"
+							+ 	date 
+							+	"');"
+							+ "CALL IDENTITY();"; //Call Identity() liefert die zuletzt generierte Identity (gameId) zurück
+			
+		  ResultSet resultSet = statement.executeQuery(sqlQuery);  
+		  resultSet.next();
+		  int id = resultSet.getInt(1);
+		  
+		  System.out.println("Spiel created with ID " + id);
+	      resultSet.close(); 
+	      statement.close(); 
+	      connection.commit();
+	      return id;
+	}
+    
+	public void addSet(int gameId, int setNr, int pointsPlayerO,int pointsPlayerX, String winner, String starter) throws SQLException{
+		execute(  "INSERT INTO saetze ("
+				+	 "spiel_id, "
+				+	 "satz_nr, "
+				+	 "punktespielero, "
+				+	 "punktespielerx, "
+				+	 "sieger, "
+				+	 "startspieler)"
+				+ "VALUES('"
+				+ 	String.valueOf(gameId) 			+ "','"
+				+ 	String.valueOf(setNr) 			+ "','"
+				+ 	String.valueOf(pointsPlayerO) 	+ "','"
+				+ 	String.valueOf(pointsPlayerX) 	+ "','"
+				+ 	winner						 	+ "','"
+				+ 	starter 
+				+ "')");
+	}
+	
+	public void addMove(int gameId, int setNr, int column, String player) throws SQLException{
+		execute(  "INSERT INTO zuege("
+				+	 "spiel_id, "
+				+	 "satz_nr, "
+				+	 "spalte, "
+				+	 "spieler) "
+				+ "VALUES('"
+				+ 	String.valueOf(gameId) 	+"','"
+				+ 	String.valueOf(setNr) 	+"','"
+				+ 	String.valueOf(column) 	+"','"
+				+ 	player
+				+ "')");
+	}
+	
+	public ResultSet getAllGames() throws SQLException {
+		final String sqlQuery =   "SELECT * "
+								+ "FROM spiele";
+		return query(sqlQuery);		
+	}
+
+	public ResultSet getAllSetsForGameId(String gameId) throws SQLException {
+		final String sqlQuery =   "SELECT * "
+								+ "FROM saetze "
+								+ "WHERE "
+								+	 "spiel_id = " + gameId;
+		return query(sqlQuery);		
+	}
+	
+	public ResultSet getAllSets() throws SQLException {
+		 final String sqlQuery =  "SELECT "
+			     				+	"spiel_id, "
+			     				+ 	"satz_nr, "
+			     				+ 	"sieger, "
+			     				+ 	"startspieler "
+			     				+ "FROM saetze";
+		
+		return query(sqlQuery);
+	}
+	public ResultSet getMovesForSet(int gameId, int setNr) throws SQLException {
+		final String sqlQuery =   "SELECT *"
+								+ "FROM zug"
+								+ "WHERE "
+								+ 	"spiel_id = " + String.valueOf(gameId)
+								+ 		"AND "
+								+ 	"satz_nr = " + String.valueOf(setNr);
+		return query(sqlQuery);
+	}
+	
+	public void updateSet(int gameId,  int setNr, String winner) throws SQLException{
+		final String sqlQuery =   "UPDATE saetze "
+								+ 	"SET sieger = " + "'" + winner + "' "
+								+ "WHERE "
+								+ 	"spiel_id = " + String.valueOf(gameId)
+								+ 	" AND "
+								+ 	"satz_nr = " + String.valueOf(setNr);
+		execute(sqlQuery);
+	}
+	private synchronized void execute(String expression) throws SQLException {
          Statement statement = null;
          statement = connection.createStatement();
 
-         int i = statement.executeUpdate(expression);
-
-         if (i == -1) {
-             System.out.println("database experssion error : " + expression);
-         }
-
+         statement.executeUpdate(expression);
+         
          statement.close();
     }  
 	
-    public synchronized ResultSet query(String expression) {
-
+    private synchronized ResultSet query(String sqlQuery) throws SQLException {
         Statement statement = null;
-        ResultSet resultset = null;
-        try {
-            statement = connection.createStatement();         
-            resultset = statement.executeQuery(expression);    
-            statement.close();  
-            
-        } catch (Exception e) {
-			System.out.println("Something went wrong executing query");
-        }
+        ResultSet resultSet = null;
         
-        return resultset;
+        statement = connection.createStatement();         
+        resultSet = statement.executeQuery(sqlQuery);    
+        statement.close();              
+        
+        return resultSet;
     }
-
-
-//	public int addSpiel(String spielerO, String spielerX, String sieger, String datum) throws SQLException {
-//			this.execute("INSERT INTO spiel ("
-//							+ "spielero, "
-//							+ "spielerx, "
-//							+ "sieger, "
-//							+ "datum)"
-//						+ "VALUES('"
-//							+ spielerO 	+ "','"
-//							+ spielerX 	+ "','"
-//							+ sieger 	+ "','"
-//							+ datum 
-//						+"')");	 
-//			
-//			int id = returnID();
-//			return id;
-//			
-//	}
-    
-    public int addSpiel(String spielerO, String spielerX, String sieger, String datum){
-		try {
-			  Statement statement = connection.createStatement(); 
-			  String sql = "INSERT INTO spiele ("
-						+ "spielero, "
-						+ "spielerx, "
-						+ "sieger, "
-						+ "datum)"
-					+ "VALUES('"
-						+ spielerO 	+ "','"
-						+ spielerX 	+ "','"
-						+ sieger 	+ "','"
-						+ datum 
-					+"');"
-					+ "CALL IDENTITY();";
-					
-			  ResultSet rs = statement.executeQuery(sql);  
-			  rs.next();
-			  int id = rs.getInt(1);
-			  System.out.println("ID: "+id);
-		      rs.close(); 
-		      statement.close(); 
-		      connection.commit();
-		      return id;
-			}catch(SQLException e){
-				e.printStackTrace();
-				return -1;
-			}
-	}
-	
-	  
-
-	public void addSatz(int spiel_id, int satz_nr, int punktespielero,int punktespielerx, String sieger, String startspieler) throws SQLException{
-		this.execute("INSERT INTO saetze ("
-						+ "spiel_id, "
-						+ "satz_nr, "
-						+ "punktespielero, "
-						+ "punktespielerx, "
-						+ "sieger, "
-						+ "startspieler)"
-					+ "VALUES('"
-						+ String.valueOf(spiel_id) 			+ "','"
-						+ String.valueOf(satz_nr) 			+ "','"
-						+ String.valueOf(punktespielero) 	+ "','"
-						+ String.valueOf(punktespielerx) 	+ "','"
-						+ sieger						 	+ "','"
-						+ startspieler 
-					+ "')");
-	}
-	
-	public void addZug(int spiel_id, int satz_nr,int zug_nr, int spalte, String spieler) throws SQLException{
-		this.execute("INSERT INTO zuege("
-						+ "spiel_id, "
-						+ "satz_nr, "
-						+ "zug_nr, "
-						+ "spalte, "
-						+ "spieler) "
-					+ "VALUES('"
-						+ String.valueOf(spiel_id) 	+"','"
-						+ String.valueOf(satz_nr) 	+"','"
-						+ String.valueOf(zug_nr) 	+"','"
-						+ String.valueOf(spalte) 	+"','"
-						+ spieler
-					+"')");
-		System.out.println("zug in db geschrieben");
-	}
-	
-	public ResultSet getSpiele(){
-		return this.query("SELECT * FROM spiele");		
-	}
-
-	public ResultSet getSaetze(String SpielID){
-		return this.query("SELECT * FROM satz WHERE spiel_id = "+SpielID);		
-	}
-	
-	public ResultSet getZuege(String SpielID, String SatzNR){
-		return this.query("SELECT * FROM zug WHERE spiel_id = "+SpielID+"AND satz_nr = "+SatzNR);
-	}
-	
-	public void updateSatz(int spielId,  int satzNr, String sieger) throws SQLException{
-		this.execute("UPDATE saetze"
-					+ " SET sieger = " + "'" + sieger + "'"
-					+ " WHERE spiel_id = " + String.valueOf(spielId)
-							+ " AND "
-						+ "satz_nr = " + String.valueOf(satzNr));
-	}
 }
