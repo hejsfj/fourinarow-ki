@@ -186,7 +186,11 @@ public class DatabaseManager {
 		return this.query("SELECT * FROM zug WHERE spiel_id = "+SpielID+"AND satz_nr = "+SatzNR);
 	}
 	
-	public void updateSpiel(String sieger, String id){
-		this.query("UPDATE spiel SET sieger = "+sieger+", WHERE ID = "+id);
+	public void updateSatz(String spielId,  String satzNr, String sieger){
+		this.query("UPDATE saetze "
+					+ "SET sieger = " + sieger + ", "
+					+ "WHERE spiel_id = " + spielId + " "
+							+ "AND "
+						+ "satz_nr = " + satzNr);
 	}
 }
