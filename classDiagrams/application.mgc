@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ClassDiagram>
-    <Class name="application.Main" x="148" y="311">
+    <Class name="application.Main" x="131" y="125">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -18,7 +18,7 @@
             default-accepted="false" static-accepted="false"
             accessors-accepted="false" constructors-accepted="false"/>
     </Class>
-    <Class name="application.SettingsController" x="329" y="297">
+    <Class name="application.SettingsController" x="462" y="377">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -29,7 +29,7 @@
         <Association destinationClassName="application.GameProperties"
             endpointName="gameProperties" kind="Simple"/>
     </Class>
-    <Class name="application.GameController" x="51" y="114">
+    <Class name="application.GameController" x="70" y="446">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
@@ -40,7 +40,7 @@
         <Association destinationClassName="application.GameProperties"
             endpointName="gameProperties" kind="Simple"/>
     </Class>
-    <Class name="application.GameProperties" x="386" y="163">
+    <Class name="application.GameProperties" x="391" y="171">
         <AttributesDisplayFilter public-accepted="true"
             private-accepted="true" protected-accepted="true"
             default-accepted="true" static-accepted="false"/>
