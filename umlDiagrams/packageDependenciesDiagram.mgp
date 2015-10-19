@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PackageAnalysis>
+    <Package name="agentKI" x="150" y="159">
+        <DependencyLink destination="gamefield"/>
+    </Package>
+    <Package name="application" x="296" y="48">
+        <DependencyLink destination="agentKI"/>
+        <DependencyLink destination="gamefield"/>
+        <DependencyLink destination="database"/>
+        <DependencyLink destination="fileInterface"/>
+        <DependencyLink destination="pusherInterface"/>
+    </Package>
+    <Package name="database" x="465" y="47"/>
+    <Package name="fileInterface" x="458" y="154"/>
+    <Package name="gamefield" x="141" y="47"/>
+    <Package name="pusherInterface" x="282" y="154">
+        <DependencyLink destination="utils"/>
+    </Package>
+    <Package name="utils" x="320" y="219"/>
+</PackageAnalysis>

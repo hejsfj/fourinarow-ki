@@ -61,6 +61,10 @@ public class GameController implements Initializable {
 	private int currentSetNr;
 	private int zugNrCounter;
 	
+	/**
+	 * 
+	 * @param event {@link javafx.event.ActionEvent}
+	 */
 	@FXML void loadGame(ActionEvent event) {    	
     	System.out.println("Load Game");
 		Stage stage;
@@ -77,6 +81,10 @@ public class GameController implements Initializable {
 		}
     }
 
+	/**
+	 * startet ein neues Spiel
+	 * @param event {@link javafx.event.ActionEvent}
+	 */
     @FXML void newGame(ActionEvent event) {
     	System.out.println("New Game");
 		Stage stage;
@@ -92,6 +100,8 @@ public class GameController implements Initializable {
 			e.printStackTrace();
 		}
     }
+    
+    
     
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {		
@@ -135,6 +145,9 @@ public class GameController implements Initializable {
 		});
 	}
 	
+	/**
+	 * initialisiert notwendige Komponenten für den Spielagenten
+	 */
 	private void initRequiredComponents() {
 		gameProperties = new GameProperties();
 		gamefield = new Gamefield();
@@ -142,6 +155,10 @@ public class GameController implements Initializable {
 		databaseManager = new DatabaseManager();
 	}
 	
+	/**
+	 * startet Pusher-Interface.
+	 * dient der Eingabe der Credentials.
+	 */
 	private void startPusherInterfaceGame() {
 		String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
 		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
