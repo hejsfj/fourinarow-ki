@@ -67,6 +67,10 @@ public class GameController implements Initializable {
 	private int currentGameId;
 	private int currentSetNr;
 	private int zugNrCounter;
+	private int ourPoints = 0;
+	private int opponentPoints = 0;
+	private String winnerGame = "Kein Gewinner";
+	private String winnerSet = "Kein Gewinner";
 	
 	@FXML void loadGame(ActionEvent event) {    	
     	System.out.println("Load Game");
@@ -266,7 +270,7 @@ public class GameController implements Initializable {
 	private int addNewGameToDb(){
 		int newGameId = -1;
 		try {
-			newGameId = databaseManager.addGame("spielerO", "spielerX", null, new Date().toString());
+			newGameId = databaseManager.addGame(myPlayer, opponentPlayer, ourPoints, opponentPoints, winnerGame, new Date().toString());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
@@ -275,7 +279,7 @@ public class GameController implements Initializable {
 	
 	private void addNewSetToGameInDb(int gameId, int setNr){
 		try {
-			databaseManager.addSet(gameId, setNr, 0, 0, "", "startspieler");
+			databaseManager.addSet(gameId, setNr, winnerSet, "startspieler");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	

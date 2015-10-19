@@ -59,7 +59,7 @@ public class DatabaseManager {
 		execute(DatabaseStructure.CREATE_TABLE_ZUEGE);
 	}
 
-    public int addGame(String ourPlayer, String opponentPlayer, int ourPoints, int opponentPoints, String winner, String date) throws SQLException {
+    public int addGame(char ourPlayer, char opponentPlayer, int ourPoints, int opponentPoints, String winner, String date) throws SQLException {
 		  Statement statement = connection.createStatement(); 
 		  
 		  String sqlQuery =   "INSERT INTO spiele ("
