@@ -5,17 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
-
 import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.pusher.client.channel.PrivateChannel;
-
-
-import javafx.animation.FadeTransition;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-
 
 import agentKI.AgentKI;
 import database.DatabaseManager;
@@ -23,6 +16,8 @@ import fileInterface.Agentfile;
 import fileInterface.AgentfileWriter;
 import fileInterface.ServerfileReaderService;
 import gamefield.Gamefield;
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -33,11 +28,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import pusherInterface.PusherConnector;
 import pusherInterface.PusherEventReaderService;
 
@@ -74,15 +70,9 @@ public class GameController implements Initializable {
 	
 	@FXML void loadGame(ActionEvent event) {    	
     	System.out.println("Load Game");
-		Stage stage;
-		stage = (Stage) startButton.getScene().getWindow();
-		AnchorPane page;
 		
 		try {
-			page = (AnchorPane) FXMLLoader.load(getClass().getResource("Load.fxml"));
-			Scene scene = new Scene(page);
-			stage.setScene(scene);
-			stage.show();
+			showLoadScreen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -90,15 +80,9 @@ public class GameController implements Initializable {
 
     @FXML void newGame(ActionEvent event) {
     	System.out.println("New Game");
-		Stage stage;
-		stage = (Stage) startButton.getScene().getWindow();
-		AnchorPane page;
 		
 		try {
-			page = (AnchorPane) FXMLLoader.load(getClass().getResource("Settings.fxml"));
-			Scene scene = new Scene(page);
-			stage.setScene(scene);
-			stage.show();
+			showSettingsScreen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -149,6 +133,26 @@ public class GameController implements Initializable {
 			}
 		});
 	}
+	
+	private Stage showSettingsScreen() throws IOException {
+    	Stage stage = (Stage) startButton.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+	
+	  	stage.setScene(new Scene((Pane) loader.load()));
+	
+	  	stage.show();
+	  	return stage;
+    }
+	
+    private Stage showLoadScreen() throws IOException {
+    	Stage stage = (Stage) startButton.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Load.fxml"));
+	
+	  	stage.setScene(new Scene((Pane) loader.load()));
+	
+	  	stage.show();
+	  	return stage;
+    }
 	
 	private void initRequiredComponents() {
 		gameProperties = new GameProperties();
