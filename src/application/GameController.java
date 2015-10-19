@@ -25,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -34,7 +35,9 @@ import pusherInterface.PusherEventReaderService;
 
 public class GameController implements Initializable {
 	
-	@FXML private MenuBar menuBar;	
+	@FXML private MenuBar menuBar;
+	@FXML private MenuItem LoadGame;
+	@FXML private MenuItem NewGame;
     @FXML private Button newButton; // Value injected by FXMLLoader    
     @FXML private Button statsButton; // Value injected by FXMLLoader    
 	@FXML private Button startButton; // Value injected by FXMLLoader   
@@ -59,7 +62,7 @@ public class GameController implements Initializable {
 	private int zugNrCounter;
 	
 	@FXML void loadGame(ActionEvent event) {    	
-    	System.out.println("New Game");
+    	System.out.println("Load Game");
 		Stage stage;
 		stage = (Stage) startButton.getScene().getWindow();
 		AnchorPane page;
