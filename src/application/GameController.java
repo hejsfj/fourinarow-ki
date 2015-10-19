@@ -279,7 +279,7 @@ public class GameController implements Initializable {
 	
 	private void animateCurrentPlayer(Circle circle){
 		
-			FadeTransition fade = new FadeTransition(Duration.seconds(1), circle);
+			FadeTransition fade = new FadeTransition(Duration.millis(500), circle);
             fade.setFromValue(1);
             fade.setToValue(0);
             fade.setAutoReverse(true);
