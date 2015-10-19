@@ -2,7 +2,6 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
@@ -11,7 +10,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,10 +21,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
-import javafx.util.Callback;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class LoadController implements Initializable {
     @FXML private Button loadButton; // Value injected by FXMLLoader    
@@ -35,31 +33,17 @@ public class LoadController implements Initializable {
     @FXML private Label infostat;
     @FXML private TableView myTable;
   
-	@FXML void loadGame(ActionEvent event) {		
-		Stage stage;
-		stage = (Stage) saveButton.getScene().getWindow();
-		AnchorPane page;
-	
+	@FXML void loadGame(ActionEvent event) {
 		try {
-			page = (AnchorPane) FXMLLoader.load(getClass().getResource("Load.fxml"));
-			Scene scene = new Scene(page);
-			stage.setScene(scene);
-			stage.show();
+			showLoadScreen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     }
 
-    @FXML void newGame(ActionEvent event) {
-		Stage stage;
-		stage = (Stage) saveButton.getScene().getWindow();
-		AnchorPane page;
-		
+    @FXML void newGame(ActionEvent event) {		
 		try {
-			page = (AnchorPane) FXMLLoader.load(getClass().getResource("Settings.fxml"));
-			Scene scene = new Scene(page);
-			stage.setScene(scene);
-			stage.show();
+			showSettingsScreen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -96,7 +80,27 @@ public class LoadController implements Initializable {
             }            
         });       
     } 
-
+    
+    private Stage showLoadScreen() throws IOException {
+    	Stage stage = (Stage) saveButton.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Load.fxml"));
+	
+	  	stage.setScene(new Scene((Pane) loader.load()));
+	
+	  	stage.show();
+	  	return stage;
+    }
+    
+    private Stage showSettingsScreen() throws IOException {
+    	Stage stage = (Stage) saveButton.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+	
+	  	stage.setScene(new Scene((Pane) loader.load()));
+	
+	  	stage.show();
+	  	return stage;
+    }
+    
     private void fillTableViewWithDbData(){
     	DatabaseManager databaseManager = DatabaseManager.getInstance();
 		ObservableList<ObservableList> data;

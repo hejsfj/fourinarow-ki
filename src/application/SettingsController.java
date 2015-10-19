@@ -16,7 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -57,14 +57,8 @@ public class SettingsController implements Initializable {
 	private int zugZeit;
 	
     @FXML void loadGame(ActionEvent event) {    
-		Stage stage;
-		stage = (Stage) btStart.getScene().getWindow();
-		AnchorPane page;		
 		try {
-				page = (AnchorPane) FXMLLoader.load(getClass().getResource("Load.fxml"));
-				Scene scene = new Scene(page);
-				stage.setScene(scene);
-				stage.show();
+				showLoadScreen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -131,16 +125,9 @@ public class SettingsController implements Initializable {
 				return;
 			}
 			saveUserInputToPropertiesFile();
-			// get reference to the button's stage
-			Stage stage = (Stage) btStart.getScene().getWindow();
-			// load up OTHER FXML document
-			AnchorPane page;
+			
 			try {
-				page = (AnchorPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
-				// create a new scene with root and set the stage
-				Scene scene = new Scene(page);
-				stage.setScene(scene);
-				stage.show();
+				showGameScreen();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -182,6 +169,26 @@ public class SettingsController implements Initializable {
 			}
 		});
 	}
+	
+	private Stage showGameScreen() throws IOException {
+    	Stage stage = (Stage) btStart.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Game.fxml"));
+	
+	  	stage.setScene(new Scene((Pane) loader.load()));
+	
+	  	stage.show();
+	  	return stage;
+    }
+	
+    private Stage showLoadScreen() throws IOException {
+    	Stage stage = (Stage) btStart.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Load.fxml"));
+	
+	  	stage.setScene(new Scene((Pane) loader.load()));
+	
+	  	stage.show();
+	  	return stage;
+    }
 
 	private boolean areAllRequiredFieldsFilledCorrectly() {
 		if (!isPlayerSelected()){
