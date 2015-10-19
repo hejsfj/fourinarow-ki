@@ -59,17 +59,21 @@ public class DatabaseManager {
 		execute(DatabaseStructure.CREATE_TABLE_ZUEGE);
 	}
 
-    public int addGame(String playerO, String playerX, String winner, String date) throws SQLException {
+    public int addGame(String ourPlayer, String opponentPlayer, int ourPoints, int opponentPoints, String winner, String date) throws SQLException {
 		  Statement statement = connection.createStatement(); 
 		  
 		  String sqlQuery =   "INSERT INTO spiele ("
-							+ 	"spielero, "
-							+ 	"spielerx, "
+							+ 	"ourplayer, "
+							+ 	"opponentplayer, "
+							+ 	"ourpoints, "
+							+ 	"opponentpoints, "
 							+ 	"sieger, "
 							+ 	"datum)"
 							+ "VALUES('"
-							+ 	playerO 	+ "','"
-							+ 	playerX 	+ "','"
+							+ 	ourPlayer 	+ "','"
+							+ 	opponentPlayer 	+ "','"
+							+ 	ourPoints 	+ "','"
+							+ 	opponentPoints 	+ "','"
 							+ 	winner 	+ "','"
 							+ 	date 
 							+	"');"
@@ -86,19 +90,15 @@ public class DatabaseManager {
 	      return id;
 	}
     
-	public void addSet(int gameId, int setNr, int pointsPlayerO,int pointsPlayerX, String winner, String starter) throws SQLException{
+	public void addSet(int gameId, int setNr, String winner, String starter) throws SQLException{
 		execute(  "INSERT INTO saetze ("
 				+	 "spiel_id, "
 				+	 "satz_nr, "
-				+	 "punktespielero, "
-				+	 "punktespielerx, "
 				+	 "sieger, "
 				+	 "startspieler)"
 				+ "VALUES('"
 				+ 	String.valueOf(gameId) 			+ "','"
 				+ 	String.valueOf(setNr) 			+ "','"
-				+ 	String.valueOf(pointsPlayerO) 	+ "','"
-				+ 	String.valueOf(pointsPlayerX) 	+ "','"
 				+ 	winner						 	+ "','"
 				+ 	starter 
 				+ "')");
