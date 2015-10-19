@@ -74,7 +74,7 @@
           <children>
             <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
               <children>
-                <Circle fill="#fff500" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                <Circle fx:id="circlePlayerO" fill="#fff500" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler O" textOrigin="CENTER">
                   <font>
                     <Font size="24.0" fx:id="x4" />
@@ -88,7 +88,7 @@
       <right>
         <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
           <children>
-            <Circle fill="#ff3d00" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fx:id="circlePlayerX" fill="#ff3d00" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Text font="$x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler X" textOrigin="CENTER" />
           </children>
         </VBox>

@@ -5,10 +5,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
+
 import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.pusher.client.channel.PrivateChannel;
+
+
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 
 import agentKI.AgentKI;
 import database.DatabaseManager;
@@ -28,6 +35,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pusherInterface.PusherConnector;
@@ -47,6 +55,9 @@ public class GameController implements Initializable {
     @FXML private Text tfPlayer1_Set_Wins;
     @FXML private Text tfPlayer2_Set_Wins;
 	
+    @FXML private Circle circlePlayerO;
+    @FXML private Circle circlePlayerX;
+    
 	@FXML private Label infostat;
 	@FXML private GridPane gamefieldGrid;
 	
@@ -97,7 +108,9 @@ public class GameController implements Initializable {
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {		
 		assert startButton != null : "fx:id=\"startButton\" was not injected: check your FXML file";
 		assert menuBar != null : "fx:id=\"menuBar\" was not injected: check your FXML file";
-
+		assert circlePlayerO != null : "fx:id=\"circlePlayerO\" was not injected: check your FXML file 'Game.fxml'.";
+	    assert circlePlayerX != null : "fx:id=\"circlePlayerX\" was not injected: check your FXML file 'Game.fxml'.";
+	       
 		initRequiredComponents();
 
 		readPropertiesFromFileSystem();
@@ -106,8 +119,10 @@ public class GameController implements Initializable {
 
 		if (myPlayer == 'o') {
 			opponentPlayer = 'x';
+			animateCurrentPlayer(circlePlayerO);
 		} else { 
 			opponentPlayer = 'o';
+			animateCurrentPlayer(circlePlayerX);
 		}
 		
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -139,7 +154,7 @@ public class GameController implements Initializable {
 		gameProperties = new GameProperties();
 		gamefield = new Gamefield();
 		agent = new AgentKI();
-		databaseManager = new DatabaseManager();
+		databaseManager = DatabaseManager.getInstance();
 	}
 	
 	private void startPusherInterfaceGame() {
@@ -261,6 +276,18 @@ public class GameController implements Initializable {
 			e.printStackTrace();
 		}	
 	}
+	
+	private void animateCurrentPlayer(Circle circle){
+		
+			FadeTransition fade = new FadeTransition(Duration.seconds(1), circle);
+            fade.setFromValue(1);
+            fade.setToValue(0);
+            fade.setAutoReverse(true);
+            fade.setCycleCount(Timeline.INDEFINITE);
+            fade.play();
+		
+	}
+	
 	
 	private void readPropertiesFromFileSystem() {
 		InputStream input = null;
