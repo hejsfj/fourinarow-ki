@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.GameController">
+<AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GameController">
   <children>
     <BorderPane prefHeight="553.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
@@ -96,12 +96,12 @@
       <top>
         <VBox prefHeight="130.0" prefWidth="830.0" BorderPane.alignment="CENTER">
           <children>
-            <MenuBar fx:id="menuBar" id="MenuBar">
+            <MenuBar id="MenuBar" fx:id="menuBar">
               <menus>
                 <Menu mnemonicParsing="false" text="Datei">
                   <items>
                     <MenuItem disable="false" mnemonicParsing="false" onAction="#newGame" text="Neues Spiel" />
-                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Spiel laden" />
+                    <MenuItem fx:id="LoadGame" disable="false" mnemonicParsing="false" onAction="#loadGame" text="Spiel laden" />
                   </items>
                 </Menu>
               </menus>

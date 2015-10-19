@@ -78,21 +78,21 @@ public class LoadController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 infostat.setText("Die Daten werden geladen.");                           
-/*               
+               
                    //get reference to the button's stage   
                    Stage stage =(Stage)saveButton.getScene().getWindow();
                    //load up OTHER FXML document
                    
                 	AnchorPane page;
 					try {
-						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
+						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Settings.fxml"));
 						//create a new scene with root and set the stage
 		                 Scene scene = new Scene(page);
 		                 stage.setScene(scene);
 		                 stage.show();					
 					} catch (IOException e) {
 						e.printStackTrace();
-					} */                 
+					}                 
             }            
         });       
     } 
