@@ -11,7 +11,16 @@ import database.DatabaseStructure;
 public class DatabaseManager {
 	private Connection connection = null;
 	
-	public DatabaseManager(){
+	private static DatabaseManager dbManagerInstance = null;
+
+	public static DatabaseManager getInstance() {
+		if(dbManagerInstance == null) {
+			dbManagerInstance = new DatabaseManager();
+		}
+		return dbManagerInstance;
+	}
+	
+	protected DatabaseManager(){
 		connectToDatabase();
 		System.out.println("database connected");
 		try {

@@ -98,7 +98,7 @@ public class LoadController implements Initializable {
     } 
 
     private void fillTableViewWithDbData(){
-    	DatabaseManager databaseManager = new DatabaseManager();
+    	DatabaseManager databaseManager = DatabaseManager.getInstance();
 		ObservableList<ObservableList> data;
         data = FXCollections.observableArrayList();
 
