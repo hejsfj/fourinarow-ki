@@ -74,7 +74,7 @@
           <children>
             <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
               <children>
-                <Circle fill="#fff500" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                <Circle fx:id="circlePlayerO" fill="#fff500" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler O" textOrigin="CENTER">
                   <font>
                     <Font size="24.0" fx:id="x4" />
@@ -88,7 +88,7 @@
       <right>
         <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
           <children>
-            <Circle fill="#ff3d00" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fx:id="circlePlayerX" fill="#ff3d00" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Text font="$x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler X" textOrigin="CENTER" />
           </children>
         </VBox>
@@ -98,17 +98,17 @@
           <children>
             <MenuBar id="MenuBar" fx:id="menuBar">
               <menus>
-                <Menu mnemonicParsing="false" text="Datei">
+                <Menu fx:id="menuDatei" mnemonicParsing="false" text="Datei">
                   <items>
                     <MenuItem disable="false" mnemonicParsing="false" onAction="#newGame" text="Neues Spiel" />
-                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Spiel laden" fx:id="LoadGame" />
+                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Spiel laden" fx:id="menuItem_LoadGame" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Spiel">
+                <Menu fx:id="menuSpiel" mnemonicParsing="false" text="Satz">
                   <items>
-                    <MenuItem disable="false" mnemonicParsing="false" onAction="#newGame" text="Spiel gewonnen" />
-                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Spiel verloren" />
-                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Spiel beenden" />
+                    <MenuItem fx:id="menuItem_PlayerOWinsCurrentSet" disable="true" mnemonicParsing="false" onAction="#updateWinnerOfCurrentSet" text="Spieler O gewinnt" />
+                    <MenuItem fx:id="menuItem_PlayerXWinsCurrentSet" disable="true" mnemonicParsing="false" onAction="#updateWinnerOfCurrentSet" text="Spieler X gewinnt" />
+                    <MenuItem fx:id="menuItem_StopCurrentSet" disable="true" mnemonicParsing="false" onAction="#stopCurrentSet" text="Satz beenden" />
                   </items>
                 </Menu>
               </menus>
@@ -130,10 +130,10 @@
                             <Font size="16.0" fx:id="x7" />
                           </font>
                         </Text>
-                        <Text font="$x7" layoutX="-2.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler O" textAlignment="CENTER" wrappingWidth="161.638671875" />
-                        <Text font="$x7" layoutX="231.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Siege Spieler X" textAlignment="CENTER" wrappingWidth="161.638671875" />
-                        <Text fx:id="tfPlayer2_Game_Wins" font="$x1" layoutX="299.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
-                        <Text fx:id="tfPlayer1_Game_Wins" font="$x1" layoutX="67.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
+                        <Text font="$x7" layoutX="-2.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Punkte Spieler O" textAlignment="CENTER" wrappingWidth="161.638671875" />
+                        <Text font="$x7" layoutX="231.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Punkte Spieler X" textAlignment="CENTER" wrappingWidth="161.638671875" />
+                        <Text fx:id="tfPlayer2_Points" font="$x1" layoutX="299.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
+                        <Text fx:id="tfPlayer1_Points" font="$x1" layoutX="67.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
                         <Text fx:id="tfPlayer2_Set_Wins" font="$x1" layoutX="201.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
                         <Text fx:id="tfPlayer1_Set_Wins" font="$x1" layoutX="165.0" layoutY="45.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" textOrigin="CENTER" underline="false" />
                       </children>

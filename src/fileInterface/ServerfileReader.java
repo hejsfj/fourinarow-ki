@@ -30,7 +30,7 @@ public class ServerfileReader {
 				Thread.sleep(300);
 				System.out.println("wartet auf XML von Server");
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Thread.currentThread().interrupt();
 			}
 		}
 		System.out.println("XML empfangen. Verarbeite XML");

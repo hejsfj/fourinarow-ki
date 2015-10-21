@@ -2,16 +2,16 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import database.DatabaseManager;
+import database.DatabaseSetRecord;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,43 +23,25 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
-import javafx.util.Callback;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class LoadController implements Initializable {
     @FXML private Button loadButton; // Value injected by FXMLLoader    
     @FXML private Button saveButton; // Value injected by FXMLLoader    
     @FXML private Button newButton; // Value injected by FXMLLoader    
     @FXML private Label infostat;
-    @FXML private TableView myTable;
+    @FXML private TableView<DatabaseSetRecord> myTable;
   
-	@FXML void loadGame(ActionEvent event) {		
-		Stage stage;
-		stage = (Stage) saveButton.getScene().getWindow();
-		AnchorPane page;
-	
-		try {
-			page = (AnchorPane) FXMLLoader.load(getClass().getResource("Load.fxml"));
-			Scene scene = new Scene(page);
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	@FXML void loadGame(ActionEvent event) {
+		// disabled
     }
 
-    @FXML void newGame(ActionEvent event) {
-		Stage stage;
-		stage = (Stage) saveButton.getScene().getWindow();
-		AnchorPane page;
-		
+    @FXML void newGame(ActionEvent event) {		
 		try {
-			page = (AnchorPane) FXMLLoader.load(getClass().getResource("Settings.fxml"));
-			Scene scene = new Scene(page);
-			stage.setScene(scene);
-			stage.show();
+	    	System.out.println("Switching to Settings Screen");
+			showSettingsScreen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -77,64 +59,90 @@ public class LoadController implements Initializable {
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                infostat.setText("Die Daten werden geladen.");                           
-               
-                   //get reference to the button's stage   
-                   Stage stage =(Stage)saveButton.getScene().getWindow();
-                   //load up OTHER FXML document
-                   
-                	AnchorPane page;
-					try {
-						page = (AnchorPane) FXMLLoader.load(getClass().getResource("Settings.fxml"));
-						//create a new scene with root and set the stage
-		                 Scene scene = new Scene(page);
-		                 stage.setScene(scene);
-		                 stage.show();					
-					} catch (IOException e) {
-						e.printStackTrace();
-					}                 
+                infostat.setText("Die Daten werden geladen.");    
+                try {
+                    DatabaseSetRecord selectedSet = myTable.getSelectionModel().getSelectedItem();
+                	System.out.println("Switching to Settings Screen");
+        			showSettingsScreen(selectedSet);
+        		} catch (IOException e) {
+        			e.printStackTrace();
+        		}
             }            
         });       
     } 
+    
+    private Stage showSettingsScreen() throws IOException {
+    	Stage stage = (Stage) saveButton.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+	
+	  	stage.setScene(new Scene((Pane) loader.load()));
+	
+	  	stage.show();
+	  	return stage;
+    }
+    
+    private Stage showSettingsScreen(DatabaseSetRecord selectedSet) throws IOException {
+    	Stage stage = (Stage) saveButton.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
 
+	  	stage.setScene(new Scene((Pane) loader.load()));	
+
+	  	SettingsController settingsController = loader.<SettingsController>getController();
+	  	settingsController.initController(selectedSet);
+	  	
+	  	stage.show();
+	  	return stage;
+    }
+    
     private void fillTableViewWithDbData(){
-    	DatabaseManager databaseManager = new DatabaseManager();
-		ObservableList<ObservableList> data;
-        data = FXCollections.observableArrayList();
+    	DatabaseManager databaseManager = DatabaseManager.getInstance();
 
-        try {
-        	ResultSet resultSet = databaseManager.getAllSets();
-
-            for(int i = 0 ; i < resultSet.getMetaData().getColumnCount(); i++){
-                //We are using non property style for making dynamic table
-                final int j = i;               
-                TableColumn column = new TableColumn(resultSet.getMetaData().getColumnName(i+1));
-                column.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                   
-                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                             
-                        return new SimpleStringProperty(param.getValue().get(j).toString());                       
-                    }                   
-                });
-                myTable.getColumns().addAll(column);
-                System.out.println("Column ["+i+"] ");
-            }
-            /********************************
-             * Data added to ObservableList *
-            ********************************/
-            while(resultSet.next()){
-                //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i=1 ; i<=resultSet.getMetaData().getColumnCount(); i++){
-                    //Iterate Column
-                    row.add(resultSet.getString(i));
-                }
-                System.out.println("Row [1] added "+row );
-
-                data.add(row);
-            }
-            //FINALLY ADDED TO TableView
-            myTable.setItems(data);
-        } catch (Exception e){
-            e.printStackTrace();
+     	try {
+     		ResultSet dbResult = databaseManager.getAllSets();     		
+     		addColumnsToTableView(dbResult);
+     		insertRowsToTableView(dbResult);
+     	} catch (SQLException e) {
+     		e.printStackTrace();
+     	}
+    }
+    
+    private ObservableList<DatabaseSetRecord> getListOfSetsFromDbResult(ResultSet dbResult){
+    	 ObservableList<DatabaseSetRecord> rows = FXCollections.observableArrayList();
+    	 try {
+			while (dbResult.next()) {
+			     String gameId = dbResult.getString( "spiel_id" );                                
+			     String setId = dbResult.getString( "satz_nr" );
+			     String winner = dbResult.getString( "sieger" );
+			     String starter = dbResult.getString( "startspieler" );
+			     String pointsPlayerO = dbResult.getString( "punktespielero" );
+			     String pointsPlayerX = dbResult.getString( "punktespielerx" );
+			   
+			     DatabaseSetRecord datensatz = new DatabaseSetRecord(gameId, setId, winner, starter, pointsPlayerO, pointsPlayerX);
+ 
+			     rows.add(datensatz);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}      
+         return rows;
+    }
+    
+    private void addColumnsToTableView(ResultSet dbResult) throws SQLException {
+    	for(int i = 0 ; i < dbResult.getMetaData().getColumnCount(); i++){
+            final int j = i;               
+            TableColumn<DatabaseSetRecord,String> tableColumn = new TableColumn<DatabaseSetRecord,String>(dbResult.getMetaData().getColumnName(i+1));
+            tableColumn.setCellValueFactory(new Callback<CellDataFeatures<DatabaseSetRecord, String>, ObservableValue<String>>() {
+       	    public ObservableValue<String> call(CellDataFeatures<DatabaseSetRecord, String> p) {
+       	         // p.getValue() gibt den Datensatz für eine bestimmte TableView-Zeile zurück
+       	         return new SimpleStringProperty(p.getValue().get(j).toString());  
+       	     }
+            });
+            myTable.getColumns().addAll(tableColumn);
         }
+    }
+
+    private void insertRowsToTableView(ResultSet dbResult){
+    	ObservableList<DatabaseSetRecord> setList = getListOfSetsFromDbResult(dbResult);
+ 		myTable.setItems(setList);
     }
 }

@@ -155,7 +155,7 @@
             </MenuBar>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
               <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Neues Spiel" textAlignment="CENTER">
+                <Text fx:id="text_NewGame" strokeType="OUTSIDE" strokeWidth="0.0" text="Neues Spiel" textAlignment="CENTER">
                   <font>
                     <Font size="48.0" />
                   </font>

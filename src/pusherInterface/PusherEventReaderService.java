@@ -55,10 +55,10 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 	public PusherEvent getPusherEvent()	{
 		while (recentPusherEvent == null){
 			try {
-			Thread.sleep(300);
-			System.out.println("wartet auf PusherEvent");
+				Thread.sleep(300);
+				System.out.println("wartet auf PusherEvent");
 			} catch (InterruptedException e) {
-			e.printStackTrace();
+				Thread.currentThread().interrupt();
 			}
 		}
 		return recentPusherEvent;

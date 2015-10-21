@@ -11,7 +11,16 @@ import database.DatabaseStructure;
 public class DatabaseManager {
 	private Connection connection = null;
 	
-	public DatabaseManager(){
+	private static DatabaseManager dbManagerInstance = null;
+
+	public static DatabaseManager getInstance() {
+		if(dbManagerInstance == null) {
+			dbManagerInstance = new DatabaseManager();
+		}
+		return dbManagerInstance;
+	}
+	
+	protected DatabaseManager(){
 		connectToDatabase();
 		System.out.println("database connected");
 		try {
@@ -114,6 +123,14 @@ public class DatabaseManager {
 								+ "FROM spiele";
 		return query(sqlQuery);		
 	}
+	
+	public ResultSet getAllSetWinnersForGameId(String gameId) throws SQLException {
+		final String sqlQuery =   "SELECT sieger "
+				+ "FROM saetze "
+				+ "WHERE "
+				+	 "spiel_id = " + gameId;
+		return query(sqlQuery);				
+	}
 
 	public ResultSet getAllSetsForGameId(String gameId) throws SQLException {
 		final String sqlQuery =   "SELECT * "
@@ -128,7 +145,9 @@ public class DatabaseManager {
 			     				+	"spiel_id, "
 			     				+ 	"satz_nr, "
 			     				+ 	"sieger, "
-			     				+ 	"startspieler "
+			     				+ 	"startspieler, "
+			     				+ 	"punktespielero, "
+			     				+ 	"punktespielerx "
 			     				+ "FROM saetze";
 		
 		return query(sqlQuery);
@@ -143,15 +162,27 @@ public class DatabaseManager {
 		return query(sqlQuery);
 	}
 	
-	public void updateSet(int gameId,  int setNr, String winner) throws SQLException{
+	public void updateWinnerOfSet(int gameId, int setNr, String winner) throws SQLException{
+		if (winner.equals("Spieler O")){
+			updateWinnerOfSet(gameId, setNr, 2, 0, winner);
+		}
+		else if (winner.equals("Spieler X")){
+			updateWinnerOfSet(gameId, setNr, 0, 2, winner);			
+		}
+	}
+	
+	private void updateWinnerOfSet(int gameId, int setNr, int pointsPlayerO, int pointsPlayerX, String winner) throws SQLException{
 		final String sqlQuery =   "UPDATE saetze "
-								+ 	"SET sieger = " + "'" + winner + "' "
+								+ 	"SET sieger = " + "'" + winner + "', "
+								+ 	" punktespielero = " + pointsPlayerO + ", "
+								+ 	" punktespielerx = " + pointsPlayerX + " "
 								+ "WHERE "
 								+ 	"spiel_id = " + String.valueOf(gameId)
 								+ 	" AND "
 								+ 	"satz_nr = " + String.valueOf(setNr);
 		execute(sqlQuery);
 	}
+	
 	private synchronized void execute(String expression) throws SQLException {
          Statement statement = null;
          statement = connection.createStatement();

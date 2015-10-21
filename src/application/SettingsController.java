@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import database.DatabaseSetRecord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -50,21 +52,20 @@ public class SettingsController implements Initializable {
     @FXML private TextField tfAppSecret;
     @FXML private TextField tfDateiPfad;
     @FXML private TextField tfZugZeit;
+    
+    @FXML private Text text_NewGame;
 
 	private GameProperties gameProperties;
 	private Character player;
 	private String usedInterface;
 	private int zugZeit;
 	
-    @FXML void loadGame(ActionEvent event) {    
-		Stage stage;
-		stage = (Stage) btStart.getScene().getWindow();
-		AnchorPane page;		
+	private DatabaseSetRecord selectedSetFromLoadScreen;
+	
+    @FXML void loadGame(ActionEvent event) {  
 		try {
-				page = (AnchorPane) FXMLLoader.load(getClass().getResource("Load.fxml"));
-				Scene scene = new Scene(page);
-				stage.setScene(scene);
-				stage.show();
+	    	System.out.println("Switching to Load Screen");  
+			showLoadScreen();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -116,12 +117,12 @@ public class SettingsController implements Initializable {
 
 		gameProperties = new GameProperties();
 		
-		 if (new File(GameProperties.DATEINAME).exists()) {
+		if (new File(GameProperties.DATEINAME).exists()) {
 			readProperties();	
 			restoreInputFieldsFromProperties();
-		 } else {
+		} else {
 			setDefaultInterface("File");
-		 }
+		}
 
 		setTextfieldHints();
 		
@@ -131,16 +132,10 @@ public class SettingsController implements Initializable {
 				return;
 			}
 			saveUserInputToPropertiesFile();
-			// get reference to the button's stage
-			Stage stage = (Stage) btStart.getScene().getWindow();
-			// load up OTHER FXML document
-			AnchorPane page;
+
 			try {
-				page = (AnchorPane) FXMLLoader.load(getClass().getResource("Game.fxml"));
-				// create a new scene with root and set the stage
-				Scene scene = new Scene(page);
-				stage.setScene(scene);
-				stage.show();
+		    	System.out.println("Switching to Game Screen");
+				showGameScreen();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -182,6 +177,36 @@ public class SettingsController implements Initializable {
 			}
 		});
 	}
+
+    public void initController(DatabaseSetRecord selectedSetFromLoadScreen){
+    	this.selectedSetFromLoadScreen = selectedSetFromLoadScreen;
+    	
+    	text_NewGame.setText("Spiel fortsetzen");
+    }
+    
+	private Stage showGameScreen() throws IOException {
+    	Stage stage = (Stage) btStart.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Game.fxml"));
+	
+	  	stage.setScene(new Scene((Pane) loader.load()));
+	
+	  	if (selectedSetFromLoadScreen != null){
+	  		GameController gameController = loader.<GameController>getController();
+	  		gameController.initController(selectedSetFromLoadScreen);
+	  	}
+	  	stage.show();
+	  	return stage;
+    }
+	
+    private Stage showLoadScreen() throws IOException {
+    	Stage stage = (Stage) btStart.getScene().getWindow();
+	  	FXMLLoader loader = new FXMLLoader(getClass().getResource("Load.fxml"));
+	
+	  	stage.setScene(new Scene((Pane) loader.load()));
+	
+	  	stage.show();
+	  	return stage;
+    }
 
 	private boolean areAllRequiredFieldsFilledCorrectly() {
 		if (!isPlayerSelected()){
@@ -231,7 +256,6 @@ public class SettingsController implements Initializable {
 	private void restoreInputFieldsFromProperties() {
 		setDefaultInterface(gameProperties.getProperty(GameProperties.INTERFACE));
 		
-		System.out.println(GameProperties.SPIELER);
 		player = gameProperties.getProperty(GameProperties.SPIELER).toCharArray()[0];
 		if (player == 'o') {
 			rbGelb.setSelected(true);
