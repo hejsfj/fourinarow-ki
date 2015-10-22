@@ -104,15 +104,17 @@ public class DatabaseManager {
 				+ "')");
 	}
 	
-	public void addMove(int gameId, int setNr, int column, String player) throws SQLException{
+	public void addMove(int gameId, int setNr, int moveNr, int column, String player) throws SQLException{
 		execute(  "INSERT INTO zuege("
 				+	 "spiel_id, "
 				+	 "satz_nr, "
+				+ 	 "zug_nr, "
 				+	 "spalte, "
 				+	 "spieler) "
 				+ "VALUES('"
 				+ 	String.valueOf(gameId) 	+"','"
 				+ 	String.valueOf(setNr) 	+"','"
+				+ 	String.valueOf(moveNr) 	+"','"
 				+ 	String.valueOf(column) 	+"','"
 				+ 	player
 				+ "')");
