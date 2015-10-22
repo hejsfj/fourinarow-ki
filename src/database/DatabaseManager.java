@@ -29,7 +29,7 @@ public class DatabaseManager {
 	}
 	
 	/**
-	 * Instantiates a new database manager.
+	 * Neuen Datenbank Manager erstellen.
 	 */
 	protected DatabaseManager(){
 		connectToDatabase();
