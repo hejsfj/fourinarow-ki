@@ -102,7 +102,7 @@
                 <Menu mnemonicParsing="false" text="Datei" fx:id="menuDatei">
                   <items>
                     <MenuItem disable="false" mnemonicParsing="false" onAction="#newGame" text="Neues Spiel" />
-                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Spiel laden" fx:id="menuItem_LoadGame" />
+                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Satz laden" fx:id="menuItem_LoadGame" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Satz" fx:id="menuSpiel">
