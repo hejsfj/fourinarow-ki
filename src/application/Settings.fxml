@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.layout.FlowPane?>
 
 <AnchorPane maxHeight="530.0" maxWidth="830.0" minHeight="530.0" minWidth="830.0" prefHeight="553.0" prefWidth="835.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.SettingsController">
   <children>
@@ -49,16 +50,21 @@
                   <children>
                     <HBox alignment="CENTER" prefHeight="40.0" prefWidth="390.0">
                       <children>
-                        <RadioButton fx:id="rbPush" mnemonicParsing="false" text="Pusher Schnittstelle">
-                          <font>
-                            <Font size="15.0" fx:id="x1" />
-                          </font>
-                          <toggleGroup>
-                            <ToggleGroup fx:id="toggleGroup_Interface" />
-                          </toggleGroup>
-                        </RadioButton>
-                        <Pane prefHeight="87.0" prefWidth="93.0" />
-                        <RadioButton fx:id="rbFile" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" prefHeight="27.0" prefWidth="131.0" text="File Schnittstelle" toggleGroup="$toggleGroup_Interface" />
+	                      <FlowPane>
+							<children>
+			                      <RadioButton prefWidth="195.0" fx:id="rbPush" mnemonicParsing="false" text="Pusher Schnittstelle">
+			                      <font>
+			                      <Font size="15.0" fx:id="x1" />
+			                      </font>
+			                      <toggleGroup>
+			                      <ToggleGroup fx:id="toggleGroup_Interface" />
+			                      </toggleGroup>
+			                      </RadioButton>
+							</children>
+		                    <children>
+		                        <RadioButton prefWidth="195.0" fx:id="rbFile" contentDisplay="CENTER" font="$x1" mnemonicParsing="false" prefHeight="27.0" text="File Schnittstelle" toggleGroup="$toggleGroup_Interface" />
+		                    </children>
+                     	 </FlowPane>
                       </children>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" disable="false" fillHeight="true" prefHeight="-1.0" prefWidth="-1.0">

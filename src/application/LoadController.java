@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.ResizeFeatures;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -54,6 +55,8 @@ public class LoadController implements Initializable {
         assert newButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file";
         assert myTable != null : "fx:id=\"myTable\" was not injected: check your FXML file";
         
+        setWidthOfTableView();
+
         fillTableViewWithDbData();
         
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -93,10 +96,16 @@ public class LoadController implements Initializable {
 	  	stage.show();
 	  	return stage;
     }
+
+    private void setWidthOfTableView(){
+    	myTable.setMaxWidth(660.0);
+    	myTable.setMinWidth(660.0);
+    	myTable.setPrefWidth(660.0);
+    }
     
     private void fillTableViewWithDbData(){
     	DatabaseManager databaseManager = DatabaseManager.getInstance();
-
+    	
      	try {
      		ResultSet dbResult = databaseManager.getAllSets();     		
      		addColumnsToTableView(dbResult);
@@ -137,6 +146,8 @@ public class LoadController implements Initializable {
        	         return new SimpleStringProperty(p.getValue().get(j).toString());  
        	     }
             });
+            tableColumn.setPrefWidth(110.0);
+            
             myTable.getColumns().addAll(tableColumn);
         }
     }
