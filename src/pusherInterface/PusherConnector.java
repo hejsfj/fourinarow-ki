@@ -10,13 +10,25 @@ import com.pusher.client.connection.ConnectionEventListener;
 import com.pusher.client.connection.ConnectionStateChange;
 import utils.HmacSHA256;
 
+
+/**
+ * Die Hauptklasse für die Kommunikation mit dem Server.
+ */
 public class PusherConnector implements ConnectionEventListener {
+
 	private final Pusher pusher;
 	private final String appKey;
 	private final String appSecret;
 	private final long startTime = System.currentTimeMillis();
 	private PrivateChannel channel;
 	
+	/**
+	 * Instantiierung des PusherConnectors.
+	 *
+	 * @param pusherAppId Die AppID für die Pusher Kommunikation
+	 * @param pusherAppKey Der AppKey für die Pusher Kommunikation
+	 * @param pusherAppSecret Der AppSecret für die Pusher Kommunikation
+	 */
 	public PusherConnector(String pusherAppId, String pusherAppKey, String pusherAppSecret) {
 		appKey = pusherAppKey;
 		appSecret = pusherAppSecret;
@@ -25,17 +37,13 @@ public class PusherConnector implements ConnectionEventListener {
 
 		options.setAuthorizer(new Authorizer() {
 			/**
-			 * The user (the client) can be authorized, if he knows the key and
-			 * the secret. And the user is to be authorized on a decided
-			 * channel.
 			 * 
-			 * "Given that your application - d. h. dieser Nutzer hier -
-			 * receives a POST request to /pusher/auth with the parameters:
-			 * channel_name=private-foobar&socket_id=1234.1234
+			 * Der Client kann auf einem ausgewählten Channel authorisiert werden, 
+			 * wenn er den AppKey und AppSecret kennt.
+			 * Der Client muss ein POST Request empfangen.
+			 * Der Rückgabewert ist ein JSON String, der aus dem AppKey 
+			 * gefolgt von einem Doppelpunkt und der Authentifizierungssignatur.
 			 * 
-			 * The auth response should be a JSON string with a an auth property
-			 * with a value composed of the application key and the
-			 * authentication signature separated by a colon ‘:’ as follows:
 			 */
 			public String authorize(String channelName, String socketId) throws AuthorizationFailureException {
 				System.out.println("The clients channelName: " + channelName);
@@ -55,16 +63,33 @@ public class PusherConnector implements ConnectionEventListener {
 		pusher.connect(this);
 	}
 
+	/**
+	 * Auslöser für den Spielzug.
+	 *
+	 * @param channel Channel Element
+	 * @param move Spalte, in die der Spielstein gesetzt wird
+	 */
 	public void triggerClientMove(PrivateChannel channel, int move){
 		channel.trigger("client-event", "{\"move\": \"" + move + "\"}");	
 		System.out.println("Client move: " + move + " losgeschickt!!");	
 	}
 
+	/**
+	 * Anmeldung am PrivateChannel
+	 *
+	 * @param channelName Name des Channels
+	 * @param listener Der Listener
+	 * @param eventName Der Name des Events
+	 * @return Das PrivateChannel Element
+	 */
 	public PrivateChannel subscribeToPrivateChannel(String channelName, PrivateChannelEventListener listener, String eventName){
 		channel =  pusher.subscribePrivate(channelName, listener, eventName);		
 		return channel;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.pusher.client.connection.ConnectionEventListener#onConnectionStateChange(com.pusher.client.connection.ConnectionStateChange)
+	 */
 	/* ConnectionEventListener implementation */
 	@Override
 	public void onConnectionStateChange(final ConnectionStateChange change) {
@@ -73,6 +98,9 @@ public class PusherConnector implements ConnectionEventListener {
 				change.getPreviousState(), change.getCurrentState()));
 	}
 
+	/* (non-Javadoc)
+	 * @see com.pusher.client.connection.ConnectionEventListener#onError(java.lang.String, java.lang.String, java.lang.Exception)
+	 */
 	@Override
 	public void onError(final String message, final String code, final Exception e) {
 

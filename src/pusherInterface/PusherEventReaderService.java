@@ -5,10 +5,16 @@ import com.pusher.client.channel.PrivateChannelEventListener;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
+/**
+ * Der Dienst für den PusherEventReader.
+ */
 public class PusherEventReaderService extends Service<PusherEvent> implements PrivateChannelEventListener {
 	private final long startTime = System.currentTimeMillis();
 	private PusherEvent recentPusherEvent;
 	
+	/* (non-Javadoc)
+	 * @see javafx.concurrent.Service#createTask()
+	 */
 	@Override
 	protected Task<PusherEvent> createTask() {
 		 return new Task<PusherEvent>() {
@@ -20,6 +26,9 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 		 };
 	}	
 
+	/* (non-Javadoc)
+	 * @see com.pusher.client.channel.SubscriptionEventListener#onEvent(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void onEvent(final String channelName, final String eventName, final String data) {
 
@@ -39,12 +48,18 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 		recentPusherEvent.setSieger(correctedSieger);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.pusher.client.channel.ChannelEventListener#onSubscriptionSucceeded(java.lang.String)
+	 */
 	@Override
 	public void onSubscriptionSucceeded(final String channelName) {
 
 		System.out.println(String.format("[%d] Subscription to channel [%s] succeeded", timestamp(), channelName));
 	}
 
+	/* (non-Javadoc)
+	 * @see com.pusher.client.channel.PrivateChannelEventListener#onAuthenticationFailure(java.lang.String, java.lang.Exception)
+	 */
 	@Override
 	public void onAuthenticationFailure(String arg0, Exception arg1) {
 		System.out.println(arg0);
@@ -52,6 +67,10 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 		System.out.println("authentication failure!!");
 	}
 	
+	/**
+	 *
+	 * @return Das PusherEvent Element
+	 */
 	public PusherEvent getPusherEvent()	{
 		while (recentPusherEvent == null){
 			try {
@@ -63,6 +82,10 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 		}
 		return recentPusherEvent;
 	}
+	
+	/**
+	 * Löschen des PusherEvents
+	 */
 	public void deletePusherEvent(){
 		recentPusherEvent = null;
 	}
