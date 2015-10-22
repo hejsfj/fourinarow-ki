@@ -236,7 +236,7 @@ public class GameController implements Initializable {
 				gamefield.insertCoin(gamefieldGrid, opponentMove, opponentPlayer);
 				try {
 					// addZug(int spiel_id, int satz_nr,int zug_nr, int spalte, String spieler)
-					databaseManager.addMove(currentGameId, currentSetNr, opponentMove, "spieler" + String.valueOf(opponentPlayer));
+					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, opponentMove, "spieler" + String.valueOf(opponentPlayer));
 					zugNrCounter++;
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -250,7 +250,7 @@ public class GameController implements Initializable {
 				pusher.triggerClientMove(channel, move);
 				
 				try {
-	    			databaseManager.addMove(currentGameId, currentSetNr, move, "spieler" + String.valueOf(myPlayer));
+	    			databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, move, "spieler" + String.valueOf(myPlayer));
 	    			zugNrCounter++;
 	    		} catch (SQLException e1) {
 	    			e1.printStackTrace();
@@ -276,7 +276,7 @@ public class GameController implements Initializable {
 				gamefield.insertCoin(gamefieldGrid, gegnerZug, opponentPlayer);
 				try {
 					// addZug(int spiel_id, int satz_nr,int zug_nr, int spalte, String spieler)
-					databaseManager.addMove(currentGameId, currentSetNr, gegnerZug, "spieler" + String.valueOf(opponentPlayer));
+					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, gegnerZug, "spieler" + String.valueOf(opponentPlayer));
 					zugNrCounter++;
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -289,7 +289,7 @@ public class GameController implements Initializable {
 	    		 gamefield.insertCoin(gamefieldGrid, move, myPlayer);
 	    		 try {
 	    			 agentfileWriter.writeAgentfile(new Agentfile(move));
-	    			 databaseManager.addMove(currentGameId, currentSetNr, move, "spieler" + String.valueOf(myPlayer));
+	    			 databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, move, "spieler" + String.valueOf(myPlayer));
 	    			 zugNrCounter++;
 	    		 } catch (SQLException e1) {
 	    			 e1.printStackTrace();
@@ -348,11 +348,13 @@ public class GameController implements Initializable {
 		infostat.setText("Spiel läuft.");
 	}
 	
-	private void finishSet(String winner){
+	private void finishSet(String winner) {
 		System.out.println("Spiel vorbei. Der Gewinner ist: " + winner);
 		infostat.setText(winner + " hat gewonnen!");
-		startButton.setDisable(false);
 		menuDatei.setDisable(false);
+		menuItem_PlayerOWinsCurrentSet.setDisable(false);
+		menuItem_PlayerXWinsCurrentSet.setDisable(false);
+		menuItem_StopCurrentSet.setDisable(true);
 		try {
 			databaseManager.updateWinnerOfSet(currentGameId, currentSetNr, winner);
 			updateTextFields();

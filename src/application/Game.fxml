@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -21,7 +22,7 @@
               <children>
                 <HBox alignment="CENTER" prefHeight="40.0" prefWidth="-1.0">
                   <children>
-                    <Button id="statsButton" fx:id="startButton" defaultButton="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="-1.0" text="Spiel starten">
+                    <Button id="statsButton" fx:id="startButton" defaultButton="false" mnemonicParsing="false" prefHeight="30.0" prefWidth="-1.0" text="Satz starten">
                       <font>
                         <Font size="18.0" />
                       </font>
@@ -98,17 +99,17 @@
           <children>
             <MenuBar id="MenuBar" fx:id="menuBar">
               <menus>
-                <Menu fx:id="menuDatei" mnemonicParsing="false" text="Datei">
+                <Menu mnemonicParsing="false" text="Datei" fx:id="menuDatei">
                   <items>
                     <MenuItem disable="false" mnemonicParsing="false" onAction="#newGame" text="Neues Spiel" />
-                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Spiel laden" fx:id="menuItem_LoadGame" />
+                    <MenuItem disable="false" mnemonicParsing="false" onAction="#loadGame" text="Satz laden" fx:id="menuItem_LoadGame" />
                   </items>
                 </Menu>
-                <Menu fx:id="menuSpiel" mnemonicParsing="false" text="Satz">
+                <Menu mnemonicParsing="false" text="Satz" fx:id="menuSpiel">
                   <items>
-                    <MenuItem fx:id="menuItem_PlayerOWinsCurrentSet" disable="true" mnemonicParsing="false" onAction="#updateWinnerOfCurrentSet" text="Spieler O gewinnt" />
-                    <MenuItem fx:id="menuItem_PlayerXWinsCurrentSet" disable="true" mnemonicParsing="false" onAction="#updateWinnerOfCurrentSet" text="Spieler X gewinnt" />
-                    <MenuItem fx:id="menuItem_StopCurrentSet" disable="true" mnemonicParsing="false" onAction="#stopCurrentSet" text="Satz beenden" />
+                    <MenuItem disable="true" mnemonicParsing="false" onAction="#updateWinnerOfCurrentSet" text="Spieler O gewinnt" fx:id="menuItem_PlayerOWinsCurrentSet" />
+                    <MenuItem disable="true" mnemonicParsing="false" onAction="#updateWinnerOfCurrentSet" text="Spieler X gewinnt" fx:id="menuItem_PlayerXWinsCurrentSet" />
+                    <MenuItem disable="true" mnemonicParsing="false" onAction="#stopCurrentSet" text="Satz beenden" fx:id="menuItem_StopCurrentSet" />
                   </items>
                 </Menu>
               </menus>
