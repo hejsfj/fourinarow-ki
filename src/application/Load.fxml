@@ -22,7 +22,7 @@
               <children>
                 <HBox alignment="CENTER" prefHeight="40.0" prefWidth="-1.0">
                   <children>
-                    <Button id="newButton" fx:id="saveButton" defaultButton="false" graphicTextGap="4.0" mnemonicParsing="false" pickOnBounds="false" text="Spiel laden" wrapText="false">
+                    <Button id="newButton" fx:id="saveButton" defaultButton="false" graphicTextGap="4.0" mnemonicParsing="false" pickOnBounds="false" text="Satz laden" wrapText="false">
                       <font>
                         <Font size="18.0" />
                       </font>
@@ -60,14 +60,14 @@
                 <Menu mnemonicParsing="false" text="Datei">
                   <items>
                     <MenuItem disable="false" mnemonicParsing="false" onAction="#newGame" text="Neues Spiel" />
-                    <MenuItem disable="true" mnemonicParsing="false" onAction="#loadGame" text="Spiel laden" />
+                    <MenuItem disable="true" mnemonicParsing="false" onAction="#loadGame" text="Satz laden" />
                   </items>
                 </Menu>
               </menus>
             </MenuBar>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
               <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spiel laden">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Satz laden">
                   <font>
                     <Font size="48.0" />
                   </font>
