@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
-  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
   <class id="1" language="java" name="database.DatabaseStructure" project="fourinarow-ki" 
     file="/fourinarow-ki/src/database/DatabaseStructure.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="189" width="183" x="41" y="37"/>    
@@ -12,7 +12,16 @@
   </class>  
   <class id="2" language="java" name="database.DatabaseManager" project="fourinarow-ki" 
     file="/fourinarow-ki/src/database/DatabaseManager.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="261" width="215" x="264" y="37"/>    
+    <position height="-1" width="-1" x="186" y="443"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="database.DatabaseSetRecord" project="fourinarow-ki" 
+    file="/fourinarow-ki/src/database/DatabaseSetRecord.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="596" y="290"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      

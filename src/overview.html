@@ -1,6 +1,24 @@
 <body>
-Die Overview.html dient zur Projektbeschreibung.
-Ich hoffe es klappt.
-Notizen:
-DatabaseSetRecord-Klasse???
+<h1>Überblick über die Projektstruktur</h1>
+<h2>Paketüberblick</h2>
+<p>Das Java Projekt ist in sieben Pakete unterteilt. 
+Alle graphischen Benutzeroberflächen und Treiberklasse sind im Paket <code>application</code> gebündelt. 
+Das Paket <code>AgentKI</code> beinhaltet die Spiellogik für das Setzten der Spielsteine. 
+In dem Paket fileInterface ist die Kommunikation über die Dateischnittstelle realisiert. 
+Parallel dazu wurde im pusherInterface die Kommunikation über den Pusher Server implementiert. 
+Das Paket gamefield umfasst die interne Repräsentation des Spielfeldes, in das die Spielsteine gesetzt werden. 
+Im database Paket befinden sich alle Datenbankfunktionen. 
+Zusätzlich befinden sich Hilfsklassen (z.B für die Pusherschnittstelle) im Paket utils.</p>
+
+<br>
+	<figure>
+		<img src="../umlDiagrams/packageDependenciesDiagram1.png" alt="Diagramm der Paketabhängigkeiten im Projekt"
+			title="Paketabhängigkeiten">
+		<figcaption>Überblick über die Paketabhängigkeiten</figcaption>
+	</figure>
+
+<h3>Fragen:</h3>
+<ul>
+<li>DatabaseSetRecord-Klasse???</li>
+</ul>
 </body>
