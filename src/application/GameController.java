@@ -42,14 +42,40 @@ import pusherInterface.PusherEventReaderService;
 
 /**
  * Diese Klasse enthält die Anwendungslogik für die die Game.fxml-Datei, welche
- * das Spielfeld repräsentiert. Der Aufbau der Game.fxml-Datei besteht aus
- * folgenden Komponenten:<br>
+ * das Spielfeld repräsentiert.
  * 
+ * Die Anwendung ist in 3 separat agierende Benutzeroberflächen (fxml)
+ * aufgeteilt, welche logisch miteinander verbunden sind. Alle Fenster des
+ * Programms sind mit 830x530 Pixel fest skaliert. Der Aufbau der Fenster ist
+ * identisch. Mit JavaFX wurde eine AnchorPane erstellt, an dem alle Elemente
+ * des Interface verankert sind. Zudem verbindet die AnchorPane die reinen
+ * Design-Dateien mit der Controllerdatei in dem Package applications, welche
+ * die logischen Aktionen der Benutzeroberfläche steuert. Direkt über dem
+ * AnchorPane liegt ein BorderPane, welches das Fenster in 5 Boxen zerteilt (s.
+ * Abb.XX). Diese Boxen werden je nach Bedarf mit verschiedenen Elementen
+ * befüllt.
  * <br>
- * <figure>
- * <img src="doc-files/GameScreen.png" widht="300" height="300" alt=
- * "UI-Aufbau des Spielebildschirms" title="UI-Aufbau des Spielebildschirms">
- * <figcaption>UI-Aufbau des Spielebildschirms</figcaption> </figure> 
+ * <figure> <img src="doc-files/BorderPane.jpg" widht="450" height="450" alt=
+ * "Grundaufbau des UIs" title="Grundaufbau des UIs"/> 
+ * <figcaption>Grundaufbau des UIs</figcaption> </figure> <br>
+ * <br>
+ * Von der Konfigurationsoberfläche wird der Benutzer auf die
+ * Spielfeldoberfläche weitergeleitet, die einen identischen strukturellen
+ * Aufbau hat. Box 1 beinhaltet ebenso eine Menüleiste, sowie Textelemente,
+ * verbaut in eine H-Box, die Informationen zum aktuellen Spielstand bzw.
+ * Satzstand darstellen. In Box 2 und 4 werden die beiden agierenden Spieler
+ * angezeigt, mittels Kreisen werden die verschiedenen Spielerfarben angezeigt
+ * sowie weitere Informationen mit Hilfe eines Textelements. In Box 3 befindet
+ * sich das Spielfeld, welches in Form eines GridPanes abgebildet wird. In dem
+ * GridPane mit der Größe eines 4-Gewinnt Spielfelds können Kreise hinzugefügt
+ * werden, die den Spielzug eines Spielers widergeben. Die Kreise nehmen jeweils
+ * die Farbe des jeweiligen Spielers an. Box 5 ist wie bei der
+ * Konfigurationsoberfläche mit einem Button und einem Label befüllt. Der Button
+ * ist zum Start des Spiels da. Das Label gibt Statusmeldungen über das Spiel.
+ * <br><br>
+ * <figure> <img src="doc-files/GameScreen.jpg" widht="300" height="300" alt=
+ * "UI-Aufbau des Spielebildschirms" title="UI-Aufbau des Spielebildschirms"
+ * /> <figcaption>UI-Aufbau des Spielebildschirms</figcaption> </figure>
  * <p>
  * weiter schreiben-----
  * </p>

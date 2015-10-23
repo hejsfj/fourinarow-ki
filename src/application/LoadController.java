@@ -30,7 +30,9 @@ import javafx.util.Callback;
 
 
 /**
- * Diese Klasse enthält die Anwendungslogik für den Lade-Bildschirm des Spielagenten.
+ * Diese Klasse enthält die Anwendungslogik für die Settings.fxml-Datei.
+ * 
+ * FEHLT NOCH!!!
  */
 public class LoadController implements Initializable {
     @FXML private Button loadButton; // Value injected by FXMLLoader    
