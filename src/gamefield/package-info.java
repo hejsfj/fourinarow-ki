@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author marce
- *
- */
-package gamefield;

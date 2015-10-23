@@ -22,6 +22,10 @@ import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+
+/**
+ * Diese Klasse enthält die Anwendungslogik für die Settings.fxml-Datei, welche den Konfigurations-Bildschrim repräsentiert.
+ */
 public class SettingsController implements Initializable {
 	
 	@FXML private ResourceBundle resources;
@@ -62,6 +66,11 @@ public class SettingsController implements Initializable {
 	
 	private DatabaseSetRecord selectedSetFromLoadScreen;
 	
+    /**
+     * Lädt ein bestehendes Spiel.
+     *
+     * @param event {@link javafx.event.ActionEvent}
+     */
     @FXML void loadGame(ActionEvent event) {  
 		try {
 	    	System.out.println("Switching to Load Screen");  
@@ -71,10 +80,20 @@ public class SettingsController implements Initializable {
 		}
     }
 
+    /**
+     * Startet ein neues Spiel.
+     *
+     * @param event {@link javafx.event.ActionEvent}
+     */
     @FXML void newGame(ActionEvent event) {
     	//disabled
     }
     
+    /**
+     * Wählt und überprüft den Pfad für den Dateienaustausch.
+     *
+     * @param event {@link javafx.event.ActionEvent}
+     */
     @FXML void choose(ActionEvent event) {
     	Stage stage = new Stage();
     	
@@ -91,6 +110,9 @@ public class SettingsController implements Initializable {
     	}    	
     }  
     
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override 
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		assert LoadGame != null : "fx:id=\"LoadGame\" was not injected: check your FXML file 'Settings.fxml'.";
@@ -178,6 +200,11 @@ public class SettingsController implements Initializable {
 		});
 	}
 
+    /**
+     * Initialisiert den Controller.
+     *
+     * @param selectedSetFromLoadScreen der ausgewählte Satz vom Lade-Bildschirm.
+     */
     public void initController(DatabaseSetRecord selectedSetFromLoadScreen){
     	this.selectedSetFromLoadScreen = selectedSetFromLoadScreen;
     	

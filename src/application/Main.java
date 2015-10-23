@@ -8,7 +8,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+
+/**
+ * Diese Klasse ist der Einstiegspunkt der Applikation.
+ */
 public class Main extends Application {
+	
+	/* (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override	
 	public void start(Stage primaryStage) {
 		try {
@@ -19,6 +27,11 @@ public class Main extends Application {
         }	
 	}
 	
+	/**
+	 * Die Main-Methode.
+	 *
+	 * @param args Paramter
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

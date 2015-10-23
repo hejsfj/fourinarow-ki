@@ -4,8 +4,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 
+
 /**
- * DatabaseSetRecord Klasse.
+ * Diese Klasse...
  */
 public class DatabaseSetRecord {
 	

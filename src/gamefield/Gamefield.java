@@ -5,17 +5,28 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+
+/**
+ * Dient der physikalische Repräsenation des Spielfeldes.
+ * Es ist als zweidimensionales Array realisiert.
+ */
 public class Gamefield {
 	private char[][] gamefield;
 	private final int numRows = 6;
 	private final int numColumns = 7;
 	private boolean isEmpty = true;
 	
+	/**
+	 * Instanziiert ein neues Gamefield-Objekt.
+	 */
 	public Gamefield(){
 		gamefield = new char[numRows][numColumns];
 		initGame();
 	}
 	
+	/**
+	 * Initialisierung des Spiels.
+	 */
 	public void initGame(){
 		 for(int rowIndex = 0;rowIndex < numRows;rowIndex++) {
 	         for(int columnIndex=0;columnIndex<numColumns;columnIndex++) {
@@ -24,6 +35,11 @@ public class Gamefield {
 	     }
 	}
 	
+	/**
+	 * Überprüft ob es einen Gewinner gibt.
+	 *
+	 * @return true, wenn ein Gewinner exisitert.
+	 */
 	public boolean hasWinner(){
 		
 		return 	hasHorizontalWinner()	||
@@ -32,6 +48,13 @@ public class Gamefield {
         
 	}	
 
+	/**
+	 * Setzt einen Spielstein
+	 *
+	 * @param gridPane {@link javafx.scene.layout.GridPane}
+	 * @param columnIndex der Spaltenindex
+	 * @param player der Spielername
+	 */
 	public void insertCoin(GridPane gridPane, int columnIndex, char player) {		
 		for (int rowIndex = numRows - 1; rowIndex >= 0; rowIndex--) {
 			if (gamefield[rowIndex][columnIndex] == ' ' )
@@ -44,10 +67,20 @@ public class Gamefield {
 		}
 	}
 
+	/**
+	 * Überprüft ob das Spielfeld leer ist.
+	 *
+	 * @return true, wenn das Spielfeld leer ist.
+	 */
 	public boolean isEmpty(){
 		return isEmpty;
 	}
 	
+	/**
+	 * Überprüft ob das Spielfeld voll ist.
+	 *
+	 * @return true, wenn das Spielfeld voll ist.
+	 */
 	public boolean isFull(){
 		for (int columnIndex = 0; columnIndex < numColumns; columnIndex++){
 			if (isColumnFull(columnIndex)){
@@ -56,6 +89,13 @@ public class Gamefield {
 		}
 		return false;
 	}
+	
+	/**
+	 * Überprüft ob der Spielzug valide ist.
+	 *
+	 * @param columnIndex der Spaltenindex in den geworfen wird
+	 * @return true, wenn der Spielzug valide ist.
+	 */
 	public boolean isValidMove(int columnIndex){
 		return !isColumnFull(columnIndex);
 	}

@@ -28,6 +28,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+
+/**
+ * Diese Klasse enthält die Anwendungslogik für den Lade-Bildschirm des Spielagenten.
+ */
 public class LoadController implements Initializable {
     @FXML private Button loadButton; // Value injected by FXMLLoader    
     @FXML private Button saveButton; // Value injected by FXMLLoader    
@@ -35,10 +39,20 @@ public class LoadController implements Initializable {
     @FXML private Label infostat;
     @FXML private TableView<DatabaseSetRecord> myTable;
   
+	/**
+	 * Load game.
+	 *
+	 * @param event the event
+	 */
 	@FXML void loadGame(ActionEvent event) {
 		// disabled
     }
 
+    /**
+     * Startet ein neues Spiel.
+     *
+     * @param event {@link javafx.event.ActionEvent}
+     */
     @FXML void newGame(ActionEvent event) {		
 		try {
 	    	System.out.println("Switching to Settings Screen");
@@ -48,6 +62,9 @@ public class LoadController implements Initializable {
 		}
     }
     
+    /* (non-Javadoc)
+     * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+     */
     @Override // This method is called by the FXMLLoader when initialization is complete
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
         assert loadButton != null : "fx:id=\"refreshButton\" was not injected: check your FXML file";
@@ -136,7 +153,8 @@ public class LoadController implements Initializable {
          return rows;
     }
     
-    private void addColumnsToTableView(ResultSet dbResult) throws SQLException {
+    @SuppressWarnings("unchecked")
+	private void addColumnsToTableView(ResultSet dbResult) throws SQLException {
     	for(int i = 0 ; i < dbResult.getMetaData().getColumnCount(); i++){
             final int j = i;               
             TableColumn<DatabaseSetRecord,String> tableColumn = new TableColumn<DatabaseSetRecord,String>(dbResult.getMetaData().getColumnName(i+1));

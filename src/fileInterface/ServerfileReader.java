@@ -12,16 +12,31 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+
+/**
+ * Dient dem Lesen und Verarbeiten der Text-Datei vom Server.
+ */
 public class ServerfileReader {
 	private String sharedFolderPath;
 	private char player;
 	private Serverfile serverFile;	
 	
+	/**
+	 * Instanziiert einen neuen ServerfileReader.
+	 *
+	 * @param sharedFolderPath der Pfad zum Austauschverzeichnis
+	 * @param player der Spielername
+	 */
 	public ServerfileReader(String sharedFolderPath, char player){
 		this.sharedFolderPath = sharedFolderPath;
 		this.player = player;
 	}
 	
+	/**
+	 * Lieﬂt die Server-Textdatei.
+	 *
+	 * @return ein ServerFile-Objekt
+	 */
 	public Serverfile readServerfile(){			
 		File xmlFile = new File(sharedFolderPath + "/server2spieler" + player + ".xml");
 		

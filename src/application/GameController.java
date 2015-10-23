@@ -40,6 +40,11 @@ import javafx.util.Duration;
 import pusherInterface.PusherConnector;
 import pusherInterface.PusherEventReaderService;
 
+
+/**
+ * Diese Klasse enthält die Anwendungslogik für die die Game.fxml-Datei, welche das Spielfeld repräsentiert.
+ * 
+ */
 public class GameController implements Initializable {
 	
 	@FXML private MenuBar menuBar;
@@ -79,6 +84,13 @@ public class GameController implements Initializable {
 	private PusherEventReaderService pusherEventReaderService;
 	private ServerfileReaderService serverFileReaderService;
 	
+	/**
+	 * Aktualisiert den Gewinner des aktuellen Spielsatzes.
+	 *
+	 * @param event Ein Event repräsentiert eine Art von Aktion.
+	 * 				Dieser Event-Type wird benutzt um z.B. wenn auf einen Button-Klick reagiert werden soll.
+	 * @see {@link javafx.event.ActionEvent}
+	 */
 	@FXML void updateWinnerOfCurrentSet(ActionEvent event) {    
 		MenuItem source = (MenuItem) event.getSource();
 		try {
@@ -93,6 +105,11 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Stoppt / Beendet den aktuell laufenden Spielsatz.
+	 *
+	 * @param event {@link javafx.event.ActionEvent}
+	 */
 	@FXML void stopCurrentSet(ActionEvent event) {    	
 		infostat.setText("Satz gestoppt. Kein Gewinner!");
 		startButton.setDisable(false);
@@ -111,7 +128,8 @@ public class GameController implements Initializable {
 	}
 	
 	/**
-	 * 
+	 * Lädt einen Spielstand aus der Datenbank.
+	 *
 	 * @param event {@link javafx.event.ActionEvent}
 	 */
 	@FXML void loadGame(ActionEvent event) {    			
@@ -124,7 +142,8 @@ public class GameController implements Initializable {
     }
 	
 	/**
-	 * startet ein neues Spiel
+	 * Startet ein neues Spiel.
+	 *
 	 * @param event {@link javafx.event.ActionEvent}
 	 */
     @FXML void newGame(ActionEvent event) {		
@@ -136,6 +155,11 @@ public class GameController implements Initializable {
 		}
     }
     
+    /**
+     * Initialisiert den Game-Controller.
+     *
+     * @param selectedSetFromLoadScreen ausgewählter Satz aus der Datenbank bzw. dem Lade-Bildschirm.
+     */
     public void initController(DatabaseSetRecord selectedSetFromLoadScreen){
     	System.out.println("initController in GameController called!");
     	this.selectedSetFromLoadScreen = selectedSetFromLoadScreen;
@@ -152,6 +176,9 @@ public class GameController implements Initializable {
 		}
     }
     
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {		
 		assert startButton != null : "fx:id=\"startButton\" was not injected: check your FXML file";

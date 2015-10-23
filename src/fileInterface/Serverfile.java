@@ -2,7 +2,7 @@ package fileInterface;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Serverfile.
+ * Diese Klasse repräsentiert das Serverfile.
  */
 public class Serverfile {
 	private Boolean freigabe;
