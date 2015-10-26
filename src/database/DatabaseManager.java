@@ -125,10 +125,9 @@ public class DatabaseManager {
 	 * @param pointsPlayerO die Punkt des Spielers o
 	 * @param pointsPlayerX die Punkte des Spielers x
 	 * @param winner der Gewinner des Satzes
-	 * @param starter der Spieler, der den ersten Zug hatte
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
-	public void addSet(int gameId, int setNr, int pointsPlayerO,int pointsPlayerX, String winner, String starter) throws SQLException{
+	public void addSet(int gameId, int setNr, int pointsPlayerO,int pointsPlayerX, String winner) throws SQLException{
 		execute(  "INSERT INTO saetze ("
 				+	 "spiel_id, "
 				+	 "satz_nr, "
@@ -142,7 +141,7 @@ public class DatabaseManager {
 				+ 	String.valueOf(pointsPlayerO) 	+ "','"
 				+ 	String.valueOf(pointsPlayerX) 	+ "','"
 				+ 	winner						 	+ "','"
-				+ 	starter 
+				+ 	""
 				+ "')");
 	}
 	

@@ -428,14 +428,14 @@ public class GameController implements Initializable {
 		if (selectedSetFromLoadScreen == null) {
 			currentGameId = addNewGameToDb();
 			currentSetNr = 1;
-			addNewSetToGameInDb(currentGameId, currentSetNr, startPlayer);
+			addNewSetToGameInDb(currentGameId, currentSetNr);
 		} else if (selectedSetFromLoadScreen.getWinner().equals("")) {
 			currentGameId = Integer.parseInt(selectedSetFromLoadScreen.getGameId());
 			currentSetNr = Integer.parseInt(selectedSetFromLoadScreen.getSetId());
 		} else {
 			currentGameId = Integer.parseInt(selectedSetFromLoadScreen.getGameId());
 			currentSetNr = Integer.parseInt(selectedSetFromLoadScreen.getSetId()) + 1;
-			addNewSetToGameInDb(currentGameId, currentSetNr, startPlayer);
+			addNewSetToGameInDb(currentGameId, currentSetNr);
 		}
 	}
 
@@ -449,9 +449,9 @@ public class GameController implements Initializable {
 		return newGameId;
 	}
 
-	private void addNewSetToGameInDb(int gameId, int setNr, String startPlayer) {
+	private void addNewSetToGameInDb(int gameId, int setNr) {
 		try {
-			databaseManager.addSet(gameId, setNr, 0, 0, "", startPlayer);
+			databaseManager.addSet(gameId, setNr, 0, 0, "");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
