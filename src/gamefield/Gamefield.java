@@ -41,11 +41,9 @@ public class Gamefield {
 	 * @return true, wenn ein Gewinner exisitert.
 	 */
 	public boolean hasWinner(){
-		
 		return 	hasHorizontalWinner()	||
 				hasVerticalWinner() 	||
 				hasDiagonalWinner();
-        
 	}	
 
 	/**
@@ -91,6 +89,24 @@ public class Gamefield {
 	}
 	
 	/**
+	 * Überprüft ob eine bestimmte Stelle im Spielfeld besetzt ist.
+	 *
+	 * @return true, wenn die Stelle besetzt ist.
+	 */
+	public boolean isFieldEmpty(int rowIndex, int columnIndex){
+		return gamefield[rowIndex][columnIndex] == ' ';
+	}
+	
+	/**
+	 * Überprüft ob eine bestimmte Stelle im Spielfeld für einen bestimmten Spieler besetzt ist.
+	 *
+	 * @return true, wenn die Stelle für einen Spieler besetzt ist.
+	 */
+	public boolean isFieldOccupiedForPlayer(int rowIndex, int columnIndex, char player){
+		return gamefield[rowIndex][columnIndex] == player;
+	}
+	
+	/**
 	 * Überprüft ob der Spielzug valide ist.
 	 *
 	 * @param columnIndex der Spaltenindex in den geworfen wird
@@ -99,6 +115,7 @@ public class Gamefield {
 	public boolean isValidMove(int columnIndex){
 		return !isColumnFull(columnIndex);
 	}
+	
 	private boolean isColumnFull(int columnIndex){
 		 return gamefield[0][columnIndex] != ' ';
 	}

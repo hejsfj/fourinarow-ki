@@ -306,7 +306,7 @@ public class GameController implements Initializable {
 	private void initRequiredComponents() {
 		gameProperties = new GameProperties();
 		gamefield = new Gamefield();
-		agent = new AgentKI();
+		agent = new AgentKI("");
 		databaseManager = DatabaseManager.getInstance();
 	}
 
