@@ -133,6 +133,7 @@ public class GameController implements Initializable {
 	private int currentGameId;
 	private int currentSetNr;
 	private int zugNrCounter;
+	private String startPlayer;
 	private DatabaseSetRecord selectedSetFromLoadScreen;
 	private PusherEventReaderService pusherEventReaderService;
 	private ServerfileReaderService serverFileReaderService;
@@ -334,6 +335,10 @@ public class GameController implements Initializable {
 					// String spieler)
 					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, opponentMove,
 							"spieler" + String.valueOf(opponentPlayer));
+					if (zugNrCounter == 1){
+						startPlayer = "Spieler " + String.valueOf(opponentPlayer).toUpperCase();
+						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
+					}
 					zugNrCounter++;
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -349,6 +354,10 @@ public class GameController implements Initializable {
 				try {
 					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, move,
 							"spieler" + String.valueOf(myPlayer));
+					if (zugNrCounter == 1){
+						startPlayer = "Spieler " + String.valueOf(myPlayer).toUpperCase();
+						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
+					}
 					zugNrCounter++;
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -377,12 +386,16 @@ public class GameController implements Initializable {
 					// String spieler)
 					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, gegnerZug,
 							"spieler" + String.valueOf(opponentPlayer));
+					if (zugNrCounter == 1){
+						startPlayer = "Spieler " + String.valueOf(opponentPlayer).toUpperCase();
+						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
+					}
 					zugNrCounter++;
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
 			}
-
+			
 			// unseren Zug bestimmen und wegschicken
 			if (!serverFileReaderService.getValue().isGameOver()) {
 				int move = agent.calculateMove(gamefield);
@@ -391,6 +404,10 @@ public class GameController implements Initializable {
 					agentfileWriter.writeAgentfile(new Agentfile(move));
 					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, move,
 							"spieler" + String.valueOf(myPlayer));
+					if (zugNrCounter == 1){
+						startPlayer = "Spieler " + String.valueOf(myPlayer).toUpperCase();
+						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
+					}
 					zugNrCounter++;
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -405,19 +422,20 @@ public class GameController implements Initializable {
 
 		serverFileReaderService.start();
 	}
-
+	
+	
 	private void determineCurrentGameIdAndSetNr() {
 		if (selectedSetFromLoadScreen == null) {
 			currentGameId = addNewGameToDb();
 			currentSetNr = 1;
-			addNewSetToGameInDb(currentGameId, currentSetNr);
+			addNewSetToGameInDb(currentGameId, currentSetNr, startPlayer);
 		} else if (selectedSetFromLoadScreen.getWinner().equals("")) {
 			currentGameId = Integer.parseInt(selectedSetFromLoadScreen.getGameId());
 			currentSetNr = Integer.parseInt(selectedSetFromLoadScreen.getSetId());
 		} else {
 			currentGameId = Integer.parseInt(selectedSetFromLoadScreen.getGameId());
 			currentSetNr = Integer.parseInt(selectedSetFromLoadScreen.getSetId()) + 1;
-			addNewSetToGameInDb(currentGameId, currentSetNr);
+			addNewSetToGameInDb(currentGameId, currentSetNr, startPlayer);
 		}
 	}
 
@@ -431,9 +449,9 @@ public class GameController implements Initializable {
 		return newGameId;
 	}
 
-	private void addNewSetToGameInDb(int gameId, int setNr) {
+	private void addNewSetToGameInDb(int gameId, int setNr, String startPlayer) {
 		try {
-			databaseManager.addSet(gameId, setNr, 0, 0, "", "startspieler");
+			databaseManager.addSet(gameId, setNr, 0, 0, "", startPlayer);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

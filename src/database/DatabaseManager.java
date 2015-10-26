@@ -146,6 +146,29 @@ public class DatabaseManager {
 				+ "')");
 	}
 	
+	
+	
+	/**
+	 * Aktuallisiert den Start Spieler eines Sets
+	 *
+	 * @param gameId die Spiel_Id
+	 * @param setNr die Satznummer
+	 * @param startPlayer der Spieler, der den ersten Zug hatte
+	 * @throws SQLException {@link java.sql.SQLException}
+	 */
+	
+	public void updateStartPlayerOfSet(int gameId, int setNr, String startPlayer) throws SQLException{
+		final String sqlQuery =   "UPDATE saetze "
+								+ 	"SET startspieler = " + "'" + startPlayer + "'"
+								+ "WHERE "
+								+ 	"spiel_id = " + String.valueOf(gameId)
+								+ 	" AND "
+								+ 	"satz_nr = " + String.valueOf(setNr);
+		execute(sqlQuery);
+	}
+	
+	
+	
 	/**
 	 * Fügt einen Zug zur Datenbank hinzu.
 	 *
