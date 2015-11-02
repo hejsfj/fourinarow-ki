@@ -62,8 +62,6 @@ public class AgentKI {
 		// plan: erreichen von ___xx_x oder x_xx___ 
 		// oder erreichen von __xxx__
 		
-		int move;
-		
 		if (myPlayer == startPlayer) {
 			if (isAttackingFirstLineStrategyPossible){
 				return playAttackingFirstLineStrategy(gamefield);
@@ -181,35 +179,54 @@ public class AgentKI {
 	}
 	
 	private int playDefensiveStrategy(Gamefield gamefield){
-
-		 if (gamefield.hasThreeInARow(opponentPlayer)){
-			 
-		 } 
-		 //and weCanDestroy it
-		// dann getCorrectMove();
+		
+		int move;
+		if ((move = playDefensiveFirstLineStrategy(gamefield)) == -1) {
+			System.out.println("firstLineStrategy over");
+			if ((move = gamefield.findWinPatternAndGetWinningMove(myPlayer)) == -1){
+				System.out.println("no winning pattern for our player gefunden");
+				if ((move = gamefield.findWinPatternAndGetWinningMove(opponentPlayer)) == -1){
+					System.out.println("no winning pattern for opponent player gefunden");
+					System.out.println("random!!!!");
+					return calculateRandomMove(gamefield);
+				}
+			}
+		}
+		if (!gamefield.isValidMove(move)){
+			return calculateRandomMove(gamefield);
+		}
+		return move;
 	
-		return playDefensiveFirstLineStrategy(gamefield);
+		//return playDefensiveFirstLineStrategy(gamefield);
 		// UNBEDINGT PRÜFEN: IST ZUG VALIDE!!!! SPRICH PASST DAS DING IN DIE SPALTE
 	}
 	private int playDefensiveFirstLineStrategy(Gamefield gamefield){
 		if (gamefield.isFieldEmpty(5, 3)){
+			System.out.println("playing defensive first line");
 			return 3;			
 		}
 		
-		if (gamefield.isFieldEmpty(5, 2))
+		if (gamefield.isFieldEmpty(5, 2)){
+			System.out.println("playing defensive first line");
 			return 2;
+		}
 
-		if (gamefield.isFieldOccupiedForPlayer(5, 2, myPlayer) && gamefield.isFieldEmpty(5, 6))
+		if (gamefield.isFieldOccupiedForPlayer(5, 2, myPlayer) && gamefield.isFieldEmpty(5, 6)){
+			System.out.println("playing defensive first line");
 			return 6;
+		}
 		
-		if (gamefield.isFieldEmpty(5, 4))
+		if (gamefield.isFieldEmpty(5, 4)){
+			System.out.println("playing defensive first line");
 			return 4;
+		}
 		
-		if (gamefield.isFieldOccupiedForPlayer(5, 4, myPlayer) && gamefield.isFieldEmpty(5, 0))
+		if (gamefield.isFieldOccupiedForPlayer(5, 4, myPlayer) && gamefield.isFieldEmpty(5, 0)){
+			System.out.println("playing defensive first line");
 			return 0;
+		}
 		
-		return calculateRandomMove(gamefield);
-		
+		return -1;
 	}
 	
 	private boolean areFieldsLeftFromBottomMidNotOccupiedByOpponent(Gamefield gamefield){

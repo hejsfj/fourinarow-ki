@@ -39,11 +39,10 @@ public class ServerfileReader {
 	 */
 	public Serverfile readServerfile(){			
 		File xmlFile = new File(sharedFolderPath + "/server2spieler" + player + ".xml");
-		
+		System.out.println("wartet auf XML von Server");
 		while (!xmlFile.exists()){
 			try {
 				Thread.sleep(300);
-				System.out.println("wartet auf XML von Server");
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 			}
