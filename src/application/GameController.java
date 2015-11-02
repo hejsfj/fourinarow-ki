@@ -15,7 +15,6 @@ import java.util.ResourceBundle;
 import com.pusher.client.channel.PrivateChannel;
 
 import agentKI.AgentKI;
-import agentKI.KI_MinMax;
 import database.DatabaseManager;
 import database.DatabaseSetRecord;
 import fileInterface.Agentfile;
@@ -30,6 +29,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -107,6 +108,7 @@ public class GameController implements Initializable {
 	@FXML private Text spielerXMoveHistory;
 	
 	@FXML private Label lGameOverview;
+	@FXML private Label lSetOverview;
 
 	@FXML private Circle circlePlayerO;
 	@FXML private Circle circlePlayerX;
@@ -118,7 +120,6 @@ public class GameController implements Initializable {
 	private GameProperties gameProperties;
 	private Gamefield gamefield;
 	
-	private KI_MinMax ki_minMax;
 	private AgentKI agent;
 	private char myPlayer;
 	private char opponentPlayer;
@@ -253,6 +254,8 @@ public class GameController implements Initializable {
 		usedInterface = gameProperties.getProperty(GameProperties.INTERFACE);
 		myPlayer = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
 		opponentPlayer = setOpponentPlayer();
+		agent.setMyPlayer(myPlayer);
+		agent.setOpponentPlayer(opponentPlayer);
 
 		animateCurrentPlayer();
 
@@ -261,7 +264,8 @@ public class GameController implements Initializable {
 			public void handle(ActionEvent event) {
 				startSet();
 				determineCurrentGameIdAndSetNr();
-				lGameOverview.setText("Spiel: " + currentGameId + "\nSatz: " + currentSetNr);
+				lGameOverview.setText(lGameOverview.getText() + currentGameId);
+				lSetOverview.setText(lSetOverview.getText() + currentSetNr);
 
 				if (usedInterface.equals("File")) {
 					startFileInterfaceGame();
@@ -296,10 +300,8 @@ public class GameController implements Initializable {
 	private void initRequiredComponents() {
 		gameProperties = new GameProperties();
 		gamefield = new Gamefield();
-		agent = new AgentKI("wir");
-		ki_minMax = new KI_MinMax(gamefield, 'o');
 		databaseManager = DatabaseManager.getInstance();
-		
+		agent = new AgentKI();
 		myPlayerMoveHistory = new ArrayList<Integer>();
 		opponentPlayerMoveHistory = new ArrayList<Integer>();
 	}
@@ -331,6 +333,7 @@ public class GameController implements Initializable {
 					
 					if (zugNrCounter == 1){
 						startPlayer = "Spieler " + String.valueOf(opponentPlayer).toUpperCase();
+						agent.setStartplayer(opponentPlayer);
 						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
 					}
 					zugNrCounter++;
@@ -350,6 +353,7 @@ public class GameController implements Initializable {
 							"spieler" + String.valueOf(myPlayer));
 					if (zugNrCounter == 1){
 						startPlayer = "Spieler " + String.valueOf(myPlayer).toUpperCase();
+						agent.setStartplayer(myPlayer);
 						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
 					}
 					zugNrCounter++;
@@ -382,6 +386,7 @@ public class GameController implements Initializable {
 					
 					if (zugNrCounter == 1){
 						startPlayer = "Spieler " + String.valueOf(opponentPlayer).toUpperCase();
+						agent.setStartplayer(opponentPlayer);
 						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
 					}
 					zugNrCounter++;
@@ -393,7 +398,6 @@ public class GameController implements Initializable {
 			// unseren Zug bestimmen und wegschicken
 			if (!serverFileReaderService.getValue().isGameOver()) {
 				int move = agent.calculateMove(gamefield);
-				System.out.println("Move From KI: " + move);
 				gamefield.insertCoin(gamefieldGrid, move, myPlayer);
 				updateMyPlayerMoveHistory(myPlayerMoveHistory, move);
 				try {
@@ -402,6 +406,7 @@ public class GameController implements Initializable {
 							"spieler" + String.valueOf(myPlayer));
 					if (zugNrCounter == 1){
 						startPlayer = "Spieler " + String.valueOf(myPlayer).toUpperCase();
+						agent.setStartplayer(myPlayer);
 						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
 					}
 					zugNrCounter++;
@@ -475,6 +480,8 @@ public class GameController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		createPopup(winner);
+		
 	}
 
 	private void updateTextFields() throws SQLException{
@@ -562,6 +569,20 @@ public class GameController implements Initializable {
 		} else {
 			return 'o';
 		}
+	}
+	
+	private void createPopup(String winner){
+		Alert alert = new Alert(AlertType.INFORMATION);
+		if (winner == "Spieler O"){
+			alert.setTitle("Spieler O hat gewonnen");
+			alert.setContentText("Der Gewinner ist Spieler O");
+		} else {			
+			alert.setTitle("Spieler X hat gewonnen");
+			alert.setContentText("Der Gewinner ist Spieler X");
+		}	
+
+		alert.setHeaderText(null);
+		alert.showAndWait();	
 	}
 	
 	private void animateCurrentPlayer() {
