@@ -326,10 +326,9 @@ public class GameController implements Initializable {
 				gamefield.insertCoin(gamefieldGrid, opponentMove, opponentPlayer);
 				updateOpponentPlayerHistory(opponentPlayerMoveHistory, opponentMove);
 				try {
-					// addZug(int spiel_id, int satz_nr,int zug_nr, int spalte,
-					// String spieler)
 					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, opponentMove,
 							"spieler" + String.valueOf(opponentPlayer));
+					
 					if (zugNrCounter == 1){
 						startPlayer = "Spieler " + String.valueOf(opponentPlayer).toUpperCase();
 						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
@@ -378,10 +377,9 @@ public class GameController implements Initializable {
 				gamefield.insertCoin(gamefieldGrid, opponentMove, opponentPlayer);
 				updateOpponentPlayerHistory(opponentPlayerMoveHistory, opponentMove);
 				try {
-					// addZug(int spiel_id, int satz_nr,int zug_nr, int spalte,
-					// String spieler)
 					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, opponentMove,
 							"spieler" + String.valueOf(opponentPlayer));
+					
 					if (zugNrCounter == 1){
 						startPlayer = "Spieler " + String.valueOf(opponentPlayer).toUpperCase();
 						databaseManager.updateStartPlayerOfSet(currentGameId, currentSetNr, startPlayer);
@@ -496,10 +494,13 @@ public class GameController implements Initializable {
 		    Integer moveFromList = myListIterator.next();     
 
 		    String moveHistoryOfTextField = spielerXMoveHistory.getText();
-		    moveHistoryOfTextField = moveHistoryOfTextField + "\n" + String.valueOf(moveFromList);
+
+			if (myListIterator.hasNext()){
+			    moveHistoryOfTextField = moveHistoryOfTextField + "Spalte: " + String.valueOf(moveFromList) + "\n";
+			} else {
+				moveHistoryOfTextField = moveHistoryOfTextField + "-> Spalte: " + String.valueOf(moveFromList) + "\n";
+			}
 		    spielerXMoveHistory.setText(moveHistoryOfTextField);
-		    System.out.println();
-		    System.out.println("OpponentPlayer moveHistory: " + moveFromList);
 		}
 	}
 	
@@ -517,11 +518,13 @@ public class GameController implements Initializable {
 		    Integer moveFromList = myListIterator.next();     
 		    
 		    String moveHistoryOfTextField = spielerOMoveHistory.getText();
-		    moveHistoryOfTextField = moveHistoryOfTextField + "\n" + String.valueOf(moveFromList);
+		    
+		    if (myListIterator.hasNext()){
+			    moveHistoryOfTextField = moveHistoryOfTextField + "Spalte: " + String.valueOf(moveFromList) + "\n";
+			} else {
+				moveHistoryOfTextField = moveHistoryOfTextField + "-> Spalte: " + String.valueOf(moveFromList) + "\n";
+			}
 		    spielerOMoveHistory.setText(moveHistoryOfTextField);
-
-		    System.out.println();
-		    System.out.println("MyPlayer moveHistory: " + moveFromList);
 		}
 	}
 	private List<Integer> getLastMovesFromMoveHistory(List<Integer> moveHistory, int numMoves){

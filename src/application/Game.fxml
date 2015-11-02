@@ -85,7 +85,7 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="220.0">
             	<children>
-	            		<Text text="Spielzug in Spalte:">
+	            		<Text text="Letzte Spielzüge">
 		            	</Text>
 	            </children>
 	            <children>
@@ -105,7 +105,7 @@
 	         	</VBox>
 				<VBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="220.0">
 		           	<children>
-	            		<Text text="Spielzug in Spalte:">
+	            		<Text text="Letzte Spielzüge:">
 		            	</Text>
 	            	</children>
 		            <children>
