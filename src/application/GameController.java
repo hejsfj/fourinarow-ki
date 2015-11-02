@@ -277,6 +277,7 @@ public class GameController implements Initializable {
 		});
 	}
 	
+	//Methode zum Navigieren zum Setting Screen
 	private Stage showSettingsScreen() throws IOException {
 		Stage stage = (Stage) startButton.getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
@@ -286,7 +287,8 @@ public class GameController implements Initializable {
 		stage.show();
 		return stage;
 	}
-
+	
+	//Methode zum Navigieren zum Load Screen
 	private Stage showLoadScreen() throws IOException {
 		Stage stage = (Stage) startButton.getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Load.fxml"));
@@ -297,6 +299,7 @@ public class GameController implements Initializable {
 		return stage;
 	}
 
+	//Methode zum initialisieren erforderlicher Objekte
 	private void initRequiredComponents() {
 		gameProperties = new GameProperties();
 		gamefield = new Gamefield();
@@ -306,6 +309,7 @@ public class GameController implements Initializable {
 		opponentPlayerMoveHistory = new ArrayList<Integer>();
 	}
 
+	//Methode, die gestertet wird, wenn ein Spiel über das Pusher Interface gestartet wird, ruft KI Berechnung auf, und schreibt Züge in Datenbank
 	private void startPusherInterfaceGame() {
 		String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
 		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
@@ -369,6 +373,7 @@ public class GameController implements Initializable {
 		pusherEventReaderService.start();
 	}
 
+	//Methode, die gestertet wird, wenn ein Spiel über das File Interface gestartet wird, ruft KI Berechnung auf, und schreibt Züge in Datenbank
 	private void startFileInterfaceGame() {
 		String sharedFolderPath = gameProperties.getProperty(GameProperties.DATEIPFAD);
 		AgentfileWriter agentfileWriter = new AgentfileWriter(sharedFolderPath, myPlayer);
@@ -424,7 +429,7 @@ public class GameController implements Initializable {
 		serverFileReaderService.start();
 	}
 	
-	
+	//SpielID und SetNr bestimmen und in Datenbank schreiben
 	private void determineCurrentGameIdAndSetNr() {
 		if (selectedSetFromLoadScreen == null) {
 			currentGameId = addNewGameToDb();
@@ -440,6 +445,7 @@ public class GameController implements Initializable {
 		}
 	}
 
+	//Wenn ein neues Spiel gestertet wurde, wird dieses in die Datenbank geschrieben
 	private int addNewGameToDb() {
 		int newGameId = -1;
 		try {
@@ -450,6 +456,7 @@ public class GameController implements Initializable {
 		return newGameId;
 	}
 
+	//Wenn ein neues Set gestsartet wurde, wird dieses in die Datenbank geschrieben
 	private void addNewSetToGameInDb(int gameId, int setNr) {
 		try {
 			databaseManager.addSet(gameId, setNr, 0, 0, "");
@@ -458,6 +465,7 @@ public class GameController implements Initializable {
 		}
 	}
 
+	//Methode die die Sichtbarkeit von Elementen verändert wenn ein Satz läuft
 	private void startSet() {
 		startButton.setDisable(true);
 		menuDatei.setDisable(true);
@@ -467,6 +475,7 @@ public class GameController implements Initializable {
 		infostat.setText("Spiel läuft.");
 	}
 
+	//Methode wird aufgerufen, wenn ein Satz gewonnen wurde
 	private void finishSet(String winner) {
 		System.out.println("Spiel vorbei. Der Gewinner ist: " + winner);
 		infostat.setText(winner + " hat gewonnen!");
@@ -484,10 +493,12 @@ public class GameController implements Initializable {
 		
 	}
 
+	//Methode zum Aktuallisieren der Textfelder
 	private void updateTextFields() throws SQLException{
 		updateGameAndSetTextFields();
 	}
 	
+	//Methode die die Zug Historie des gegnerischen Spielers aktuallisiert
 	private void updateOpponentPlayerHistory(List<Integer> moveHistory, int move){
 		moveHistory.add(move);
 		
@@ -511,6 +522,7 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	//Methode die meine Zug Historie aktuallisiert
 	private void updateMyPlayerMoveHistory(List<Integer> moveHistory, int move){
 		//moveHistory
 		moveHistory.add(move);
@@ -534,6 +546,8 @@ public class GameController implements Initializable {
 		    spielerOMoveHistory.setText(moveHistoryOfTextField);
 		}
 	}
+	
+	//Methode die die letzten Züge des jeweiligen Spielers ausliest und zurückgibt
 	private List<Integer> getLastMovesFromMoveHistory(List<Integer> moveHistory, int numMoves){
 		if (moveHistory.size() > 5){
 			int lastIndex = moveHistory.size() - 1;
@@ -543,6 +557,7 @@ public class GameController implements Initializable {
 	
 	}
 	
+	//Methode aktuallisiert den Satzstand und Spielstand
 	private void updateGameAndSetTextFields() throws SQLException{
 		ResultSet setWinners = databaseManager.getAllSetWinnersForGameId(String.valueOf(currentGameId));
 
@@ -563,6 +578,7 @@ public class GameController implements Initializable {
 		tfPlayer2_Points.setText(String.valueOf(setWinsPlayer2 * 2));
 	}
 
+	//Methode die den gegnerischen Spieler bestimmt
 	private char setOpponentPlayer(){
 		if (myPlayer == 'o') {
 			return 'x';
@@ -571,12 +587,13 @@ public class GameController implements Initializable {
 		}
 	}
 	
+	//Methode die ein Popup generiert, die den Sieger anzeigt
 	private void createPopup(String winner){
 		Alert alert = new Alert(AlertType.INFORMATION);
-		if (winner == "Spieler O"){
+		if (winner.equals("Spieler O")){
 			alert.setTitle("Spieler O hat gewonnen");
 			alert.setContentText("Der Gewinner ist Spieler O");
-		} else {			
+		} else if (winner.equals("Spieler X")) {			
 			alert.setTitle("Spieler X hat gewonnen");
 			alert.setContentText("Der Gewinner ist Spieler X");
 		}	
@@ -585,6 +602,7 @@ public class GameController implements Initializable {
 		alert.showAndWait();	
 	}
 	
+	//Methode die visuell anzeigt welcher Spieler wir sind
 	private void animateCurrentPlayer() {
 		Circle circle = getCircleForPlayer(myPlayer);
 		
@@ -596,12 +614,15 @@ public class GameController implements Initializable {
 		fade.play();
 	}
 
+	//Methode bestimmt welcher Kreis welchem SPieler zugeordnet wird
 	private Circle getCircleForPlayer(char player){
 		if (player == 'o')
 			return circlePlayerO;
 		else 
 			return circlePlayerX;
 	}
+	
+	//Methode zum einlesen der Daten aus dem File System
 	private void readPropertiesFromFileSystem() {
 		InputStream input = null;
 
