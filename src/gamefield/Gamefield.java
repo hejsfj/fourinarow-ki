@@ -116,271 +116,20 @@ public class Gamefield {
 		return !isColumnFull(columnIndex);
 	}
 
-
-	public boolean hasFourInARow(char spieler){
-
-		//Wenn einer der beiden spieler eine viererreihe hat wird true zurueckgegeben
-		if(spieler == ' '){
-			if(hasFourInARow('o') || hasFourInARow('x')){
-				return true;
-			}
-		}
-
-		//Laufe spalten entlang
-		for(int i=0; i<7; i++){
-			//Laufe zeilen hoch
-			for(int j=0; j<6; j++){
-
-				if(gamefield[i][j]==spieler){
-
-					//Pruefe waagerecht
-					//Pruefe links -3
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i-3][j] == spieler && gamefield[i-2][j] == spieler && gamefield[i-1][j] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe links -2 rechts +1
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i-2][j] == spieler && gamefield[i-1][j] == spieler && gamefield[i+1][j] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe links -1 rechts +2
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i-1][j] == spieler && gamefield[i+1][j] == spieler && gamefield[i+2][j] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe rechts +3
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i+1][j] == spieler && gamefield[i+2][j] == spieler && gamefield[i+3][j] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe senkrecht
-					//Pruefe unten -3
-					try{
-						if(gamefield[i][j-1] == spieler && gamefield[i][j-2] == spieler && gamefield[i][j-3] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe diagonal vierer
-					//Pruefe diagonal links runter -3
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i-3][j-3] == spieler && gamefield[i-2][j-2] == spieler && gamefield[i-1][j-1] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe diagonal links runter -2
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i-2][j-2] == spieler && gamefield[i-1][j-1] == spieler && gamefield[i+1][j+1] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe diagonal links runter -1
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i-1][j-1] == spieler && gamefield[i+1][j+1] == spieler && gamefield[i+2][j+2] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe diagonal rechts hoch
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i+1][j+1] == spieler && gamefield[i+2][j+2] == spieler && gamefield[i+3][j+3] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe diagonal rechts runter -3
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i+3][j-3] == spieler && gamefield[i+2][j-2] == spieler && gamefield[i+1][j-1] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe diagonal rechts runter -2
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i+2][j-2] == spieler && gamefield[i+1][j-1] == spieler && gamefield[i-1][j+1] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe diagonal rechts runter -1
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i+1][j-1] == spieler && gamefield[i-1][j+1] == spieler && gamefield[i-2][j+2] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-
-					//Pruefe diagonal rechts links hoch
-					try{
-						if(gamefield[i][j-1] != ' ' && gamefield[i-3][j+3] == spieler && gamefield[i-2][j+2] == spieler && gamefield[i-1][j+1] == spieler){
-							return true;
-						}
-					}catch(ArrayIndexOutOfBoundsException e){}
-				}			
-
-			}//end zeilen for
-		}//end spalten for
-
-		return false;
-	} //end of viererReihe
-
-
-	//Prueft ob im aktuellen Spielfeld drei Steine einer Sorte in einer Reihe liegen
-	//Falls kein Parameter uebergeben wird werden beide Arten geprueft
-	public boolean hasThreeInARow(){
-		if(hasThreeInARow('o') || hasThreeInARow('x')){
-			return true;
-		}
-		return false;
-
-	}
-
-	//Prueft ob im aktuellen Spielfeld drei Steine einer Sorte in einer Reihe liegen
-	//Falls kein Parameter uebergeben wird werden beide Arten geprueft
-	public boolean hasThreeInARow(char player){
-
-		//Laufe spalten entlang
-		for(int i=0; i<7; i++){
-			//Laufe zeilen hoch
-			for(int j=0; j<6; j++){
-				if(gamefield[i][j] == player){
-					//Pruefe waagerecht
-					//Pruefe links -2
-					try {
-						if(gamefield[i][j-1] != ' ' && gamefield[i-2][j] == player && gamefield[i-1][j] == player){
-							return true;
-						}
-						//Pruefe links -1 rechts +1
-						if(gamefield[i][j-1] != ' ' && gamefield[i-1][j] == player && gamefield[i+1][j] == player){
-							return true;
-						}
-						//Pruefe rechts +2
-						if(gamefield[i][j-1] != ' ' && gamefield[i+1][j] == player && gamefield[i+2][j] == player){
-							return true;
-						}
-						//Pruefe senkrecht
-						//Pruefe unten -2
-						if(gamefield[i][j-1] != ' ' && gamefield[i][j-1] == player && gamefield[i][j-2] == player){
-							return true;
-						}
-						//Pruefe diagonal dreier
-						//Pruefe diagonal links runter -2
-						if(gamefield[i][j-1] != ' ' && gamefield[i-2][j-2] == player && gamefield[i-1][j-1] == player){
-							return true;
-						}
-						//Pruefe diagonal links runter -1
-						if(gamefield[i][j-1] != ' ' && gamefield[i-1][j-1] == player && gamefield[i+1][j+1] == player){
-							return true;
-						}
-						//Pruefe diagonal rechts hoch
-						if(gamefield[i][j-1] != ' ' && gamefield[i+1][j+1] == player && gamefield[i+2][j+2] == player){
-							return true;
-						}
-						//Pruefe diagonal rechts runter -2
-						if(gamefield[i][j-1] != ' ' && gamefield[i+2][j-2] == player && gamefield[i+1][j-1] == player){
-							return true;
-						}
-						//Pruefe diagonal rechts runter -1
-						if(gamefield[i][j-1] != ' ' && gamefield[i+1][j-1] == player && gamefield[i-1][j+1] == player){
-							return true;
-						}
-						//Pruefe diagonal rechts links hoch
-						if(gamefield[i][j-1] != ' ' && gamefield[i-2][j+2] == player && gamefield[i-1][j+1] == player){
-							return true;
-						}
-					} catch (ArrayIndexOutOfBoundsException e){
-						//e.printStackTrace();
-					}
-				}			
-			}
-		}
-
-		return false;
-	}
-
-	//Prueft ob im aktuellen Spielfeld zwei Steine einer Sorte in einer Reihe liegen
-	//Falls kein Parameter uebergeben wird werden beide Arten geprueft
-	public boolean hasTwoInARow(){
-		if(hasTwoInARow('o') || hasTwoInARow('x')){
-			return true;
-		}
-		return false;
-	}
-
-	//Prueft ob im aktuellen Spielfeld zwei Steine einer Sorte in einer Reihe liegen
-	//Falls kein Parameter uebergeben wird werden beide Arten geprueft
-	public boolean hasTwoInARow(char player) {
-
-		//Laufe spalten entlang
-		for(int i=0; i<7; i++){
-			//Laufe zeilen hoch
-			for(int j=0; j<6; j++){
-				if(gamefield[i][j] == player){
-					//Pruefe waagerecht
-					//Pruefe links -1
-					try {
-						if(gamefield[i][j-1] != ' ' && gamefield[i-1][j] == player){
-							return true;
-						}
-						//Pruefe rechts +1
-						if(gamefield[i][j-1] != ' ' && gamefield[i+1][j] == player){
-							return true;
-						}
-						//Pruefe senkrecht
-						//Pruefe unten -1
-						if(gamefield[i][j-1] != ' ' && gamefield[i][j-1] == player){
-							return true;
-						}
-						//Pruefe diagonal zweier
-						//Pruefe links unten
-						if(gamefield[i][j-1] != ' ' && gamefield[i-1][j-1] == player){
-							return true;
-						}
-						//Pruefe rechts unten
-						if(gamefield[i][j-1] != ' ' && gamefield[i+1][j-1] == player){
-							return true;
-						}
-						//Pruefe links oben
-						if(gamefield[i][j-1] != ' ' && gamefield[i-1][j+1] == player){
-							return true;
-						}
-						//Pruefe rechts oben
-						if(gamefield[i][j-1] != ' ' && gamefield[i+1][j+1] == player){
-							return true;
-						}
-					} catch (ArrayIndexOutOfBoundsException e){
-						//e.printStackTrace();
-					}
-				}			
-			}
-		}
-
-		return false;
-	}
-
 	//Prueft ob spieler in dieser runde gewinnen kann und setzt den siegstein
 	//Prueft im anschluss ob gegner in dieser runde gewinnen kann und verhindert sieg
 	public int findWinPatternAndGetWinningMove(char player) {
 		int move = -1;
 
 		//Siegmuster erkennen
-		for(int rowIndex=0; rowIndex<6;rowIndex++){
-			for(int columnIndex=0; columnIndex<7; columnIndex++) {
+		for(int rowIndex = 0; rowIndex < 6;rowIndex++){
+			for(int columnIndex = 0; columnIndex < 7; columnIndex++) {
 				if(gamefield[rowIndex][columnIndex] == ' '){
 					try {
 						//Pruefe senkrecht
-						if(gamefield[rowIndex][columnIndex-1] == player && gamefield[rowIndex][columnIndex-2] == player && gamefield[rowIndex][columnIndex-3] == player){
-							move = rowIndex;
+						if(gamefield[rowIndex+1][columnIndex] == player && gamefield[rowIndex+2][columnIndex] == player && gamefield[rowIndex+3][columnIndex] == player){
+							move = columnIndex;
+							System.out.println("found vertical winning Pattern");
 							return move;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {
@@ -390,13 +139,15 @@ public class Gamefield {
 						//Pruefe waagerecht links -3 
 						if (rowIndex == 5){
 							if(gamefield[rowIndex][columnIndex-3] == player && gamefield[rowIndex][columnIndex-2] == player && gamefield[rowIndex][columnIndex-1] == player){
-								move = rowIndex;
+								move = columnIndex;
+								System.out.println("found horizontal winning Pattern");
 								return move;
 							}
 						}
 						else {
 							if(gamefield[rowIndex+1][columnIndex] != ' ' && gamefield[rowIndex][columnIndex-3] == player && gamefield[rowIndex][columnIndex-2] == player && gamefield[rowIndex][columnIndex-1] == player){
-								move = rowIndex;
+								move = columnIndex;
+								System.out.println("found horizontal winning Pattern");
 								return move;
 							}
 						}
@@ -407,12 +158,14 @@ public class Gamefield {
 						//Pruefe waagerecht links -2 und rechts +1
 						if (rowIndex == 5){
 							if(gamefield[rowIndex][columnIndex-2] == player && gamefield[rowIndex][columnIndex-1] == player && gamefield[rowIndex][columnIndex+1] == player){
-								move = rowIndex;
+								move = columnIndex;
+								System.out.println("found horizontal winning Pattern");
 								return move;
 							}
 						} else {
 							if(gamefield[rowIndex+1][columnIndex] != ' ' && gamefield[rowIndex][columnIndex-2] == player && gamefield[rowIndex][columnIndex-1] == player && gamefield[rowIndex][columnIndex+1] == player){
-								move = rowIndex;
+								move = columnIndex;
+								System.out.println("found horizontal winning Pattern");
 								return move;
 							}
 						}
@@ -423,12 +176,14 @@ public class Gamefield {
 						//Pruefe waagerecht links -1 und rechts +2
 						if (rowIndex == 5){
 							if(gamefield[rowIndex+1][columnIndex] != ' ' && gamefield[rowIndex][columnIndex-1] == player && gamefield[rowIndex][columnIndex+1] == player && gamefield[rowIndex][columnIndex+2] == player){
-								move = rowIndex;
+								move = columnIndex;
+								System.out.println("found horizontal winning Pattern");
 								return move;
 							}
 						} else {
 							if(gamefield[rowIndex+1][columnIndex] != ' ' && gamefield[rowIndex][columnIndex+1] == player && gamefield[rowIndex][columnIndex+2] == player && gamefield[rowIndex][columnIndex+3] == player){
-								move = rowIndex;
+								move = columnIndex;
+								System.out.println("found horizontal winning Pattern");
 								return move;
 							}
 						}
@@ -440,12 +195,14 @@ public class Gamefield {
 						//Pruefe waagerecht rechts +3
 						if (rowIndex == 5){
 							if(gamefield[rowIndex][columnIndex+1] == player && gamefield[rowIndex][columnIndex+2] == player && gamefield[rowIndex][columnIndex+3] == player){
-								move = rowIndex;
+								move = columnIndex;
+								System.out.println("found horizontal winning Pattern");
 								return move;
 							}
 						} else {
 							if(gamefield[rowIndex+1][columnIndex] != ' ' && gamefield[rowIndex][columnIndex+1] == player && gamefield[rowIndex][columnIndex+2] == player && gamefield[rowIndex][columnIndex+3] == player){
-								move = rowIndex;
+								move = columnIndex;
+								System.out.println("found horizontal winning Pattern");
 								return move;
 							}
 						}
@@ -455,7 +212,8 @@ public class Gamefield {
 					try {
 						//Pruefe diagonal links runter -3 
 						if(gamefield[rowIndex-1][columnIndex] != ' ' && gamefield[rowIndex-3][columnIndex-3] == player && gamefield[rowIndex-2][columnIndex-2] == player && gamefield[rowIndex-1][columnIndex-1] == player){
-							move = rowIndex;
+							move = columnIndex;
+							System.out.println("found diagonal winning Pattern");
 							return move;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {
@@ -464,7 +222,8 @@ public class Gamefield {
 					try {
 						//Pruefe diagonal links runter -2 und rechts hoch +1
 						if(gamefield[rowIndex-1][columnIndex] != ' ' && gamefield[rowIndex-2][columnIndex-2] == player && gamefield[rowIndex-1][columnIndex-1] == player && gamefield[rowIndex+1][columnIndex+1] == player){
-							move = rowIndex;
+							move = columnIndex;
+							System.out.println("found diagonal winning Pattern");
 							return move;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {
@@ -473,7 +232,8 @@ public class Gamefield {
 					try {
 						//Pruefe diagonal links runter -1 und rechts hoch +2
 						if(gamefield[rowIndex-1][columnIndex] != ' ' && gamefield[rowIndex-1][columnIndex-1] == player && gamefield[rowIndex+1][columnIndex+1] == player && gamefield[rowIndex+2][columnIndex+2] == player){
-							move = rowIndex;
+							move = columnIndex;
+							System.out.println("found diagonal winning Pattern");
 							return move;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {
@@ -482,7 +242,8 @@ public class Gamefield {
 					try {
 						//Pruefe diagonal rechts hoch +3
 						if(gamefield[rowIndex-1][columnIndex] != ' ' && gamefield[rowIndex+1][columnIndex+1] == player && gamefield[rowIndex+2][columnIndex+2] == player && gamefield[rowIndex+3][columnIndex+3] == player){
-							move = rowIndex;
+							move = columnIndex;
+							System.out.println("found diagonal winning Pattern");
 							return move;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {
@@ -491,7 +252,8 @@ public class Gamefield {
 					try {
 						//Pruefe diagonal rechts runter -3 
 						if(gamefield[rowIndex-1][columnIndex] != ' ' && gamefield[rowIndex+3][columnIndex-3] == player && gamefield[rowIndex+2][columnIndex-2] == player && gamefield[rowIndex+1][columnIndex-1] == player){
-							move = rowIndex;
+							move = columnIndex;
+							System.out.println("found diagonal winning Pattern");
 							return move;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {
@@ -500,7 +262,8 @@ public class Gamefield {
 					try {
 						//Pruefe diagonal rechts runter -2 und links hoch +1
 						if(gamefield[rowIndex-1][columnIndex] != ' ' && gamefield[rowIndex+2][columnIndex-2] == player && gamefield[rowIndex+1][columnIndex-1] == player && gamefield[rowIndex-1][columnIndex+1] == player){
-							move = rowIndex;
+							move = columnIndex;
+							System.out.println("found diagonal winning Pattern");
 							return move;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {
@@ -509,7 +272,8 @@ public class Gamefield {
 					try {
 						//Pruefe diagonal rechts runter -1  und links hoch +2
 						if(gamefield[rowIndex-1][columnIndex] != ' ' && gamefield[rowIndex+1][columnIndex-1] == player && gamefield[rowIndex-1][columnIndex+1] == player && gamefield[rowIndex-2][columnIndex+2] == player){
-							move = rowIndex;
+							move = columnIndex;
+							System.out.println("found diagonal winning Pattern");
 							return move;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {
@@ -518,7 +282,8 @@ public class Gamefield {
 					try {
 						//Pruefe diagonal links hoch +3
 						if(gamefield[rowIndex-1][columnIndex] != ' ' && gamefield[rowIndex-1][columnIndex+1] == player && gamefield[rowIndex-2][columnIndex+2] == player && gamefield[rowIndex-3][columnIndex+3] == player){
-							move = rowIndex;
+							move = columnIndex;
+							System.out.println("found diagonal winning Pattern");
 							return move;
 						}
 					} catch(ArrayIndexOutOfBoundsException e) {

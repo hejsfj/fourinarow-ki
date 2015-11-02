@@ -187,7 +187,6 @@ public class AgentKI {
 				System.out.println("no winning pattern for our player gefunden");
 				if ((move = gamefield.findWinPatternAndGetWinningMove(opponentPlayer)) == -1){
 					System.out.println("no winning pattern for opponent player gefunden");
-					System.out.println("random!!!!");
 					return calculateRandomMove(gamefield);
 				}
 			}
