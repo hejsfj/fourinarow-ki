@@ -85,7 +85,7 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="220.0">
             	<children>
-	            		<Text text="Letzte Spielzüge">
+	            		<Text text="Letzte Spielzüge:">
 		            	</Text>
 	            </children>
 	            <children>
@@ -163,15 +163,20 @@
                     </Pane>
                   </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="113.0" prefWidth="220.0" >
+                <VBox alignment="CENTER" prefHeight="113.0" prefWidth="220.0" >
 					<children>
-                		 <Label fx:id="lGameOverview" textAlignment="LEFT">
+                		 <Label fx:id="lGameOverview" textAlignment="LEFT" text="Spiel: ">
+                          <font>
+                            <Font size="16.0"/>
+                          </font>
+                        </Label>
+                        <Label fx:id="lSetOverview" textAlignment="LEFT" text="Satz: ">
                           <font>
                             <Font size="16.0"/>
                           </font>
                         </Label>
                     </children>
-				</HBox>
+				</VBox>
               </children>
               <rotationAxis>
                 <Point3D />
