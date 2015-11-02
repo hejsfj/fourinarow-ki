@@ -83,15 +83,37 @@
                 </Text>
               </children>
             </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="220.0">
+            	<children>
+	            		<Text text="Spielzug in Spalte:">
+		            	</Text>
+	            </children>
+	            <children>
+	            		<Text fx:id="spielerOMoveHistory" text="">
+		            	</Text>
+	            </children>
+            </VBox>
           </children>
         </VBox>
       </left>
       <right>
-        <VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
-          <children>
-            <Circle fx:id="circlePlayerX" fill="#ff3d00" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Text font="$x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler X" textOrigin="CENTER" />
-          </children>
+        <VBox prefHeight="345.0" prefWidth="220.0"  BorderPane.alignment="CENTER">
+			<children>
+	           	<VBox alignment="CENTER" prefHeight="303.0" prefWidth="220.0">
+	            	<Circle fx:id="circlePlayerX" fill="#ff3d00" radius="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+	            	<Text font="$x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Spieler X" textOrigin="CENTER" />
+	         	</VBox>
+				<VBox alignment="TOP_CENTER" prefHeight="303.0" prefWidth="220.0">
+		           	<children>
+	            		<Text text="Spielzug in Spalte:">
+		            	</Text>
+	            	</children>
+		            <children>
+		            	<Text fx:id="spielerXMoveHistory" text="">
+		            	</Text>
+		            </children>
+				</VBox>
+			</children>
         </VBox>
       </right>
       <top>
@@ -141,7 +163,15 @@
                     </Pane>
                   </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="113.0" prefWidth="220.0" />
+                <HBox alignment="CENTER" prefHeight="113.0" prefWidth="220.0" >
+					<children>
+                		 <Label fx:id="lGameOverview" textAlignment="LEFT">
+                          <font>
+                            <Font size="16.0"/>
+                          </font>
+                        </Label>
+                    </children>
+				</HBox>
               </children>
               <rotationAxis>
                 <Point3D />

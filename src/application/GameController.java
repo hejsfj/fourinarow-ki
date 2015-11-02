@@ -6,12 +6,16 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.pusher.client.channel.PrivateChannel;
 
 import agentKI.AgentKI;
+import agentKI.KI_MinMax;
 import database.DatabaseManager;
 import database.DatabaseSetRecord;
 import fileInterface.Agentfile;
@@ -82,50 +86,39 @@ import pusherInterface.PusherEventReaderService;
  */
 public class GameController implements Initializable {
 
-	@FXML
-	private MenuBar menuBar;
-	@FXML
-	private Menu menuDatei;
-	@FXML
-	private Menu menuSpiel;
-	@FXML
-	private MenuItem menuItem_LoadGame;
-	@FXML
-	private MenuItem menuItem_PlayerOWinsCurrentSet;
-	@FXML
-	private MenuItem menuItem_PlayerXWinsCurrentSet;
-	@FXML
-	private MenuItem menuItem_StopCurrentSet;
+	@FXML private MenuBar menuBar;
+	@FXML private Menu menuDatei;
+	@FXML private Menu menuSpiel;
+	@FXML private MenuItem menuItem_LoadGame;
+	@FXML private MenuItem menuItem_PlayerOWinsCurrentSet;
+	@FXML private MenuItem menuItem_PlayerXWinsCurrentSet;
+	@FXML private MenuItem menuItem_StopCurrentSet;
 
-	@FXML
-	private Button newButton; // Value injected by FXMLLoader
-	@FXML
-	private Button statsButton; // Value injected by FXMLLoader
-	@FXML
-	private Button startButton; // Value injected by FXMLLoader
+	@FXML private Button newButton;
+	@FXML private Button statsButton;
+	@FXML private Button startButton;
 
-	@FXML
-	private Text tfPlayer1_Points;
-	@FXML
-	private Text tfPlayer2_Points;
-	@FXML
-	private Text tfPlayer1_Set_Wins;
-	@FXML
-	private Text tfPlayer2_Set_Wins;
+	@FXML private Text tfPlayer1_Points;
+	@FXML private Text tfPlayer2_Points;
+	@FXML private Text tfPlayer1_Set_Wins;
+	@FXML private Text tfPlayer2_Set_Wins;
+	
+	@FXML private Text spielerOMoveHistory;
+	@FXML private Text spielerXMoveHistory;
+	
+	@FXML private Label lGameOverview;
 
-	@FXML
-	private Circle circlePlayerO;
-	@FXML
-	private Circle circlePlayerX;
+	@FXML private Circle circlePlayerO;
+	@FXML private Circle circlePlayerX;
 
-	@FXML
-	private Label infostat;
-	@FXML
-	private GridPane gamefieldGrid;
+	@FXML private Label infostat;
+	@FXML private GridPane gamefieldGrid;
 
 	private DatabaseManager databaseManager;
 	private GameProperties gameProperties;
 	private Gamefield gamefield;
+	
+	private KI_MinMax ki_minMax;
 	private AgentKI agent;
 	private char myPlayer;
 	private char opponentPlayer;
@@ -137,14 +130,15 @@ public class GameController implements Initializable {
 	private DatabaseSetRecord selectedSetFromLoadScreen;
 	private PusherEventReaderService pusherEventReaderService;
 	private ServerfileReaderService serverFileReaderService;
+	private List<Integer> myPlayerMoveHistory;
+	private List<Integer> opponentPlayerMoveHistory;
 
 	/**
 	 * Aktualisiert den Gewinner des aktuellen Spielsatzes.
 	 *
 	 * @param event
 	 *            Ein Event repräsentiert eine Art von Aktion. Dieser Event-Type
-	 *            wird benutzt um z.B. wenn auf einen Button-Klick reagiert
-	 *            werden soll.
+	 *            wird benutzt um z.B.auf einen Button-Klick zu reagieren.
 	 * @see {@link javafx.event.ActionEvent}
 	 */
 	@FXML
@@ -163,7 +157,7 @@ public class GameController implements Initializable {
 	}
 
 	/**
-	 * Stoppt / Beendet den aktuell laufenden Spielsatz.
+	 * Stoppt den aktuell laufenden Spielsatz.
 	 *
 	 * @param event
 	 *            {@link javafx.event.ActionEvent}
@@ -187,7 +181,7 @@ public class GameController implements Initializable {
 	}
 
 	/**
-	 * Lädt einen Spielstand aus der Datenbank.
+	 * Zeigt den Bildschirm zum Laden von Sätzen.
 	 *
 	 * @param event
 	 *            {@link javafx.event.ActionEvent}
@@ -203,7 +197,7 @@ public class GameController implements Initializable {
 	}
 
 	/**
-	 * Startet ein neues Spiel.
+	 * Zeigt den Bildschirm zum Starten eines neuen Spiels.
 	 *
 	 * @param event
 	 *            {@link javafx.event.ActionEvent}
@@ -258,20 +252,16 @@ public class GameController implements Initializable {
 		readPropertiesFromFileSystem();
 		usedInterface = gameProperties.getProperty(GameProperties.INTERFACE);
 		myPlayer = gameProperties.getProperty(GameProperties.SPIELER).charAt(0);
+		opponentPlayer = setOpponentPlayer();
 
-		if (myPlayer == 'o') {
-			opponentPlayer = 'x';
-			animateCurrentPlayer(circlePlayerO);
-		} else {
-			opponentPlayer = 'o';
-			animateCurrentPlayer(circlePlayerX);
-		}
+		animateCurrentPlayer();
 
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				startSet();
 				determineCurrentGameIdAndSetNr();
+				lGameOverview.setText("Spiel: " + currentGameId + "\nSatz: " + currentSetNr);
 
 				if (usedInterface.equals("File")) {
 					startFileInterfaceGame();
@@ -282,7 +272,7 @@ public class GameController implements Initializable {
 			}
 		});
 	}
-
+	
 	private Stage showSettingsScreen() throws IOException {
 		Stage stage = (Stage) startButton.getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
@@ -306,8 +296,12 @@ public class GameController implements Initializable {
 	private void initRequiredComponents() {
 		gameProperties = new GameProperties();
 		gamefield = new Gamefield();
-		agent = new AgentKI("");
+		agent = new AgentKI("wir");
+		ki_minMax = new KI_MinMax(gamefield, 'o');
 		databaseManager = DatabaseManager.getInstance();
+		
+		myPlayerMoveHistory = new ArrayList<Integer>();
+		opponentPlayerMoveHistory = new ArrayList<Integer>();
 	}
 
 	private void startPusherInterfaceGame() {
@@ -330,6 +324,7 @@ public class GameController implements Initializable {
 			if (pusherEventReaderService.getValue().getGegnerzug() != -1) {
 				int opponentMove = pusherEventReaderService.getValue().getGegnerzug();
 				gamefield.insertCoin(gamefieldGrid, opponentMove, opponentPlayer);
+				updateOpponentPlayerHistory(opponentPlayerMoveHistory, opponentMove);
 				try {
 					// addZug(int spiel_id, int satz_nr,int zug_nr, int spalte,
 					// String spieler)
@@ -350,7 +345,7 @@ public class GameController implements Initializable {
 				int move = agent.calculateMove(gamefield);
 				gamefield.insertCoin(gamefieldGrid, move, myPlayer);
 				pusher.triggerClientMove(channel, move);
-
+				updateMyPlayerMoveHistory(myPlayerMoveHistory, move);
 				try {
 					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, move,
 							"spieler" + String.valueOf(myPlayer));
@@ -379,12 +374,13 @@ public class GameController implements Initializable {
 		serverFileReaderService.setOnSucceeded(e -> {
 			// Gegnerzug verarbeiten
 			if (serverFileReaderService.getValue().getGegnerzug() != -1) {
-				int gegnerZug = serverFileReaderService.getValue().getGegnerzug();
-				gamefield.insertCoin(gamefieldGrid, gegnerZug, opponentPlayer);
+				int opponentMove = serverFileReaderService.getValue().getGegnerzug();
+				gamefield.insertCoin(gamefieldGrid, opponentMove, opponentPlayer);
+				updateOpponentPlayerHistory(opponentPlayerMoveHistory, opponentMove);
 				try {
 					// addZug(int spiel_id, int satz_nr,int zug_nr, int spalte,
 					// String spieler)
-					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, gegnerZug,
+					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, opponentMove,
 							"spieler" + String.valueOf(opponentPlayer));
 					if (zugNrCounter == 1){
 						startPlayer = "Spieler " + String.valueOf(opponentPlayer).toUpperCase();
@@ -399,7 +395,9 @@ public class GameController implements Initializable {
 			// unseren Zug bestimmen und wegschicken
 			if (!serverFileReaderService.getValue().isGameOver()) {
 				int move = agent.calculateMove(gamefield);
+				System.out.println("Move From KI: " + move);
 				gamefield.insertCoin(gamefieldGrid, move, myPlayer);
+				updateMyPlayerMoveHistory(myPlayerMoveHistory, move);
 				try {
 					agentfileWriter.writeAgentfile(new Agentfile(move));
 					databaseManager.addMove(currentGameId, currentSetNr, zugNrCounter, move,
@@ -481,7 +479,61 @@ public class GameController implements Initializable {
 		}
 	}
 
-	private void updateTextFields() throws SQLException {
+	private void updateTextFields() throws SQLException{
+		updateGameAndSetTextFields();
+	}
+	
+	private void updateOpponentPlayerHistory(List<Integer> moveHistory, int move){
+		moveHistory.add(move);
+		
+		List <Integer> last5Moves = getLastMovesFromMoveHistory(moveHistory, 5);
+		
+		Iterator<Integer> myListIterator = last5Moves.iterator(); 
+
+	    spielerXMoveHistory.setText("");
+	    
+		while (myListIterator.hasNext()) {
+		    Integer moveFromList = myListIterator.next();     
+
+		    String moveHistoryOfTextField = spielerXMoveHistory.getText();
+		    moveHistoryOfTextField = moveHistoryOfTextField + "\n" + String.valueOf(moveFromList);
+		    spielerXMoveHistory.setText(moveHistoryOfTextField);
+		    System.out.println();
+		    System.out.println("OpponentPlayer moveHistory: " + moveFromList);
+		}
+	}
+	
+	private void updateMyPlayerMoveHistory(List<Integer> moveHistory, int move){
+		//moveHistory
+		moveHistory.add(move);
+		
+		List <Integer> last5Moves = getLastMovesFromMoveHistory(moveHistory, 5);
+		
+		Iterator<Integer> myListIterator = last5Moves.iterator(); 
+
+	    spielerOMoveHistory.setText("");
+	    
+		while (myListIterator.hasNext()) {
+		    Integer moveFromList = myListIterator.next();     
+		    
+		    String moveHistoryOfTextField = spielerOMoveHistory.getText();
+		    moveHistoryOfTextField = moveHistoryOfTextField + "\n" + String.valueOf(moveFromList);
+		    spielerOMoveHistory.setText(moveHistoryOfTextField);
+
+		    System.out.println();
+		    System.out.println("MyPlayer moveHistory: " + moveFromList);
+		}
+	}
+	private List<Integer> getLastMovesFromMoveHistory(List<Integer> moveHistory, int numMoves){
+		if (moveHistory.size() > 5){
+			int lastIndex = moveHistory.size() - 1;
+			return moveHistory.subList(lastIndex - numMoves, lastIndex);
+		}
+		return moveHistory;
+	
+	}
+	
+	private void updateGameAndSetTextFields() throws SQLException{
 		ResultSet setWinners = databaseManager.getAllSetWinnersForGameId(String.valueOf(currentGameId));
 
 		int setWinsPlayer1 = 0;
@@ -501,7 +553,17 @@ public class GameController implements Initializable {
 		tfPlayer2_Points.setText(String.valueOf(setWinsPlayer2 * 2));
 	}
 
-	private void animateCurrentPlayer(Circle circle) {
+	private char setOpponentPlayer(){
+		if (myPlayer == 'o') {
+			return 'x';
+		} else {
+			return 'o';
+		}
+	}
+	
+	private void animateCurrentPlayer() {
+		Circle circle = getCircleForPlayer(myPlayer);
+		
 		FadeTransition fade = new FadeTransition(Duration.millis(500), circle);
 		fade.setFromValue(1);
 		fade.setToValue(0);
@@ -510,6 +572,12 @@ public class GameController implements Initializable {
 		fade.play();
 	}
 
+	private Circle getCircleForPlayer(char player){
+		if (player == 'o')
+			return circlePlayerO;
+		else 
+			return circlePlayerX;
+	}
 	private void readPropertiesFromFileSystem() {
 		InputStream input = null;
 
