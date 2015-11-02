@@ -41,13 +41,13 @@ public class AgentKI {
 	 */
 	public int calculateMove(Gamefield gamefield) {		
 
-		//return calculateRandomMove(gamefield);
+		return calculateRandomMove(gamefield);
 		// if startspieler = wir
 		// Strategie: mit 4 Zügen zum gewinn
 		// plan: erreichen von ___xx_x oder x_xx___ 
 		// oder erreichen von __xxx__
 		
-		
+		/*
 		System.out.println("startPlayer: " + startPlayer);
 		int move;
 		
@@ -61,7 +61,7 @@ public class AgentKI {
 		else {
 			return playDefensiveStrategy(gamefield);
 		}
-		
+		*/
 	}
 	
 	private boolean isFourInARowInBottomRowPossible(Gamefield gamefield){
