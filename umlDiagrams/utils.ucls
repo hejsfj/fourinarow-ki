@@ -3,7 +3,7 @@
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="utils.HmacSHA256" project="fourinarow-ki" 
     file="/fourinarow-ki/src/utils/HmacSHA256.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="255" x="41" y="37"/>    
+    <position height="106" width="304" x="41" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

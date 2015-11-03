@@ -3,7 +3,7 @@
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
   <class id="1" language="java" name="database.DatabaseStructure" project="fourinarow-ki" 
     file="/fourinarow-ki/src/database/DatabaseStructure.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="183" x="41" y="37"/>    
+    <position height="-1" width="-1" x="940" y="180"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="database.DatabaseManager" project="fourinarow-ki" 
     file="/fourinarow-ki/src/database/DatabaseManager.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="186" y="443"/>    
+    <position height="-1" width="-1" x="616" y="181"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
@@ -21,13 +21,25 @@
   </class>  
   <class id="3" language="java" name="database.DatabaseSetRecord" project="fourinarow-ki" 
     file="/fourinarow-ki/src/database/DatabaseSetRecord.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="596" y="290"/>    
+    <position height="-1" width="-1" x="227" y="181"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
+  <association id="4">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="5" name="dbManagerInstance"/>      
+      <multiplicity id="6" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="7">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="false" static="true"/>    

@@ -4,7 +4,7 @@ import java.util.Properties;
 
 
 /**
- * Diese Klasse enthält die Konfigurationsparameter für den Spieleagenten.
+ * Klasse, die die Konfigurationsparameter für den Spieleagenten enthält.
  */
 public class GameProperties extends Properties{
 

@@ -3,66 +3,67 @@
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
   <package id="1" language="java" name="agentKI" project="fourinarow-ki" file="/fourinarow-ki/src/agentKI" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="133" y="220"/>    
+    <position height="55" width="122" x="543" y="132"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="2" language="java" name="application" project="fourinarow-ki" file="/fourinarow-ki/src/application" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="342" y="60"/>    
+    <position height="55" width="122" x="421" y="37"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="3" language="java" name="database" project="fourinarow-ki" file="/fourinarow-ki/src/database" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="530" y="92"/>    
+    <position height="55" width="122" x="204" y="132"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="4" language="java" name="fileInterface" project="fourinarow-ki" file="/fourinarow-ki/src/fileInterface" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="530" y="220"/>    
+    <position height="55" width="122" x="42" y="132"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="5" language="java" name="gamefield" project="fourinarow-ki" file="/fourinarow-ki/src/gamefield" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="133" y="92"/>    
+    <position height="-1" width="-1" x="739" y="246"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="6" language="java" name="pusherInterface" project="fourinarow-ki" 
     file="/fourinarow-ki/src/pusherInterface" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="343" y="220"/>    
+    <position height="55" width="137" x="366" y="132"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="7" language="java" name="utils" project="fourinarow-ki" file="/fourinarow-ki/src/utils" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="345" y="307"/>    
+    <position height="-1" width="-1" x="435" y="264"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <dependency id="8">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
   </dependency>  
   <dependency id="9">    
     <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
+    <end type="TARGET" refId="4"/>  
   </dependency>  
   <dependency id="10">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
   <dependency id="11">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="12">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="12">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
   <dependency id="13">    
+    <bendpoint x="695" y="132"/>    
     <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="4"/>  
+    <end type="TARGET" refId="5"/>  
   </dependency>  
   <dependency id="14">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

@@ -23,20 +23,22 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 /**
- * Diese Klasse enthält die Anwendungslogik für die Settings.fxml-Datei, welche
+ * Klasse enthält die Anwendungslogik für die Settings.fxml-Datei, welche
  * den Konfigurations-Bildschrim repräsentiert. Beim Start des Programms wird
- * das Einstellungsfenster (Settings.fxml) aufgerufen.In
- * diesem hat der Anwender die Möglichkeit auszuwählen, welche Startoptionen er
+ * das Einstellungsfenster (Settings.fxml) aufgerufen.<br>
+ * In diesem hat der Anwender die Möglichkeit auszuwählen, welche Startoptionen er
  * wählen möchte. Die eingetragenen Startwerte sind für den Spielstart
  * essentiell. Alle 5 Boxen wurden mit V-Boxen (Aufteilung der Darstellung in
  * horizontal angeordnete Blöcke) befüllt. Box 1 wurde mit einer Menüleiste und
  * einer H-Box (Aufteilung der Darstellung in vertikal angeordnete Blöcke)
  * befüllt. Das Menü umfasst zwei MenuItems, welche Links zu den weiteren
  * Fenstern des Programms führen. Darunter wurde der Text „Neues Spiel“
- * eingefügt. Die Boxen 2 und 4 wurden mit einer V-Box befüllt um die Box 3 in
+ * eingefügt. <br>
+ * Die Boxen 2 und 4 wurden mit einer V-Box befüllt um die Box 3 in
  * der Mitte des Fensters zu fixieren. Box 3 wurde zunächst mit einer V-Box
  * befüllt, welche wiederum mit H-Boxen befüllt ist, die alle Eingabeoptionen
- * für den Spielstart bereitstellen. Box 5 umfasst wie Box 1 die gesamte Breite
+ * für den Spielstart bereitstellen.<br> 
+ * Box 5 umfasst wie Box 1 die gesamte Breite
  * des Fensters und beinhaltet einen zentrierten Button, der zum
  * Spielfeldfenster (Game.fxml) weiterleitet, sobald die Startoptionen korrekt
  * eingetragen wurden. Ein zentriertes Label, welches sich unter dem Button
@@ -44,7 +46,11 @@ import javafx.stage.Stage;
  * Rückmeldungen an.
  * 
  * <br>
- * <img src="doc-files/SettingsScreen.jpg" width="450" height="450" alt="UI Aufbau des Setting-Screens"> 
+ *  <figure>
+ *		<img src="doc-files/SettingsScreen.jpg" width="450" height="450" alt="UI Aufbau des Setting-Screens"
+ *			title="UI Aufbau des Setting-Screens">
+ *		<figcaption>UI Aufbau des Setting-Screens</figcaption>
+ *	</figure>
  * <br>
  */
 public class SettingsController implements Initializable {

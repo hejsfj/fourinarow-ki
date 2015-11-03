@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="agentKI.AgentKI" project="fourinarow-ki" 
-    file="/fourinarow-ki/src/agentKI/AgentKI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="165" x="41" y="37"/>    
+  <class id="1" language="java" name="agentKI.Agent" project="fourinarow-ki" 
+    file="/fourinarow-ki/src/agentKI/Agent.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="196" x="190" y="66"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      

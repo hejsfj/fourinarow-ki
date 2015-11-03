@@ -3,7 +3,7 @@
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="application.GameProperties" project="fourinarow-ki" 
     file="/fourinarow-ki/src/application/GameProperties.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="225" width="124" x="313" y="230"/>    
+    <position height="232" width="153" x="373" y="273"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="application.SettingsController" project="fourinarow-ki" 
     file="/fourinarow-ki/src/application/SettingsController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="197" x="194" y="37"/>    
+    <position height="178" width="248" x="535" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="application.LoadController" project="fourinarow-ki" 
     file="/fourinarow-ki/src/application/LoadController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="197" x="668" y="37"/>    
+    <position height="142" width="231" x="823" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="application.GameController" project="fourinarow-ki" 
     file="/fourinarow-ki/src/application/GameController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="197" x="431" y="37"/>    
+    <position height="196" width="284" x="211" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="application.Main" project="fourinarow-ki" 
     file="/fourinarow-ki/src/application/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="113" x="41" y="37"/>    
+    <position height="124" width="130" x="41" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="false" static="true"/>      
@@ -48,16 +48,24 @@
   </class>  
   <association id="6">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="7" name="gameProperties"/>      
-      <multiplicity id="8" minimum="0" maximum="1"/>    
+      <attribute id="7" name="gameProperties">        
+        <position height="0" width="0" x="31" y="64"/>      
+      </attribute>      
+      <multiplicity id="8" minimum="0" maximum="1">        
+        <position height="0" width="0" x="31" y="64"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="9">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="10" name="gameProperties"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
+      <attribute id="10" name="gameProperties">        
+        <position height="0" width="0" x="31" y="64"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="31" y="64"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

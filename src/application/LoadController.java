@@ -29,7 +29,7 @@ import javafx.util.Callback;
 
 
 /**
- * Diese Klasse enthält die Anwendungslogik für die Settings.fxml-Datei.
+ * Klasse enthält die Anwendungslogik für die <code>Settings.fxml</code>-Datei.
  * 
  */
 public class LoadController implements Initializable {

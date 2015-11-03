@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 
 /**
- * Diese Klasse ist der Einstiegspunkt der Applikation.
+ * Einstiegspunkt der Applikation.
  */
 public class Main extends Application {
 	
