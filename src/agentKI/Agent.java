@@ -5,63 +5,53 @@ import java.util.Random;
 import gamefield.Gamefield;
 
 /**
- * Dient der Berechnung des nächsten Spielzuges
- * @author Tim
+ * Klasse zur Berechnung des nächsten Spielzuges.
  *
  */
-public class AgentKI {
-	
+public class Agent {
 	private boolean isAttackingFirstLineStrategyPossible = true;
-	char myPlayer;
-	char opponentPlayer;
-	char startPlayer;
-	// Zugzeit auf englisch??
+	private char myPlayer;
+	private char opponentPlayer;
+	private char startPlayer;
+
 	/**
-	 * Zeit, die Agent zur Berechnung seines Spielzuges hat.
+	 * Default-Konstruktur der Agenten-Klasse.
 	 */
-	private int zugzeit;
+	public Agent(){}
 	
 	/**
-	 * default-Konstruktur der AgentKI-Klasse
+	 * Methode zum Setzen des Startspielers in der Agenten-Klasse.
+	 * @param startPlayer
+	 *            'o' entspricht "Spieler O" und 'x' entspricht "Spieler X"
 	 */
-	public AgentKI(char myPlayer){
-		this.myPlayer = myPlayer;
-	}
-	
-	public AgentKI(){
-		
-	}
-	
 	public void setStartplayer(char startPlayer){
 		this.startPlayer = startPlayer;
 	}
+	
+	/**
+	 * Methode zum Setzen des gegnerischen Spielers in der Agenten-Klasse.
+	 * @param opponentPlayer
+	 *            'o' entspricht "Spieler O" und 'x' entspricht "Spieler X"
+	 */
 	public void setOpponentPlayer(char opponentPlayer){
 		this.opponentPlayer = opponentPlayer;
 	}
+	
+	/**
+	 * Methode zum Setzen des eigenen Spielers in der Agenten-Klasse.
+	 * @param myPlayer
+	 *            'o' entspricht "Spieler O" und 'x' entspricht "Spieler X"
+	 */
 	public void setMyPlayer(char myPlayer){
 		this.myPlayer = myPlayer;
 	}
 	
 	/**
-	 * benutzerdefinierter-Konstruktur der AgentKI-Klasse
-	 * @param zugzeit {@link #zugzeit}
-	 */
-	public AgentKI(int zugzeit){
-	
-	}
-	
-	/**
-	 * kalkuliert den nächsten Zug
+	 * Kalkuliert den nächsten Zug.
 	 * @param gamefield {@link gamefield.Gamefield#Gamefield()}
-	 * @return Spalte in der Spielstein gesetzt werden soll
+	 * @return Spalte, in die der Spielstein gesetzt wird.
 	 */
 	public int calculateMove(Gamefield gamefield) {		
-
-		// if startspieler = wir
-		// Strategie: mit 4 Zügen zum gewinn
-		// plan: erreichen von ___xx_x oder x_xx___ 
-		// oder erreichen von __xxx__
-		
 		if (myPlayer == startPlayer) {
 			if (isAttackingFirstLineStrategyPossible){
 				return playAttackingFirstLineStrategy(gamefield);
@@ -72,7 +62,6 @@ public class AgentKI {
 		else {
 			return playDefensiveStrategy(gamefield);
 		}
-		
 	}
 	
 	private boolean isFourInARowInBottomRowPossible(Gamefield gamefield){
@@ -112,6 +101,10 @@ public class AgentKI {
 	}
 	
 	private int playAttackingFirstLineStrategy(Gamefield gamefield){
+		// Strategie: mit 4 Zügen zum gewinn
+		// plan: erreichen von ___xx_x oder x_xx___ 
+		// oder erreichen von __xxx__
+		
 		if (gamefield.isEmpty()){
 			System.out.println("starting move! 3");
 			return 3;
@@ -120,7 +113,6 @@ public class AgentKI {
 		if (isFourInARowInBottomRowPossible(gamefield)) {
 			return calculateMoveToGet4InARowInBottomRow(gamefield);
 		}
-		
 		
 		if (areFieldsLeftFromBottomMidNotOccupiedByOpponent(gamefield)) {
 			System.out.println("our plan is perfect left side");
@@ -175,11 +167,9 @@ public class AgentKI {
 		}
 		isAttackingFirstLineStrategyPossible = false;
 		return playDefensiveStrategy(gamefield);
-		
 	}
 	
 	private int playDefensiveStrategy(Gamefield gamefield){
-		
 		int move;
 		if ((move = playDefensiveFirstLineStrategy(gamefield)) == -1) {
 			System.out.println("firstLineStrategy over");
@@ -195,10 +185,8 @@ public class AgentKI {
 			return calculateRandomMove(gamefield);
 		}
 		return move;
-	
-		//return playDefensiveFirstLineStrategy(gamefield);
-		// UNBEDINGT PRÜFEN: IST ZUG VALIDE!!!! SPRICH PASST DAS DING IN DIE SPALTE
 	}
+	
 	private int playDefensiveFirstLineStrategy(Gamefield gamefield){
 		if (gamefield.isFieldEmpty(5, 3)){
 			System.out.println("playing defensive first line");
@@ -250,7 +238,4 @@ public class AgentKI {
 		} 
 		return calculateRandomMove(gamefield);
 	}
-	
-	
-	
 }

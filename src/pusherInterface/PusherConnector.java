@@ -10,7 +10,6 @@ import com.pusher.client.connection.ConnectionEventListener;
 import com.pusher.client.connection.ConnectionStateChange;
 import utils.HmacSHA256;
 
-
 /**
  * Die Hauptklasse für die Kommunikation mit dem Server.
  */
@@ -23,7 +22,7 @@ public class PusherConnector implements ConnectionEventListener {
 	private PrivateChannel channel;
 	
 	/**
-	 * Instantiierung des PusherConnectors.
+	 * Instanziierung des PusherConnectors.
 	 *
 	 * @param pusherAppId Die AppID für die Pusher Kommunikation
 	 * @param pusherAppKey Der AppKey für die Pusher Kommunikation
@@ -37,13 +36,8 @@ public class PusherConnector implements ConnectionEventListener {
 
 		options.setAuthorizer(new Authorizer() {
 			/**
-			 * 
 			 * Der Client kann auf einem ausgewählten Channel authorisiert werden, 
-			 * wenn er den AppKey und AppSecret kennt.
-			 * Der Client muss ein POST Request empfangen.
-			 * Der Rückgabewert ist ein JSON String, der aus dem AppKey 
-			 * gefolgt von einem Doppelpunkt und der Authentifizierungssignatur.
-			 * 
+			 * wenn er den zugehörigen AppKey und AppSecret kennt.
 			 */
 			public String authorize(String channelName, String socketId) throws AuthorizationFailureException {
 				System.out.println("The clients channelName: " + channelName);
@@ -52,7 +46,6 @@ public class PusherConnector implements ConnectionEventListener {
 				String message = socketId + ":" + channelName;
 				String hash = HmacSHA256.getHmacSHA256HexDigest(appSecret, message);
 
-				// <signature> ::= "{"auth":"<appId>:<hash>"}"
 				String signature = "{\"auth\":\"" + appKey + ":" + hash + "\"}";
 
 				return signature;
@@ -64,7 +57,7 @@ public class PusherConnector implements ConnectionEventListener {
 	}
 
 	/**
-	 * Auslöser für den Spielzug.
+	 * Schickt den Spielzug des Clients an den Server.
 	 *
 	 * @param channel Channel Element
 	 * @param move Spalte, in die der Spielstein gesetzt wird
@@ -75,7 +68,7 @@ public class PusherConnector implements ConnectionEventListener {
 	}
 
 	/**
-	 * Anmeldung am PrivateChannel
+	 * Anmeldung an einem PrivateChannel
 	 *
 	 * @param channelName Name des Channels
 	 * @param listener Der Listener

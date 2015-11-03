@@ -1,6 +1,5 @@
 package database;
 
-
 /**
  * Diese Klasse dient der Initialisierung der Datenbank.
  */

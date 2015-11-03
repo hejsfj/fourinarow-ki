@@ -6,7 +6,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
 /**
- * Der Dienst für den PusherEventReader.
+ * Der Service für den PusherEventReader.
  */
 public class PusherEventReaderService extends Service<PusherEvent> implements PrivateChannelEventListener {
 	private final long startTime = System.currentTimeMillis();
@@ -72,10 +72,10 @@ public class PusherEventReaderService extends Service<PusherEvent> implements Pr
 	 * @return Das PusherEvent Element
 	 */
 	public PusherEvent getPusherEvent()	{
+		System.out.println("wartet auf PusherEvent");
 		while (recentPusherEvent == null){
 			try {
 				Thread.sleep(300);
-				System.out.println("wartet auf PusherEvent");
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 			}

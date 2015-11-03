@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 /**
  * Diese Klasse enthält die Anwendungslogik für die Settings.fxml-Datei, welche
  * den Konfigurations-Bildschrim repräsentiert. Beim Start des Programms wird
- * das Einstellungsfenster (Settings.fxml) aufgerufen Klassen und Dateien, in
+ * das Einstellungsfenster (Settings.fxml) aufgerufen.In
  * diesem hat der Anwender die Möglichkeit auszuwählen, welche Startoptionen er
  * wählen möchte. Die eingetragenen Startwerte sind für den Spielstart
  * essentiell. Alle 5 Boxen wurden mit V-Boxen (Aufteilung der Darstellung in
@@ -38,82 +38,57 @@ import javafx.stage.Stage;
  * befüllt, welche wiederum mit H-Boxen befüllt ist, die alle Eingabeoptionen
  * für den Spielstart bereitstellen. Box 5 umfasst wie Box 1 die gesamte Breite
  * des Fensters und beinhaltet einen zentrierten Button, der zum
- * Spielfeldfenster (game.fxml) weiterleitet, sobald die Startoptionen korrekt
- * aufgefüllt sind. Ein zentriertes Label welches sich unter dem Button
- * befindet, gibt unterschiedliche Rückmeldungen in Abhängigkeit welche Felder
- * noch ausgefüllt werden müssen.
+ * Spielfeldfenster (Game.fxml) weiterleitet, sobald die Startoptionen korrekt
+ * eingetragen wurden. Ein zentriertes Label, welches sich unter dem Button
+ * befindet, zeigt abhängigkeit der noch auszufüllenden Felder unterschiedliche 
+ * Rückmeldungen an.
  * 
  * <br>
- * <figure> <img src="doc-files/SettingsScreen.jpg" widht="450" height="450" alt=
- * "UI Aufbau des Setting-Screens" title="UI Aufbau des Setting-Screens"/> 
- * <figcaption>UI Aufbau des Setting-Screens</figcaption> </figure> <br>
+ * <img src="doc-files/SettingsScreen.jpg" width="450" height="450" alt="UI Aufbau des Setting-Screens"> 
+ * <br>
  */
 public class SettingsController implements Initializable {
 
-	@FXML
-	private ResourceBundle resources;
-	@FXML
-	private URL location;
-	@FXML
-	private MenuItem LoadGame;
-	@FXML
-	private MenuItem NewGame;
+	@FXML private ResourceBundle resources;
+	@FXML private URL location;
+	@FXML private MenuItem LoadGame;
+	@FXML private MenuItem NewGame;
 
-	@FXML
-	private ToggleGroup toggleGroup_Interface;
-	@FXML
-	private ToggleGroup toggleGroup_Player;
+	@FXML private ToggleGroup toggleGroup_Interface;
+	@FXML private ToggleGroup toggleGroup_Player;
 
-	@FXML
-	private Button btStart;
-	@FXML
-	private Button findFile;
+	@FXML private Button btStart;
+	@FXML private Button findFile;
 
-	@FXML
-	private Label infostart;
-	@FXML
-	private Label lAppId;
-	@FXML
-	private Label lAppKey;
-	@FXML
-	private Label lAppSecret;
-	@FXML
-	private Label lDateiPfad;
-	@FXML
-	private Label lZugZeit;
+	@FXML private Label infostart;
+	@FXML private Label lAppId;
+	@FXML private Label lAppKey;
+	@FXML private Label lAppSecret;
+	@FXML private Label lDateiPfad;
+	@FXML private Label lZugZeit;
 
-	@FXML
-	private RadioButton rbFile;
-	@FXML
-	private RadioButton rbGelb;
-	@FXML
-	private RadioButton rbPush;
-	@FXML
-	private RadioButton rbRot;
+	@FXML private RadioButton rbFile;
+	@FXML private RadioButton rbGelb;
+	@FXML private RadioButton rbPush;
+	@FXML private RadioButton rbRot;
 
-	@FXML
-	private TextField tfAppId;
-	@FXML
-	private TextField tfAppKey;
-	@FXML
-	private TextField tfAppSecret;
-	@FXML
-	private TextField tfDateiPfad;
-	@FXML
-	private TextField tfZugZeit;
-
-	@FXML
-	private Text text_NewGame;
+	@FXML private TextField tfAppId;
+	@FXML private TextField tfAppKey;
+	@FXML private TextField tfAppSecret;
+	@FXML private TextField tfDateiPfad;
+	@FXML private TextField tfZugZeit;
+	
+	@FXML private Text text_NewGame;
 
 	private GameProperties gameProperties;
+	private DatabaseSetRecord selectedSetFromLoadScreen;
+	
 	private Character player;
 	private String usedInterface;
 	private int zugZeit;
 
-	private DatabaseSetRecord selectedSetFromLoadScreen;
-
 	/**
-	 * Lädt ein bestehendes Spiel.
+	 * Zeigt den Bildschirm zum Laden von Sätzen an.
 	 *
 	 * @param event
 	 *            {@link javafx.event.ActionEvent}
@@ -129,7 +104,7 @@ public class SettingsController implements Initializable {
 	}
 
 	/**
-	 * Startet ein neues Spiel.
+	 * Zeigt den Bildschirm zum Starten eines neuen Spiels an.
 	 *
 	 * @param event
 	 *            {@link javafx.event.ActionEvent}
@@ -140,7 +115,7 @@ public class SettingsController implements Initializable {
 	}
 
 	/**
-	 * Wählt und überprüft den Pfad für den Dateienaustausch.
+	 * Wählt und überprüft den Pfad für den Dateiaustausch.
 	 *
 	 * @param event
 	 *            {@link javafx.event.ActionEvent}
@@ -170,28 +145,6 @@ public class SettingsController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		assert LoadGame != null : "fx:id=\"LoadGame\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert NewGame != null : "fx:id=\"NewGame\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert toggleGroup_Interface != null : "fx:id=\"toggleGroup_Interface\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert toggleGroup_Player != null : "fx:id=\"toggleGroup_Player\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert btStart != null : "fx:id=\"btStart\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert findFile != null : "fx:id=\"findFile\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert infostart != null : "fx:id=\"infostart\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert lAppId != null : "fx:id=\"lAppId\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert lAppKey != null : "fx:id=\"lAppKey\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert lAppSecret != null : "fx:id=\"lAppSecret\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert lDateiPfad != null : "fx:id=\"lDateiPfad\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert lZugZeit != null : "fx:id=\"lZugZeit\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert rbFile != null : "fx:id=\"rbFile\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert rbGelb != null : "fx:id=\"rbGelb\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert rbPush != null : "fx:id=\"rbPush\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert rbRot != null : "fx:id=\"rbRot\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert tfAppId != null : "fx:id=\"tfAppId\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert tfAppKey != null : "fx:id=\"tfAppKey\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert tfAppSecret != null : "fx:id=\"tfAppSecret\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert tfDateiPfad != null : "fx:id=\"tfDateiPfad\" was not injected: check your FXML file 'Settings.fxml'.";
-		assert tfZugZeit != null : "fx:id=\"tfZugZeit\" was not injected: check your FXML file 'Settings.fxml'.";
-
 		gameProperties = new GameProperties();
 
 		if (new File(GameProperties.DATEINAME).exists()) {
@@ -258,7 +211,7 @@ public class SettingsController implements Initializable {
 	 * Initialisiert den Controller.
 	 *
 	 * @param selectedSetFromLoadScreen
-	 *            der ausgewählte Satz vom Lade-Bildschirm.
+	 *            Ausgewählter Datensatz aus der Datenbank.
 	 */
 	public void initController(DatabaseSetRecord selectedSetFromLoadScreen) {
 		this.selectedSetFromLoadScreen = selectedSetFromLoadScreen;

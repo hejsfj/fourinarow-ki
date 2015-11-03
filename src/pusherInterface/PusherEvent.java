@@ -1,7 +1,7 @@
 package pusherInterface;
 
 /**
- * Die PusherEvent Klasse.
+ * Diese Klasse repräsentiert das vom Server erhaltene Pusherevent.
  */
 public class PusherEvent {
 	private Boolean freigabe;
@@ -10,76 +10,83 @@ public class PusherEvent {
 	private String sieger;
 	
 	/**
-	 *
-	 * @return Der Boolsche Wert für den Freigabestatus
+	 * Gibt den Freigabe-Status zurück.
+	 * 
+	 * @return ein boolean Wert mit dem Freigabestatus
 	 */
 	public Boolean getFreigabe() {
 		return freigabe;
 	}
 
 	/**
-	 *
-	 * @param freigabe Der Freigabestatus
+	 * Setzt die Freigabe.
+	 * 
+	 * @param freigabe die Freigabe
 	 */
 	public void setFreigabe(Boolean freigabe) {
 		this.freigabe = freigabe;
 	}
 
 	/**
-	 *
-	 * @return Der Integer Wert für den gegnerischen Spielzug
+	 * Gibt den Gegnerzug zurück.
+	 * 
+	 * @return ein int-Wert mit dem Gegnerzug
 	 */
 	public int getGegnerzug() {
 		return gegnerzug;
 	}
 
 	/**
-	 *
-	 * @param gegnerzug Der Integer Wert für den gegnerischen Spielzug
+	 * Setzt den Gegnerzug.
+	 * 
+	 * @param gegnerzug der Gegnerzug
 	 */
 	public void setGegnerzug(int gegnerzug) {
 		this.gegnerzug = gegnerzug;
 	}
 
 	/**
-	 *
-	 * @return Der Stringwert für den Satzstatus
+	 * Gibt den Satzstatus zurück.
+	 * 
+	 * @return ein String-Wert mit dem Satzstatus
 	 */
 	public String getSatzstatus() {
 		return satzstatus;
 	}
 
 	/**
-	 *
-	 * @param satzstatus Der Stringwert für den Satzstatus
+	 * Setzt den Satzstatus.
+	 * 
+	 * @param satzstatus der Satzstatus
 	 */
 	public void setSatzstatus(String satzstatus) {
 		this.satzstatus = satzstatus;
 	}
 
 	/**
-	 *
-	 * @return Der Stringwert für den Sieger
+	 * Gibt den Sieger zurück.
+	 * 
+	 * @return ein String-Wert mit dem Sieger
 	 */
 	public String getSieger() {
 		return sieger;
 	}
 
 	/**
-	 *
-	 * @param sieger Der Stringwert für den Sieger
+	 * Setzt den Sieger.
+	 * 
+	 * @param sieger der Sieger
 	 */
 	public void setSieger(String sieger) {
 		this.sieger = sieger;
 	}
 	
 	/**
-	 * Überprüfung, ob das Spiel zu Ende ist. 
+	 * Überprüft, ob das Spiel zu Ende ist.
 	 *
 	 * @return true, wenn das Spiel zu Ende ist.
 	 */
 	public boolean isGameOver(){
 		return getFreigabe() == false && getSatzstatus().equals("beendet");
 	}
-
 }

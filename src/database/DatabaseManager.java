@@ -10,18 +10,17 @@ import database.DatabaseStructure;
 
 
 /**
- * Diese Klasse dient der Verwaltung der Datenbank.
- * Sie baut eine Verbindung zur Datenbank auf und enthält Methode zur Datenbankmanipulation.
+ * Diese Klasse dient zur Verwaltung der Datenbank.
+ * Sie baut eine Verbindung zur Datenbank auf und enthält Methoden zur Datenbankmanipulation.
  */
 public class DatabaseManager {
-	private Connection connection = null;
-	
+	private Connection connection = null;	
 	private static DatabaseManager dbManagerInstance = null;
 
 	/**
 	 * Liefert eine Instanz des DatabaseManagers zurück.
 	 *
-	 * @return Instant des DatabaseMangers
+	 * @return Instanz des DatabaseMangers.
 	 */
 	public static DatabaseManager getInstance() {
 		if(dbManagerInstance == null) {
@@ -39,13 +38,7 @@ public class DatabaseManager {
 		try {
 			System.out.println("trying to initialize database");
 			initializeDatabase();
-			System.out.println("database initialized");
-			
-			//int id = addSpiel("spielerO", "spielerX", null, "25.07.1990");
-			//int id1 = addSpiel("spielerO", "spielerX", null, "25.07.1991");
-			//addSatz(1, 1, 2, 0, "spielerO", "spielerO");
-			//addSatz(1, 2, 2, 0, "spielerO", "spielerX");
-			
+			System.out.println("database initialized");			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,13 +75,14 @@ public class DatabaseManager {
 
     /**
      * Fügt ein Spiel zur Datenbank hinzu.
-     *
-     * @param playerO der Spieler o
-     * @param playerX der Spieler x
-     * @param winner der Gewinner
-     * @param date das Datum
-     * @return die ID als Integer-Wert
-     * @throws SQLException {@link java.sql.SQLException}
+     * 
+     * @param playerO Spieler O
+	 * @param playerX Spieler X
+	 * @param winner Der Gewinner
+	 * @param date Das Datum.
+	 * 
+	 * @return Liefert die erzeugte Spiel-Id zurück.
+	 * @throws SQLException {@link java.sql.SQLException}
      */
     public int addGame(String playerO, String playerX, String winner, String date) throws SQLException {
 		  Statement statement = connection.createStatement(); 
@@ -119,12 +113,13 @@ public class DatabaseManager {
     
 	/**
 	 * Fügt einen Satz der Datenbank hinzu.
-	 *
-	 * @param gameId die Spiel_Id
-	 * @param setNr die Satznummer
-	 * @param pointsPlayerO die Punkt des Spielers o
-	 * @param pointsPlayerX die Punkte des Spielers x
-	 * @param winner der Gewinner des Satzes
+     * 
+     * @param gameId Spiel-Id
+	 * @param setNr Satz-Nr
+	 * @param pointsPlayerO Punkte von Spieler O
+	 * @param pointsPlayerX Punkte von Spieler X
+	 * @param winner Gewinner
+	 * 
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
 	public void addSet(int gameId, int setNr, int pointsPlayerO,int pointsPlayerX, String winner) throws SQLException{
@@ -145,17 +140,15 @@ public class DatabaseManager {
 				+ "')");
 	}
 	
-	
-	
 	/**
-	 * Aktuallisiert den Start Spieler eines Sets
-	 *
-	 * @param gameId die Spiel_Id
-	 * @param setNr die Satznummer
-	 * @param startPlayer der Spieler, der den ersten Zug hatte
+	 * Aktualisiert den Startspieler eines Satzes.
+	 * 
+	 * @param gameId Spiel-Id
+	 * @param setNr Satz-Nr
+	 * @param startPlayer Startspieler
+	 * 
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
-	
 	public void updateStartPlayerOfSet(int gameId, int setNr, String startPlayer) throws SQLException{
 		final String sqlQuery =   "UPDATE saetze "
 								+ 	"SET startspieler = " + "'" + startPlayer + "'"
@@ -165,17 +158,16 @@ public class DatabaseManager {
 								+ 	"satz_nr = " + String.valueOf(setNr);
 		execute(sqlQuery);
 	}
-	
-	
-	
+
 	/**
 	 * Fügt einen Zug zur Datenbank hinzu.
-	 *
-	 * @param gameId die Spiel_Id
-	 * @param setNr die Satznummer
-	 * @param moveNr die Zugnummer
-	 * @param column die Spalte, in die geworfen wurde
-	 * @param player der Spieler, der den Zug gemacht hat
+	 * 
+	 * @param gameId Spiel-Id
+	 * @param setNr Satz-Nr
+	 * @param moveNr Zug-Nr
+	 * @param column Zug
+	 * @param player Spieler
+	 * 
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
 	public void addMove(int gameId, int setNr, int moveNr, int column, String player) throws SQLException{
@@ -196,8 +188,8 @@ public class DatabaseManager {
 	
 	/**
 	 * Ruft alle Spiele aus der Datenbank ab.
-	 *
-	 * @return SQL-Query die alle Spiele aus der Datenbank abfrägt
+	 * 
+	 * @return Liefert alle Spiele in einem ResultSet zurück.
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
 	public ResultSet getAllGames() throws SQLException {
@@ -208,9 +200,8 @@ public class DatabaseManager {
 	
 	/**
 	 * Ruft alle Gewinner der Sätze eines Spiels aus der Datenbank ab.
-	 *
-	 * @param gameId die Spiel_Id
-	 * @return SQL-Query die alle Gewinner der Sätze eines Spiels abfrägt
+	 * @param gameId Spiel-Id
+	 * @return Liefert alle Gewinner zu einer Spiel-Id in einem ResultSet zurück.
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
 	public ResultSet getAllSetWinnersForGameId(String gameId) throws SQLException {
@@ -223,9 +214,8 @@ public class DatabaseManager {
 
 	/**
 	 * Ruft alle Sätzes eines ausgewählten Spiels auf der Datenbank ab.
-	 *
-	 * @param gameId die Spiel_Id
-	 * @return SQL-Query die alle Sätze eines Spiel abfrägt
+	 * @param gameId Spiel-Id
+	 * @return Liefert alle Sätze zu einer Spiel-Id in einem ResultSet zurück.
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
 	public ResultSet getAllSetsForGameId(String gameId) throws SQLException {
@@ -238,8 +228,8 @@ public class DatabaseManager {
 	
 	/**
 	 * Ruft alle gespeicherten Sätze aus der Datenbank ab.
-	 *
-	 * @return SQL-Query die alle Sätze der Datenbank abfrägt
+	 * 
+	 * @return Liefert alle Sätze in einem ResultSet zurück.
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
 	public ResultSet getAllSets() throws SQLException {
@@ -257,10 +247,9 @@ public class DatabaseManager {
 	
 	/**
 	 * Ruft alle Züge eines ausgewählten Satzes aus der Datenbank ab.
-	 *
-	 * @param gameId die Spiel_Id
-	 * @param setNr die Satznummer
-	 * @return SQL-Query die alle Züge des Satzes abfrägt
+	 * @param gameId Spiel-Id
+	 * @param setNr Satz-Nr
+	 * @return Liefert alle gespielten Züge zu einer Spiel-Id und zu einer Satz-Nr in einem ResultSet zurück.
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
 	public ResultSet getMovesForSet(int gameId, int setNr) throws SQLException {
@@ -275,10 +264,11 @@ public class DatabaseManager {
 	
 	/**
 	 * Aktualisiert den Gewinner eines Satzes.
-	 *
-	 * @param gameId die Spiel_Id
-	 * @param setNr die Satznummer
-	 * @param winner der Gewinner
+	 * 
+	 * @param gameId Spiel-Id
+	 * @param setNr Satz-Nr
+	 * @param winner Gewinner
+	 * 
 	 * @throws SQLException {@link java.sql.SQLException}
 	 */
 	public void updateWinnerOfSet(int gameId, int setNr, String winner) throws SQLException{

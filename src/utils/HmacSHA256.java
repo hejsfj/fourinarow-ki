@@ -8,9 +8,9 @@ public class HmacSHA256
 {
 	/**
 	 * Calculates a HMAC SHA256 hex digest.
-	 * @param secret
-	 * @param message
-	 * @return
+	 * @param secret AppSecret
+	 * @param message Message
+	 * @return Liefert einen Wert zurück.
 	 */
 	public static String getHmacSHA256HexDigest(String secret, String message) {	
 		StringBuffer hash = new StringBuffer();

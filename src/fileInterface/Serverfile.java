@@ -1,8 +1,7 @@
 package fileInterface;
 
-// TODO: Auto-generated Javadoc
 /**
- * Diese Klasse repräsentiert das Serverfile.
+ * Diese Klasse repräsentiert das vom Server erzeugte Serverfile.
  */
 public class Serverfile {
 	private Boolean freigabe;
@@ -11,7 +10,8 @@ public class Serverfile {
 	private String sieger;
 	
 	/**
-	 *
+	 * Gibt den Freigabe-Status zurück.
+	 * 
 	 * @return ein boolean Wert mit dem Freigabestatus
 	 */
 	public Boolean getFreigabe() {
@@ -19,36 +19,44 @@ public class Serverfile {
 	}
 
 	/**
-	 *
-	 * @param freigabe der Freigabestatus
+	 * Setzt die Freigabe.
+	 * 
+	 * @param freigabe die Freigabe
 	 */
 	public void setFreigabe(Boolean freigabe) {
 		this.freigabe = freigabe;
 	}
 
 	/**
-	 * @return den Gegnerzug als Integer.
-	 * Die Spalte in die der Gegner seinen Spielstein gesetzt hat.
+	 * Gibt den Gegnerzug zurück.
+	 * 
+	 * @return ein int-Wert mit dem Gegnerzug
 	 */
 	public int getGegnerzug() {
 		return gegnerzug;
 	}
 
 	/**
-	 * @param gegnerzug die Spalte in die der Gegner wirft.
+	 * Setzt den Gegnerzug.
+	 * 
+	 * @param gegnerzug der Gegnerzug
 	 */
 	public void setGegnerzug(int gegnerzug) {
 		this.gegnerzug = gegnerzug;
 	}
 
 	/**
-	 * @return der satzstatus
+	 * Gibt den Satzstatus zurück.
+	 * 
+	 * @return ein String-Wert mit dem Satzstatus
 	 */
 	public String getSatzstatus() {
 		return satzstatus;
 	}
 
 	/**
+	 * Setzt den Satzstatus.
+	 * 
 	 * @param satzstatus der Satzstatus
 	 */
 	public void setSatzstatus(String satzstatus) {
@@ -56,24 +64,27 @@ public class Serverfile {
 	}
 
 	/**
-	 * @return der Sieger
+	 * Gibt den Sieger zurück.
+	 * 
+	 * @return ein String-Wert mit dem Sieger
 	 */
 	public String getSieger() {
 		return sieger;
 	}
 
 	/**
+	 * Setzt den Sieger.
+	 * 
 	 * @param sieger der Sieger
-	 *            
 	 */
 	public void setSieger(String sieger) {
 		this.sieger = sieger;
 	}
 	
 	/**
-	 * Überprüft ob das Spiel zu ende ist
+	 * Überprüft, ob das Spiel zu Ende ist.
 	 *
-	 * @return true, wenn das Spiel zu ende ist.
+	 * @return true, wenn das Spiel zu Ende ist.
 	 */
 	public boolean isGameOver(){
 		return getFreigabe() == false && getSatzstatus().equals("beendet");

@@ -1,4 +1,3 @@
-
 package fileInterface;
 
 import java.io.BufferedWriter;
@@ -8,16 +7,13 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 
-
 /**
- * Dient dem Erzeugen bzw. Schreiben der Agenten-Textdatei zur Schnittstellenkommunikation.
+ * Dient dem Erzeugen bzw. Schreiben der Agenten-Textdatei.
  */
 public class AgentfileWriter {
 
 	private String sharedFolderPath;
 	private char player;
-
-
 
 	/**
 	 * Instanziiert einen neuen AgentfileWriter.
@@ -30,10 +26,8 @@ public class AgentfileWriter {
 		this.player = player;
 	}	
 	
-
-
 	/**
-	 * Gibt den Pfad des Datenaustauschverzeichnisses zurück.
+	 * Gibt den Pfad des Dateiaustauschverzeichnisses zurück.
 	 *
 	 * @return einen String als Pfad zum Austauschverzeichnis
 	 */
@@ -42,14 +36,13 @@ public class AgentfileWriter {
 	}
 
 	/**
-	 * Setzt den Pfad zum Datenaustauschverzeichnis.
+	 * Setzt den Pfad zum Dateiaustauschverzeichnis.
 	 *
 	 * @param sharedFolderPath Pfad des Datenaustauschverzeichnisses
 	 */
 	public void setSharedFolderPath(String sharedFolderPath) {
 		this.sharedFolderPath = sharedFolderPath;
 	}
-
 
 	/**
 	 * Liefert den Spielernamen zurück.
@@ -60,7 +53,6 @@ public class AgentfileWriter {
 		return player;
 	}
 
-
 	/**
 	 * Setzt den Spielernamen (x oder o).
 	 *
@@ -69,8 +61,6 @@ public class AgentfileWriter {
 	public void setPlayer(char player) {
 		this.player = player;
 	}
-	
-
 
 	/**
 	 * Schreibt bzw. Erzeugt die Agent-Textdatei.

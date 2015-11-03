@@ -5,14 +5,13 @@ import java.io.IOException;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
-
 /**
  * Ein Service für das Lesen der Server-Datei.
  */
 public class ServerfileReaderService extends Service<Serverfile>{
 	
 	/** Der serverfileReader */
-	final ServerfileReader serverfileReader;
+	private final ServerfileReader serverfileReader;
 	
 	/**
 	 * Instanziiert einen neuen ServerfileReaderService.
@@ -27,7 +26,6 @@ public class ServerfileReaderService extends Service<Serverfile>{
 	/* (non-Javadoc)
 	 * @see javafx.concurrent.Service#createTask()
 	 */
-	@Override
 	protected Task<Serverfile> createTask() {
 		 return new Task<Serverfile>() {
                 protected Serverfile call() throws IOException {

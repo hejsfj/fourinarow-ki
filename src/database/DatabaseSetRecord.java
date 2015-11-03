@@ -3,22 +3,27 @@ package database;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-
-
 /**
- * Diese Klasse...
+ * Diese Klasse repräsentiert einen Datensatz aus der Tabelle "Satz".
  */
 public class DatabaseSetRecord {
-	
+
+	 private StringProperty gameId;
+     private StringProperty setId;
+     private StringProperty winner;
+     private StringProperty starter;
+     private StringProperty pointsPlayerO;
+     private StringProperty pointsPlayerX;
+     
 	/**
-	 * Neue Datenbank instanziieren und Einträge setzen.
+	 * Konstruktur zum Instanziieren eines neuen Datensatz-Objektes.
 	 * 
-	 * @param gameId the game id
-	 * @param setId the set id
-	 * @param winner the winner
-	 * @param starter the starter
-	 * @param pointsPlayerO the points player o
-	 * @param pointsPlayerX the points player x
+     * @param gameId Spiel-Id
+	 * @param setId Satz-Nr
+	 * @param winner Gewinner
+	 * @param starter Startspieler
+	 * @param pointsPlayerO Punkte von Spieler O
+	 * @param pointsPlayerX Punkte von Spieler X
 	 */
 	public DatabaseSetRecord(String gameId, String setId, String winner, String starter, String pointsPlayerO, String pointsPlayerX){
 		setGameId(gameId);
@@ -30,10 +35,9 @@ public class DatabaseSetRecord {
 	}
 
 	/**
-	 * Spielinformationen heranziehen.
-	 *
-	 * @param id the id
-	 * @return the string
+	 * @return Gibt das passende Attribut zu einer Id zurück.
+	 * 
+	 * @param id Id
 	 */
 	public String get(int id) {
 		switch (id) {
@@ -53,164 +57,124 @@ public class DatabaseSetRecord {
 			return "something wrong";
 		}
 	}
-	
-	 private StringProperty gameId;
      
      /**
-      * Game id setzen.
-      *
-      * @param value the new game id
+      * Setzt die Spiel-Id.
+      * @param value Spiel-Id
       */
-     public void setGameId(String value) { gameIdProperty().set(value); }
-     
-     /**
-      * Game id laden.
-      *
-      * @return the game id
-      */
-     public String getGameId() { return gameIdProperty().get(); }
-     
-     /**
-      * Game id Eigenschaften.
-      *
-      * @return the string property
-      */
-     public StringProperty gameIdProperty() { 
-         if (gameId == null) gameId = new SimpleStringProperty(this, "gameId");
-         return gameId; 
+     public void setGameId(String value) { 
+    	 gameIdProperty().set(value); 
      }
- 
-     private StringProperty setId;
      
      /**
-      * ID wird vergeben.
-      *
-      * @param value the new sets the id
+      * @return Gibt die Spiel-Id zurück.
       */
-     public void setSetId(String value) { setIdProperty().set(value); }
-     
-     /**
-      * Vergebene ID laden.
-      *
-      * @return the sets the id
-      */
-     public String getSetId() { return setIdProperty().get(); }
-     
-     /**
-      * ID Eigenschaften setzen.
-      *
-      * @return the string property
-      */
-     public StringProperty setIdProperty() { 
-         if (setId == null) setId = new SimpleStringProperty(this, "setId");
-         return setId; 
-     } 
+     public String getGameId() { 
+    	 return gameIdProperty().get(); 
+     }
 
-     private StringProperty winner;
+     /**
+      * Setzt die Satz-Id.
+      * @param value Satz-Id
+      */
+     public void setSetId(String value) { 
+    	 setIdProperty().set(value); 
+     }
      
      /**
-      * Gewinner setzen.
-      *
-      * @param value the new winner
+      * @return Gibt die Satz-Id zurück.
       */
-     public void setWinner(String value) { winnerProperty().set(value); }
+     public String getSetId() { 
+    	 return setIdProperty().get(); 
+     }
      
      /**
-      * Gewinner laden.
-      *
-      * @return the winner
+      * Setzt den Gewinner.
+      * @param value Gewinner
       */
-     public String getWinner() { return winnerProperty().get(); }
+     public void setWinner(String value) { 
+    	 winnerProperty().set(value); 
+     }
      
      /**
-      * Eigenschaften des Gewinners.
-      *
-      * @return the string property
+      * @return Gibt den Gewinner zurück.
       */
-     public StringProperty winnerProperty() { 
-         if (winner == null) winner = new SimpleStringProperty(this, "winner");
-         return winner; 
-     } 
-
-
-     private StringProperty starter;
+     public String getWinner() { 
+    	 return winnerProperty().get(); 
+     }
      
      /**
-      * Startspieler wird gesetzt.
-      *
-      * @param value the new starter
+      * Setzt den Startspieler.
+      * @param value Startspieler
       */
-     public void setStarter(String value) { starterProperty().set(value); }
+     public void setStarter(String value) { 
+    	 starterProperty().set(value); 
+     }
      
      /**
-      * Startspieler wird ermittelt.
-      *
-      * @return the starter
+      * @return Gibt den Startspieler zurück.
       */
-     public String getStarter() { return starterProperty().get(); }
+     public String getStarter() { 
+    	 return starterProperty().get(); 
+     }
      
      /**
-      * Eigenschaften des Startspieler.
-      *
-      * @return the string property
+      * Setzt die Punkte von Spieler O.
+      * @param value Punkte von Spieler O
       */
-     public StringProperty starterProperty() { 
-         if (starter == null) starter = new SimpleStringProperty(this, "starter");
-         return starter; 
-     } 
-     
-     private StringProperty pointsPlayerO;
+     public void setPointsPlayerO(String value) { 
+    	 pointsPlayerOProperty().set(value); 
+     }
      
      /**
-      * Punkte des Spieler o werden gesetzt.
-      *
-      * @param value the new points player o
+      * @return Gibt die Punktzahl von Spieler O zurück.
       */
-     public void setPointsPlayerO(String value) { pointsPlayerOProperty().set(value); }
+     public String getPointsPlayerO() { 
+    	 return pointsPlayerOProperty().get(); 
+     }
      
      /**
-      * Punkte des Spieler o werden ermittelt.
-      *
-      * @return the points player o
+      * Setzt die Punkte von Spieler X.
+      * @param value Punkte von Spieler X
       */
-     public String getPointsPlayerO() { return pointsPlayerOProperty().get(); }
+     public void setPointsPlayerX(String value) { 
+    	 pointsPlayerXProperty().set(value); 
+     }
      
      /**
-      * Eigenschaften Punkte von Player o.
-      *
-      * @return the string property
+      * @return Gibt die Punktzahl von Spieler X zurück.
       */
-     public StringProperty pointsPlayerOProperty() { 
+     public String getPointsPlayerX() { 
+    	 return pointsPlayerXProperty().get(); 
+     }
+     
+     private StringProperty pointsPlayerOProperty() { 
          if (pointsPlayerO == null) pointsPlayerO = new SimpleStringProperty(this, "pointsPlayerO");
          return pointsPlayerO; 
      }
      
-     private StringProperty pointsPlayerX;
-     
-     /**
-      * Punkte des Spieler x werden gesetzt.
-      *
-      * @param value the new points player x
-      */
-     public void setPointsPlayerX(String value) { pointsPlayerXProperty().set(value); }
-     
-     /**
-      * Punkte des Spieler x werden ermittelt.
-      *
-      * @return the points player x
-      */
-     public String getPointsPlayerX() { return pointsPlayerXProperty().get(); }
-     
-     /**
-      * Eigenschaften Punkte von Player x.
-      *
-      * @return the string property
-      */
-     public StringProperty pointsPlayerXProperty() { 
+     private StringProperty pointsPlayerXProperty() { 
          if (pointsPlayerX == null) pointsPlayerX = new SimpleStringProperty(this, "pointsPlayerX");
          return pointsPlayerX; 
      }
 
+     private StringProperty gameIdProperty() { 
+         if (gameId == null) gameId = new SimpleStringProperty(this, "gameId");
+         return gameId; 
+     }
      
-
+     private StringProperty setIdProperty() { 
+         if (setId == null) setId = new SimpleStringProperty(this, "setId");
+         return setId; 
+     } 
+     
+     private StringProperty winnerProperty() { 
+         if (winner == null) winner = new SimpleStringProperty(this, "winner");
+         return winner; 
+     } 
+     
+     private StringProperty starterProperty() { 
+         if (starter == null) starter = new SimpleStringProperty(this, "starter");
+         return starter; 
+     } 
 }

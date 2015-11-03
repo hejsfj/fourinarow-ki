@@ -31,29 +31,27 @@ import javafx.util.Callback;
 /**
  * Diese Klasse enthält die Anwendungslogik für die Settings.fxml-Datei.
  * 
- * FEHLT NOCH!!!
  */
 public class LoadController implements Initializable {
-    @FXML private Button loadButton; // Value injected by FXMLLoader    
-    @FXML private Button saveButton; // Value injected by FXMLLoader    
-    @FXML private Button newButton; // Value injected by FXMLLoader    
+    @FXML private Button loadButton;
+    @FXML private Button saveButton;  
+    @FXML private Button newButton;
     @FXML private Label infostat;
     @FXML private TableView<DatabaseSetRecord> myTable;
   
 	/**
 	 * Load game.
-	 *
-	 * @param event the event
 	 */
 	@FXML void loadGame(ActionEvent event) {
 		// disabled
     }
 
-    /**
-     * Startet ein neues Spiel.
-     *
-     * @param event {@link javafx.event.ActionEvent}
-     */
+	/**
+	 * Zeigt den Bildschirm zum Starten eines neuen Spiels an.
+	 *
+	 * @param event
+	 *            {@link javafx.event.ActionEvent}
+	 */
     @FXML void newGame(ActionEvent event) {		
 		try {
 	    	System.out.println("Switching to Settings Screen");

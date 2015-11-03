@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 import com.pusher.client.channel.PrivateChannel;
 
-import agentKI.AgentKI;
+import agentKI.Agent;
 import database.DatabaseManager;
 import database.DatabaseSetRecord;
 import fileInterface.Agentfile;
@@ -46,23 +46,21 @@ import pusherInterface.PusherConnector;
 import pusherInterface.PusherEventReaderService;
 
 /**
- * Diese Klasse enthält die Anwendungslogik für die die Game.fxml-Datei, welche
- * das Spielfeld repräsentiert.
+ * Diese Klasse enthält die Anwendungslogik für die Game.fxml-Datei, welche
+ * das grafische Spielfeld repräsentiert.
  * 
- * Die Anwendung ist in 3 separat agierende Benutzeroberflächen (fxml)
+ * Die Anwendung ist in 3 separat agierende Benutzeroberflächen (.fxml-Dateien)
  * aufgeteilt, welche logisch miteinander verbunden sind. Alle Fenster des
  * Programms sind mit 830x530 Pixel fest skaliert. Der Aufbau der Fenster ist
  * identisch. Mit JavaFX wurde eine AnchorPane erstellt, an dem alle Elemente
  * des Interface verankert sind. Zudem verbindet die AnchorPane die reinen
- * Design-Dateien mit der Controllerdatei in dem Package applications, welche
+ * Design-Dateien mit der Controllerdatei in dem Package application, welche
  * die logischen Aktionen der Benutzeroberfläche steuert. Direkt über dem
  * AnchorPane liegt ein BorderPane, welches das Fenster in 5 Boxen zerteilt (s.
  * Abb.XX). Diese Boxen werden je nach Bedarf mit verschiedenen Elementen
  * befüllt.
  * <br>
- * <figure> <img src="doc-files/BorderPane.jpg" widht="450" height="450" alt=
- * "Grundaufbau des UIs" title="Grundaufbau des UIs"/> 
- * <figcaption>Grundaufbau des UIs</figcaption> </figure> <br>
+ * <img src="doc-files/BorderPane.jpg" width="450" height="450" alt="Grundaufbau des UIs"> <br>
  * <br>
  * Von der Konfigurationsoberfläche wird der Benutzer auf die
  * Spielfeldoberfläche weitergeleitet, die einen identischen strukturellen
@@ -78,12 +76,8 @@ import pusherInterface.PusherEventReaderService;
  * Konfigurationsoberfläche mit einem Button und einem Label befüllt. Der Button
  * ist zum Start des Spiels da. Das Label gibt Statusmeldungen über das Spiel.
  * <br><br>
- * <figure> <img src="doc-files/GameScreen.jpg" widht="300" height="300" alt=
- * "UI-Aufbau des Spielebildschirms" title="UI-Aufbau des Spielebildschirms"
- * /> <figcaption>UI-Aufbau des Spielebildschirms</figcaption> </figure>
- * <p>
- * weiter schreiben-----
- * </p>
+ * <img src="doc-files/GameScreen.jpg" width="300" height="300" alt="UI-Aufbau des Spielebildschirms">
+ * <br>
  */
 public class GameController implements Initializable {
 
@@ -102,45 +96,44 @@ public class GameController implements Initializable {
 	@FXML private Text tfPlayer1_Points;
 	@FXML private Text tfPlayer2_Points;
 	@FXML private Text tfPlayer1_Set_Wins;
-	@FXML private Text tfPlayer2_Set_Wins;
-	
+	@FXML private Text tfPlayer2_Set_Wins;	
 	@FXML private Text spielerOMoveHistory;
 	@FXML private Text spielerXMoveHistory;
 	
 	@FXML private Label lGameOverview;
 	@FXML private Label lSetOverview;
+	@FXML private Label infostat;
 
 	@FXML private Circle circlePlayerO;
 	@FXML private Circle circlePlayerX;
 
-	@FXML private Label infostat;
 	@FXML private GridPane gamefieldGrid;
 
 	private DatabaseManager databaseManager;
 	private GameProperties gameProperties;
-	private Gamefield gamefield;
-	
-	private AgentKI agent;
-	private char myPlayer;
-	private char opponentPlayer;
-	private String usedInterface;
-	private int currentGameId;
-	private int currentSetNr;
-	private int zugNrCounter;
-	private String startPlayer;
+	private Gamefield gamefield;	
+	private Agent agent;
 	private DatabaseSetRecord selectedSetFromLoadScreen;
 	private PusherEventReaderService pusherEventReaderService;
 	private ServerfileReaderService serverFileReaderService;
+	
 	private List<Integer> myPlayerMoveHistory;
 	private List<Integer> opponentPlayerMoveHistory;
 
+	private String usedInterface;
+	private String startPlayer;
+	private char myPlayer;
+	private char opponentPlayer;
+	private int currentGameId;
+	private int currentSetNr;
+	private int zugNrCounter;
+
 	/**
-	 * Aktualisiert den Gewinner des aktuellen Spielsatzes.
+	 * Aktualisiert den Gewinner des aktuellen Spielsatzes in der Datenbank und
+	 * aktualisiert den Spielstand auf dem Spielfeld.
 	 *
 	 * @param event
-	 *            Ein Event repräsentiert eine Art von Aktion. Dieser Event-Type
-	 *            wird benutzt um z.B.auf einen Button-Klick zu reagieren.
-	 * @see {@link javafx.event.ActionEvent}
+	 *            {@link javafx.event.ActionEvent}
 	 */
 	@FXML
 	void updateWinnerOfCurrentSet(ActionEvent event) {
@@ -158,7 +151,8 @@ public class GameController implements Initializable {
 	}
 
 	/**
-	 * Stoppt den aktuell laufenden Spielsatz.
+	 * Stoppt den aktuell laufenden Spielsatz. Beendet auch mögliche
+	 * Hintergrundprozesse des Spieles.
 	 *
 	 * @param event
 	 *            {@link javafx.event.ActionEvent}
@@ -178,11 +172,10 @@ public class GameController implements Initializable {
 		if (serverFileReaderService != null) {
 			serverFileReaderService.cancel();
 		}
-
 	}
 
 	/**
-	 * Zeigt den Bildschirm zum Laden von Sätzen.
+	 * Zeigt den Bildschirm zum Laden von Sätzen an.
 	 *
 	 * @param event
 	 *            {@link javafx.event.ActionEvent}
@@ -198,7 +191,7 @@ public class GameController implements Initializable {
 	}
 
 	/**
-	 * Zeigt den Bildschirm zum Starten eines neuen Spiels.
+	 * Zeigt den Bildschirm zum Starten eines neuen Spiels an.
 	 *
 	 * @param event
 	 *            {@link javafx.event.ActionEvent}
@@ -217,10 +210,9 @@ public class GameController implements Initializable {
 	 * Initialisiert den Game-Controller.
 	 *
 	 * @param selectedSetFromLoadScreen
-	 *            ausgewählter Satz aus der Datenbank bzw. dem Lade-Bildschirm.
+	 *            Ausgewählter Datensatz aus der Datenbank.
 	 */
 	public void initController(DatabaseSetRecord selectedSetFromLoadScreen) {
-		System.out.println("initController in GameController called!");
 		this.selectedSetFromLoadScreen = selectedSetFromLoadScreen;
 		try {
 			// bestimme alle gewinner der bisherigen sätze des spiels
@@ -241,13 +233,7 @@ public class GameController implements Initializable {
 	 * @see javafx.fxml.Initializable#initialize(java.net.URL,
 	 * java.util.ResourceBundle)
 	 */
-	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-		assert startButton != null : "fx:id=\"startButton\" was not injected: check your FXML file";
-		assert menuBar != null : "fx:id=\"menuBar\" was not injected: check your FXML file";
-		assert circlePlayerO != null : "fx:id=\"circlePlayerO\" was not injected: check your FXML file 'Game.fxml'.";
-		assert circlePlayerX != null : "fx:id=\"circlePlayerX\" was not injected: check your FXML file 'Game.fxml'.";
-
 		initRequiredComponents();
 
 		readPropertiesFromFileSystem();
@@ -260,7 +246,6 @@ public class GameController implements Initializable {
 		animateCurrentPlayer();
 
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
 				startSet();
 				determineCurrentGameIdAndSetNr();
@@ -304,12 +289,12 @@ public class GameController implements Initializable {
 		gameProperties = new GameProperties();
 		gamefield = new Gamefield();
 		databaseManager = DatabaseManager.getInstance();
-		agent = new AgentKI();
+		agent = new Agent();
 		myPlayerMoveHistory = new ArrayList<Integer>();
 		opponentPlayerMoveHistory = new ArrayList<Integer>();
 	}
 
-	//Methode, die gestertet wird, wenn ein Spiel über das Pusher Interface gestartet wird, ruft KI Berechnung auf, und schreibt Züge in Datenbank
+	// Methode zum Starten eines Spiels über die Pusher-Schnittstelle
 	private void startPusherInterfaceGame() {
 		String appKey = gameProperties.getProperty(GameProperties.APP_KEY);
 		String appSecret = gameProperties.getProperty(GameProperties.APP_SECRET);
@@ -373,11 +358,12 @@ public class GameController implements Initializable {
 		pusherEventReaderService.start();
 	}
 
-	//Methode, die gestertet wird, wenn ein Spiel über das File Interface gestartet wird, ruft KI Berechnung auf, und schreibt Züge in Datenbank
+	// Methode zum Starten eines Spiels über die File-Schnittstelle
 	private void startFileInterfaceGame() {
 		String sharedFolderPath = gameProperties.getProperty(GameProperties.DATEIPFAD);
 		AgentfileWriter agentfileWriter = new AgentfileWriter(sharedFolderPath, myPlayer);
 		zugNrCounter = 1;
+		
 		serverFileReaderService = new ServerfileReaderService(sharedFolderPath, myPlayer);
 		serverFileReaderService.setOnSucceeded(e -> {
 			// Gegnerzug verarbeiten
@@ -429,7 +415,7 @@ public class GameController implements Initializable {
 		serverFileReaderService.start();
 	}
 	
-	//SpielID und SetNr bestimmen und in Datenbank schreiben
+	// SpielId und SetNr bestimmen + Anlegen eines neuen Satzes in der Datenbank(falls nötig)
 	private void determineCurrentGameIdAndSetNr() {
 		if (selectedSetFromLoadScreen == null) {
 			currentGameId = addNewGameToDb();
@@ -445,7 +431,7 @@ public class GameController implements Initializable {
 		}
 	}
 
-	//Wenn ein neues Spiel gestertet wurde, wird dieses in die Datenbank geschrieben
+	// Methode zum Hinzufügen eines neuen Spieles in die Datenbank
 	private int addNewGameToDb() {
 		int newGameId = -1;
 		try {
@@ -456,7 +442,7 @@ public class GameController implements Initializable {
 		return newGameId;
 	}
 
-	//Wenn ein neues Set gestsartet wurde, wird dieses in die Datenbank geschrieben
+	// Methode zum Hinzufügen eines Satzes für ein Spiel in die Datenbank
 	private void addNewSetToGameInDb(int gameId, int setNr) {
 		try {
 			databaseManager.addSet(gameId, setNr, 0, 0, "");
@@ -465,7 +451,7 @@ public class GameController implements Initializable {
 		}
 	}
 
-	//Methode die die Sichtbarkeit von Elementen verändert wenn ein Satz läuft
+	// Methode zum Deaktivieren von Elementen während eines laufenden Satzes.
 	private void startSet() {
 		startButton.setDisable(true);
 		menuDatei.setDisable(true);
@@ -475,7 +461,7 @@ public class GameController implements Initializable {
 		infostat.setText("Spiel läuft.");
 	}
 
-	//Methode wird aufgerufen, wenn ein Satz gewonnen wurde
+	// Methode zum Beenden eines Satzes.
 	private void finishSet(String winner) {
 		System.out.println("Spiel vorbei. Der Gewinner ist: " + winner);
 		infostat.setText(winner + " hat gewonnen!");
@@ -490,27 +476,23 @@ public class GameController implements Initializable {
 			e.printStackTrace();
 		}
 		createPopup(winner);
-		
 	}
 
-	//Methode zum Aktuallisieren der Textfelder
+	//Methode zum Aktualisieren der Textfelder.
 	private void updateTextFields() throws SQLException{
 		updateGameAndSetTextFields();
 	}
 	
-	//Methode die die Zug Historie des gegnerischen Spielers aktuallisiert
+	// Methode zum Aktualisieren der Zug-Historie des gegnerischen Spielers.
 	private void updateOpponentPlayerHistory(List<Integer> moveHistory, int move){
+	    spielerXMoveHistory.setText("");
 		moveHistory.add(move);
-		
+
 		List <Integer> last5Moves = getLastMovesFromMoveHistory(moveHistory, 5);
 		
-		Iterator<Integer> myListIterator = last5Moves.iterator(); 
-
-	    spielerXMoveHistory.setText("");
-	    
+		Iterator<Integer> myListIterator = last5Moves.iterator(); 	    
 		while (myListIterator.hasNext()) {
-		    Integer moveFromList = myListIterator.next();     
-
+		    Integer moveFromList = myListIterator.next();
 		    String moveHistoryOfTextField = spielerXMoveHistory.getText();
 
 			if (myListIterator.hasNext()){
@@ -522,20 +504,16 @@ public class GameController implements Initializable {
 		}
 	}
 	
-	//Methode die meine Zug Historie aktuallisiert
+	// Methode zum Aktualisieren der Zug-Historie des eigenen Spielers.
 	private void updateMyPlayerMoveHistory(List<Integer> moveHistory, int move){
-		//moveHistory
-		moveHistory.add(move);
+	    spielerOMoveHistory.setText("");
+	    moveHistory.add(move);
 		
 		List <Integer> last5Moves = getLastMovesFromMoveHistory(moveHistory, 5);
 		
-		Iterator<Integer> myListIterator = last5Moves.iterator(); 
-
-	    spielerOMoveHistory.setText("");
-	    
+		Iterator<Integer> myListIterator = last5Moves.iterator(); 	    
 		while (myListIterator.hasNext()) {
-		    Integer moveFromList = myListIterator.next();     
-		    
+		    Integer moveFromList = myListIterator.next();  
 		    String moveHistoryOfTextField = spielerOMoveHistory.getText();
 		    
 		    if (myListIterator.hasNext()){
@@ -547,7 +525,7 @@ public class GameController implements Initializable {
 		}
 	}
 	
-	//Methode die die letzten Züge des jeweiligen Spielers ausliest und zurückgibt
+	//Methode, die die letzten Züge einer Zug-Historie zurückliefert.
 	private List<Integer> getLastMovesFromMoveHistory(List<Integer> moveHistory, int numMoves){
 		if (moveHistory.size() > 5){
 			int lastIndex = moveHistory.size() - 1;
@@ -557,7 +535,7 @@ public class GameController implements Initializable {
 	
 	}
 	
-	//Methode aktuallisiert den Satzstand und Spielstand
+	// Methode zum Aktualisieren des Spiel- und Satzstandes auf dem Spielfeld.
 	private void updateGameAndSetTextFields() throws SQLException{
 		ResultSet setWinners = databaseManager.getAllSetWinnersForGameId(String.valueOf(currentGameId));
 
@@ -578,7 +556,7 @@ public class GameController implements Initializable {
 		tfPlayer2_Points.setText(String.valueOf(setWinsPlayer2 * 2));
 	}
 
-	//Methode die den gegnerischen Spieler bestimmt
+	// Methode zum Bestimmen des gegnerischen Spielers.
 	private char setOpponentPlayer(){
 		if (myPlayer == 'o') {
 			return 'x';
@@ -587,7 +565,7 @@ public class GameController implements Initializable {
 		}
 	}
 	
-	//Methode die ein Popup generiert, die den Sieger anzeigt
+	// Methode zum Generieren eines Popups, das den Sieger anzeigt.
 	private void createPopup(String winner){
 		Alert alert = new Alert(AlertType.INFORMATION);
 		if (winner.equals("Spieler O")){
@@ -602,7 +580,7 @@ public class GameController implements Initializable {
 		alert.showAndWait();	
 	}
 	
-	//Methode die visuell anzeigt welcher Spieler wir sind
+	// Methode zum Animieren des eigenen Spielers.
 	private void animateCurrentPlayer() {
 		Circle circle = getCircleForPlayer(myPlayer);
 		
@@ -614,7 +592,6 @@ public class GameController implements Initializable {
 		fade.play();
 	}
 
-	//Methode bestimmt welcher Kreis welchem SPieler zugeordnet wird
 	private Circle getCircleForPlayer(char player){
 		if (player == 'o')
 			return circlePlayerO;
@@ -622,7 +599,7 @@ public class GameController implements Initializable {
 			return circlePlayerX;
 	}
 	
-	//Methode zum einlesen der Daten aus dem File System
+	// Methode zum Einlesen der client.ini-Datei aus dem File-System.
 	private void readPropertiesFromFileSystem() {
 		InputStream input = null;
 

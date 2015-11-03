@@ -2,8 +2,6 @@ package fileInterface;
 
 /**
  * Diese Klasse repräsentiert die Textdatei, die vom Agenten geschrieben wird, um einen Spielstein zu setzen.
- * @author Tim
- *
  */
 public class Agentfile {
 	private int move;	

@@ -12,7 +12,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
 /**
  * Dient dem Lesen und Verarbeiten der Text-Datei vom Server.
  */
@@ -33,7 +32,7 @@ public class ServerfileReader {
 	}
 	
 	/**
-	 * Lieﬂt die Server-Textdatei.
+	 * Liest die Server-Textdatei.
 	 *
 	 * @return ein ServerFile-Objekt
 	 */
