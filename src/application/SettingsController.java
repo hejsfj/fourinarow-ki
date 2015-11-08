@@ -47,7 +47,7 @@ import javafx.stage.Stage;
  * 
  * <br>
  *  <figure>
- *		<img src="doc-files/SettingsScreen.jpg" width="600" height="450" alt="UI Aufbau des Setting-Screens"
+ *		<img src="doc-files/SettingsScreen.jpg" width="830" height="530" alt="UI Aufbau des Setting-Screens"
  *			title="UI Aufbau des Setting-Screens">
  *		<figcaption>UI Aufbau des Setting-Screens</figcaption>
  *	</figure>

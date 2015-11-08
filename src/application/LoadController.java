@@ -29,8 +29,47 @@ import javafx.util.Callback;
 
 
 /**
- * Klasse enthält die Anwendungslogik für die <code>Settings.fxml</code>-Datei.
  * 
+ * 
+ * Klasse für Realiserung der Anwendungslogik für die <code>Settings.fxml</code>-Datei, welche
+ * mittels einer Tabelle dem Nutzer die vergangenen gespielten Spiele präsentiert.
+ * 
+ * Die Anwendung ist in 3 separat agierende Benutzeroberflächen (.fxml-Dateien)
+ * aufgeteilt, welche logisch miteinander verbunden sind. Alle Fenster des
+ * Programms sind mit 830x530 Pixel fest skaliert. Der Aufbau der Fenster ist
+ * identisch.</br>
+ * Mit JavaFX wurde eine AnchorPane erstellt, an dem alle Elemente
+ * des Interface verankert sind. Zudem verbindet die AnchorPane die reinen
+ * Design-Dateien mit der Controllerdatei in dem Package application, welche
+ * die logischen Aktionen der Benutzeroberfläche steuert.</br>
+ * Direkt über der AnchorPane liegt ein BorderPane, welches das Fenster in 5 Boxen aufteilt 
+ * (siehe untenstehende Abbildung. Diese Boxen werden je nach Bedarf mit verschiedenen Elementen
+ * befüllt.
+ * <br>
+ * <figure>
+ *		<img src="doc-files/BorderPane.jpg" width="830" height="530" alt="Grundaufbau des UIs"
+ *			title="Grundaufbau/Struktur des UIs">
+ *		<figcaption>Grundaufbau/Struktur des UIs</figcaption>
+ *	</figure>
+ * <br>
+ * Von der Konfigurationsoberfläche  und vom Spielfeld aus kann der Benutzer auf den
+ * Ladebildschirm gelangen, die einen identischen strukturellen
+ * Aufbau hat. </br>
+ * Box 1 beinhaltet ebenso eine Menüleiste, sowie Textelemente,
+ * verbaut in eine H-Box, die Informationen zum aktuellen Spielstand bzw.
+ * Satzstand darstellen.</br>
+ * In Box 3 befindet sich eine Tabelle, welche eine Liste mit den gespielten Spielen zeigt 
+ * mit verschieden weiteren Informationen.
+ * Box 5 ist wie bei der Konfigurationsoberfläche mit einem Button und einem Label befüllt. 
+ * Der Button ist zum Laden und anschließenden "Start des Spiels" da, d.h. man sieht den Spielstand
+ * des geladenen Spiels. Das Label gibt Statusmeldungen über das Spiel.
+ *  * <br>
+ * <figure>
+ *		<img src="doc-files/LoadScreen.jpg" width="830" height="530" alt="UI-Aufbau des Ladebildschirms"
+ *			title="UI-Aufbau des Ladebildschirms">
+ *		<figcaption>UI-Aufbau des Ladebildschirms</figcaption>
+ *	</figure>
+ * <br>
  */
 public class LoadController implements Initializable {
     @FXML private Button loadButton;

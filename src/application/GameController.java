@@ -62,7 +62,7 @@ import pusherInterface.PusherEventReaderService;
  * befüllt.
  * <br>
  * <figure>
- *		<img src="doc-files/BorderPane.jpg" width="600" height="450" alt="Grundaufbau des UIs"
+ *		<img src="doc-files/BorderPane.jpg" width="830" height="530" alt="Grundaufbau des UIs"
  *			title="Grundaufbau/Struktur des UIs">
  *		<figcaption>Grundaufbau/Struktur des UIs</figcaption>
  *	</figure>
@@ -84,7 +84,7 @@ import pusherInterface.PusherEventReaderService;
  * Der Button ist zum Start des Spiels da. Das Label gibt Statusmeldungen über das Spiel.
  * <br>
  * <figure>
- *		<img src="doc-files/GameScreen.jpg" width="600" height="450" alt="UI-Aufbau des Spielebildschirms"
+ *		<img src="doc-files/GameScreen.jpg" width="830" height="530" alt="UI-Aufbau des Spielebildschirms"
  *			title="UI-Aufbau des Spielebildschirms">
  *		<figcaption>UI-Aufbau des Spielebildschirms</figcaption>
  *	</figure>
